@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Camera from '../lib';
-import DataUriImage from './DataUriImage';
+import Images from './Images';
 import './App.css';
 
 class App extends Component {
@@ -8,13 +8,13 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataUri: "data:,"
+      dataUris: []
     };
   }
 
   onGetDataUri = (dataUri) => {
     this.setState({
-      dataUri:dataUri
+      dataUris: this.state.dataUris.concat(dataUri)
     });
   }
 
@@ -49,7 +49,8 @@ class App extends Component {
             this.onGetDataUri(dataUri);
           }}>getDataUri</button>
 
-          <DataUriImage dataUri={this.state.dataUri}/>
+          <Images dataUris = {this.state.dataUris}/>
+
       </div>
     );
   }
