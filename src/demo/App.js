@@ -36,18 +36,24 @@ class App extends Component {
             handleError = {this.handleError}
           />
 
-          <button onClick={(e)=>{
-            this.camera.stopStreams();
-          }}>Stop</button>
+          <button
+            onClick={(e)=>{
+              this.camera.stopStreams();
+            }}
+          >Stop</button>
 
-          <button onClick={(e)=>{
-            this.camera.playFirstDevice();
-          }}>Play</button>
+          <button
+            onClick={(e)=>{
+              this.camera.playFirstDevice();
+            }}
+          >Play</button>
 
-          <button onClick={(e)=>{
-            let dataUri = this.camera.getDataUri();
-            this.onGetDataUri(dataUri);
-          }}>getDataUri</button>
+          <button
+            onClick={(e)=>{
+              let dataUri = this.camera.getDataUri();
+              this.onGetDataUri(dataUri);
+            }}
+          >getDataUri</button>
 
           <Images dataUris = {this.state.dataUris}/>
 
