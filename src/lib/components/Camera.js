@@ -9,7 +9,6 @@ export default class Camera extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    // all states is handle by redux
     this.state = {
       videoInputs: [],
       stream: null,

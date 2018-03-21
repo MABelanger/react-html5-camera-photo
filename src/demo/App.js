@@ -7,12 +7,15 @@ class App extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {};
-    this.onGetDataUri = this.onGetDataUri.bind(this);
+    this.state = {
+      dataUri: ""
+    };
   }
 
-  onGetDataUri(dataUri){
-    this.setState({dataUri:dataUri})
+  onGetDataUri = (dataUri) => {
+    this.setState({
+      dataUri:dataUri
+    });
   }
 
   render() {
