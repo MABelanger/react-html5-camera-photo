@@ -23,7 +23,7 @@ const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri }) => {
         onClick={(e) => {
           onGetDataUri();
         }}
-      >getDataUri</button>
+      >Photo</button>
     </div>
   );
 }
@@ -58,18 +58,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Camera
-          ref={instance => {
-            this.camera = instance;
-          }}
-          handleError = {this.handleError}
-        />
 
-        <Buttons
-          onStopStreams = {()=>{this.camera.stopStreams()}}
-          onPlayFirstDevice = {()=>{this.camera.playFirstDevice()}}
-          onGetDataUri = {()=>{this.getDataUri()}}
-        />
+        <div className="camera">
+          <Camera
+            ref={instance => {
+              this.camera = instance;
+            }}
+            handleError = {this.handleError}
+          />
+
+          <Buttons
+            onStopStreams = {()=>{this.camera.stopStreams()}}
+            onPlayFirstDevice = {()=>{this.camera.playFirstDevice()}}
+            onGetDataUri = {()=>{this.getDataUri()}}
+          />
+        </div>
 
         <Images
           dataUris = {this.state.dataUris}

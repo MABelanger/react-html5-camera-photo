@@ -12,7 +12,7 @@ const Image = ({ dataUri }) => {
 
 export const Images = ({ dataUris }) => {
   return(
-    dataUris.map((dataUri, index) => {
+    dataUris.reverse().map((dataUri, index) => {
       return <Image key={index} dataUri={dataUri}/>
     })
   );
