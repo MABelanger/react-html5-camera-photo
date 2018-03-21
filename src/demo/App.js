@@ -3,6 +3,31 @@ import Camera from '../lib';
 import Images from './Images';
 import './App.css';
 
+
+const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri }) => {
+  return(
+    <div>
+      <button
+        onClick={(e) => {
+          onStopStreams();
+        }}
+      >Stop</button>
+
+      <button
+        onClick={(e) => {
+          onPlayFirstDevice();
+        }}
+      >Play</button>
+
+      <button
+        onClick={(e) => {
+          onGetDataUri();
+        }}
+      >getDataUri</button>
+    </div>
+  );
+}
+
 class App extends Component {
 
   constructor(props, context) {
@@ -10,9 +35,11 @@ class App extends Component {
     this.state = {
       dataUris: []
     };
+    this.camera = {};
   }
 
-  onGetDataUri = (dataUri) => {
+  getDataUri = () => {
+    let dataUri = this.camera.getDataUri();
     this.setState({
       dataUris: this.state.dataUris.concat(dataUri)
     });
@@ -31,32 +58,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <Camera
-            ref={instance => { this.camera = instance; }}
-            handleError = {this.handleError}
-          />
+        <Camera
+          ref={instance => {
+            this.camera = instance;
+          }}
+          handleError = {this.handleError}
+        />
 
-          <button
-            onClick={(e)=>{
-              this.camera.stopStreams();
-            }}
-          >Stop</button>
+        <Buttons
+          onStopStreams = {()=>{this.camera.stopStreams()}}
+          onPlayFirstDevice = {()=>{this.camera.playFirstDevice()}}
+          onGetDataUri = {()=>{this.getDataUri()}}
+        />
 
-          <button
-            onClick={(e)=>{
-              this.camera.playFirstDevice();
-            }}
-          >Play</button>
-
-          <button
-            onClick={(e)=>{
-              let dataUri = this.camera.getDataUri();
-              this.onGetDataUri(dataUri);
-            }}
-          >getDataUri</button>
-
-          <Images dataUris = {this.state.dataUris}/>
-
+        <Images
+          dataUris = {this.state.dataUris}
+        />
       </div>
     );
   }
