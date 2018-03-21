@@ -12,8 +12,7 @@ export default class Camera extends React.Component {
     this.state = {
       videoInputs: [],
       stream: null,
-      videoSrc: "",
-      videoError: null
+      videoSrc: ""
     };
   }
 
@@ -86,25 +85,13 @@ export default class Camera extends React.Component {
   }
 
   _handleError = (error) => {
-    let {constraintName, message, name} = error;
-    let errorStr = constraintName + message + name;
-    this.setState({
-      videoError:{msg: errorStr}
-    });
+    this.props.handleError(error);
     this.stopStreams();
   }
 
   render() {
-    let videoError = this.state.videoError
-      ? <div>{JSON.stringify(this.state.videoError)}</div>
-      : null
     return (
-      <div>
-        {videoError}
-        <div>
-          <video src={this.state.videoSrc} ref="video" autoPlay="true"/>
-        </div>
-      </div>
+        <video src={this.state.videoSrc} ref="video" autoPlay="true"/>
     );
   }
 }

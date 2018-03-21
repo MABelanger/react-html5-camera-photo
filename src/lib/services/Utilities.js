@@ -51,6 +51,9 @@ class Utilities {
     return dataUri;
   }
 
+  /*
+   * Resolution spect : https://webrtchacks.com/getusermedia-resolutions-3/
+   */
   static getConstraints = (deviceId) => {
     let constraints = {
       audio: false,

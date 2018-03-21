@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Camera from '../lib';
-import ImageMedia from './ImageMedia';
+import DataUriImage from './DataUriImage';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataUri: ""
+      dataUri: "data:,"
     };
   }
 
@@ -18,11 +18,23 @@ class App extends Component {
     });
   }
 
+  handleError = (error) => {
+    let {code, message, name} = error;
+    let strError = `
+      Camera Error:
+        code: ${code}
+        message: ${message}
+        name: ${name}`;
+    console.error(strError);
+  }
+
   render() {
     return (
       <div className="App">
-
-          <Camera ref={instance => { this.camera = instance; }}/>
+          <Camera
+            ref={instance => { this.camera = instance; }}
+            handleError = {this.handleError}
+          />
 
           <button onClick={(e)=>{
             this.camera.stopStreams();
@@ -37,8 +49,7 @@ class App extends Component {
             this.onGetDataUri(dataUri);
           }}>getDataUri</button>
 
-          <ImageMedia dataUri={this.state.dataUri}/>
-
+          <DataUriImage dataUri={this.state.dataUri}/>
       </div>
     );
   }
