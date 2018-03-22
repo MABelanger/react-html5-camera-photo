@@ -58,7 +58,7 @@ class App extends Component {
     });
   }
 
-  handleError = (error) => {
+  onCameraError = (error) => {
     let {code, message, name} = error;
     let strError = `
       Camera Error:
@@ -94,7 +94,7 @@ class App extends Component {
         <div className="camera">
           <Camera
             ref="camera"
-            handleError = {this.handleError}
+            onCameraError = {this.onCameraError}
             autoPlay={true}
             onCameraStart = {this.onCameraStart}
             onCameraStop = {this.onCameraStop}

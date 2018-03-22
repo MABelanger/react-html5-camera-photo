@@ -10,7 +10,7 @@ class App extends Component {
     };
   }
 
-  handleError = (error) => {
+  onCameraError = (error) => {
     console.error(error)
   }
 
@@ -24,7 +24,7 @@ class App extends Component {
       <div>
         <Camera
           ref="camera"
-          handleError={this.handleError}
+          onCameraError={this.onCameraError}
           autoPlay={true}
         />
 

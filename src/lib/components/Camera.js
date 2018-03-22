@@ -97,7 +97,7 @@ export default class Camera extends React.Component {
   }
 
   _handleError = (error) => {
-    this.props.handleError(error);
+    this.props.onCameraError(error);
     this.stopStreams();
   }
 
@@ -109,7 +109,7 @@ export default class Camera extends React.Component {
 }
 
 Camera.propTypes = {
-  handleError: PropTypes.func.isRequired,
+  onCameraError: PropTypes.func.isRequired,
   autoPlay: PropTypes.bool,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func
