@@ -1,10 +1,3 @@
-const _getImageSizeFull = (videoWidth, videoHeight) => {
-  return {
-    imageWidth: videoWidth,
-    imageHeight: videoHeight
-  };
-}
-
 const _getImageSizeThumb = (videoWidth, videoHeight, sizeFactor) => {
   // let imageWidth = IMAGE_WIDTH_THUMB;
 
