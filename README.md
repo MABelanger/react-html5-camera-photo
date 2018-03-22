@@ -84,7 +84,7 @@ Function accessible by the `refs` ex:. "camera"
 function | Description
 --- | ---
 **this.refs.camera.playFirstDevice():** | Function that start the camera with the first camera available.
-**this.refs.camera.getDataUri([sizeFactor]):** | Function that return the dataUri of the current frame of the camera. The sizeFactor is used to get a desired resolution. Example, a sizeFactor of 1 get the same resolution of the camera while sizeFactor of 0.5 get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]`
+**this.refs.camera.getDataUri([sizeFactor]):** | Function that return the dataUri of the current frame of the camera. The sizeFactor is used to get a desired resolution. Example, a sizeFactor of 1 get the same resolution of the camera while sizeFactor of 0.5 get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`
 **this.refs.camera.stopStreams():** | Function that stop the camera.
 
 ## Props
