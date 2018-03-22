@@ -31,7 +31,7 @@ img {
   height: 200px;
 }
 
-div.camera {
+.camera {
   width: 200px ;
   text-align: center;
   margin-left: auto;
@@ -40,4 +40,12 @@ div.camera {
 
 button {
   margin: 5px;
+}
+
+.txt-green {
+  color: green;
+}
+
+.txt-red {
+  color: red;
 }

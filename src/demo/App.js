@@ -4,15 +4,9 @@ import Images from './Images';
 import './App.css';
 
 
-const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri }) => {
+const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
-      <button
-        onClick={(e) => {
-          onStopStreams();
-        }}
-      >Stop</button>
-
       <button
         onClick={(e) => {
           onPlayFirstDevice();
@@ -21,9 +15,21 @@ const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri }) => {
 
       <button
         onClick={(e) => {
+          onStopStreams();
+        }}
+      >Stop</button>
+
+      <button
+        onClick={(e) => {
           onGetDataUri();
         }}
       >Photo</button>
+
+      <button
+        onClick={(e) => {
+          onClearPhotos();
+        }}
+      >Clear</button>
     </div>
   );
 }
@@ -33,7 +39,8 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataUris: []
+      dataUris: [],
+      isCameraRunning: false
     };
     this.camera = {};
   }
@@ -42,6 +49,12 @@ class App extends Component {
     let dataUri = this.camera.getDataUri();
     this.setState({
       dataUris: this.state.dataUris.concat(dataUri)
+    });
+  }
+
+  onClearPhotos = () => {
+    this.setState({
+      dataUris: []
     });
   }
 
@@ -55,7 +68,26 @@ class App extends Component {
     console.error(strError);
   }
 
+  onCameraStart = () => {
+    console.log('camera start');
+    this.setState({
+      isCameraRunning: true
+    });
+  }
+
+  onCameraStop = () => {
+    console.log('camera stop');
+    this.setState({
+      isCameraRunning: false
+    });
+  }
+
   render() {
+
+  let infoCamera = this.state.isCameraRunning
+    ? <div className="txt-green"> Camera ON </div>
+    : <div className="txt-red"> Camera OFF </div>
+
     return (
       <div className="App">
 
@@ -65,12 +97,17 @@ class App extends Component {
               this.camera = instance;
             }}
             handleError = {this.handleError}
+            onCameraStart = {this.onCameraStart}
+            onCameraStop = {this.onCameraStop}
           />
+
+          { infoCamera }
 
           <Buttons
             onStopStreams = {()=>{this.camera.stopStreams()}}
             onPlayFirstDevice = {()=>{this.camera.playFirstDevice()}}
             onGetDataUri = {()=>{this.getDataUri()}}
+            onClearPhotos = {()=>{this.onClearPhotos()}}
           />
         </div>
 

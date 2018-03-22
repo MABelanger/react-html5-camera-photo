@@ -36,11 +36,12 @@ export default class Camera extends React.Component {
   }
 
   stopStreams = () => {
-    if (this.state && this.state.stream) {
+    if (this.state.stream) {
       this.state.stream.getTracks().forEach(function(track) {
         track.stop();
       });
       this.setState({videoSrc: ""});
+      this.props.onCameraStop();
     }
   }
 
@@ -82,6 +83,7 @@ export default class Camera extends React.Component {
       stream,
       videoSrc
     });
+    this.props.onCameraStart();
   }
 
   _handleError = (error) => {
@@ -91,7 +93,7 @@ export default class Camera extends React.Component {
 
   render() {
     return (
-        <video src={this.state.videoSrc} ref="video" autoPlay="true"/>
+      <video src={this.state.videoSrc} ref="video" autoPlay="true"/>
     );
   }
 }
