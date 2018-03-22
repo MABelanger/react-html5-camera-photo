@@ -30,7 +30,7 @@ parameter | Description
 **Minimum ES6 example**
 ```js
 import React, { Component } from 'react';
-import Camera from '../lib';
+import Camera from 'react-html5-camera-photo';
 
 class App extends Component {
 
@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   getDataUri = () => {
-    let dataUri = this.refs.camera.getDataUri(1);
+    let dataUri = this.refs.camera.getDataUri();
     this.setState({dataUri});
   }
 

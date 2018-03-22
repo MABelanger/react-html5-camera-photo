@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   getDataUri = () => {
-    let dataUri = this.refs.camera.getDataUri(1);
+    let dataUri = this.refs.camera.getDataUri();
     this.setState({dataUri});
   }
 

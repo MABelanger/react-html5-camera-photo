@@ -31,7 +31,7 @@ export default class Camera extends React.Component {
     this._getStreamDevice(firstDevice.deviceId);
   }
 
-  getDataUri = (sizeFactor) => {
+  getDataUri = (sizeFactor=1) => {
     let dataUri = Utilities.getDataUri(this.refs.video, sizeFactor);
     return dataUri;
   }
