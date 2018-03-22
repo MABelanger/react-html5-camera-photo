@@ -19,7 +19,7 @@ Both Yarn and npm download packages from the npm registry.
 
 ## Getting started
 
-The component need at minimum 3 parameters `ref` `handleError` `autoPlay`.
+The component need at minimum 3 parameters `ref`, `handleError` and `autoPlay`.
 
 parameter | Description
 --- | ---
