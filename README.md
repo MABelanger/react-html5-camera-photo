@@ -90,7 +90,7 @@ function | Description
 ## Props
 parameter | PropType | Description
 --- | --- | ---
-**ref:** | string | The reference used to get the image URI with the call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
+**ref:** | string | The reference used to call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
 **handleError(error):** | func | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStop():** | func | Callback called when the camera is stopped.
 **onCameraStart():** | func | Callback called when the camera is started.
