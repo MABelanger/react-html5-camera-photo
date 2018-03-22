@@ -22,12 +22,12 @@ Both Yarn and npm download packages from the npm registry.
 
 ## Getting started
 
-The component need at minimum 3 parameters `ref`, `handleError` and `autoPlay`.
+The component need at minimum 3 parameters `ref`, `onCameraError` and `autoPlay`.
 
 parameter | Description
 --- | ---
 **ref:** | The reference used to get the image URI with the call of getDataUri()
-**handleError:** | The function called when error while opening the camera. Often the permission.
+**onCameraError:** | The function called when error while opening the camera. Often the permission.
 **autoPlay:** | Boolean value to start the first camera automatically when the component is loaded.
 
 **Minimum ES6 example**
@@ -44,7 +44,7 @@ class App extends Component {
     };
   }
 
-  handleError = (error) => {
+  onCameraError = (error) => {
     console.error(error)
   }
 
@@ -58,7 +58,7 @@ class App extends Component {
       <div>
         <Camera
           ref="camera"
-          handleError={this.handleError}
+          onCameraError={this.onCameraError}
           autoPlay={true}
         />
 
@@ -91,7 +91,7 @@ function | Description
 Properties | Type | Description
 --- | --- | ---
 **ref:** (optional) | string | The reference used to call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
-**handleError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
+**onCameraError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
 **autoPlay:**  (optional, defaults to false) | boolean | Boolean value to start the first camera automatically when the component is loaded.
