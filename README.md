@@ -80,7 +80,7 @@ export default App;
 ## API
 Function accessible by the `refs` ex:. "camera"
 
-### API with refs
+### Public API with refs
 function | Description
 --- | ---
 **this.refs.camera.playFirstDevice():** | Function that start the camera with the first camera available.
@@ -88,7 +88,7 @@ function | Description
 **this.refs.camera.stopStreams():** | Function that stop the camera.
 
 ## Props
-Properties | PropType | Description
+Properties | Type | Description
 --- | --- | ---
 **ref:** (optional) | string | The reference used to call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
 **handleError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
