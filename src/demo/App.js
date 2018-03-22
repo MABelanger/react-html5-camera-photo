@@ -3,7 +3,6 @@ import Camera from '../lib';
 import Images from './Images';
 import './App.css';
 
-
 const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
@@ -15,15 +14,15 @@ const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri, onClearPhotos
 
       <button
         onClick={(e) => {
-          onStopStreams();
-        }}
-      >Stop</button>
-
-      <button
-        onClick={(e) => {
           onGetDataUri();
         }}
       >Photo</button>
+
+      <button
+        onClick={(e) => {
+          onStopStreams();
+        }}
+      >Stop</button>
 
       <button
         onClick={(e) => {

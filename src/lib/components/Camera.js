@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Utilities from '../services/Utilities';
 
 /*
@@ -96,4 +97,10 @@ export default class Camera extends React.Component {
       <video src={this.state.videoSrc} ref="video" autoPlay="true"/>
     );
   }
+}
+
+Camera.propTypes = {
+  handleError: PropTypes.func.isRequired,
+  onCameraStart: PropTypes.func,
+  onCameraStop: PropTypes.func
 }
