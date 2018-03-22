@@ -5,6 +5,9 @@ The first objective of this package comes from the need to have a react componen
 ## Requirement
 React
 
+## LiveDemo
+[https://mabelanger.github.io/react-html5-camera-photo/](https://mabelanger.github.io/react-html5-camera-photo/)
+
 ## Installation
 
 ```bash
