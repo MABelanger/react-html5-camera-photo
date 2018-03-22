@@ -88,13 +88,13 @@ function | Description
 **this.refs.camera.stopStreams():** | Function that stop the camera.
 
 ## Props
-parameter | PropType | Description
+Properties | PropType | Description
 --- | --- | ---
-**ref:** | string | The reference used to call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
-**handleError(error):** | func | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
-**onCameraStop():** | func | Callback called when the camera is stopped.
-**onCameraStart():** | func | Callback called when the camera is started.
-**autoPlay:** | bool | Boolean value to start the first camera automatically when the component is loaded.
+**ref:** (optional) | string | The reference used to call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
+**handleError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
+**onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
+**onCameraStart():** (optional) | Event | Callback called when the camera is started.
+**autoPlay:**  (optional, defaults to false) | boolean | Boolean value to start the first camera automatically when the component is loaded.
 
 ## ToDo
 1. Select camera (front or back), right now it take by default the first camera available.
