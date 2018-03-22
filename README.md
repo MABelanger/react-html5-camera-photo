@@ -6,7 +6,7 @@ The first objective of this package comes from the need to have a react componen
 React
 
 ## LiveDemo
-<a href="https://mabelanger.github.io/react-html5-camera-photo/" target="_blank">https://mabelanger.github.io/react-html5-camera-photo/</a>
+["https://mabelanger.github.io/react-html5-camera-photo/"]("https://mabelanger.github.io/react-html5-camera-photo/")
 
 ## Installation
 
@@ -78,7 +78,29 @@ export default App;
 ```
 
 ## API
+Function accessible by the `refs` ex:. "camera"
 
+### API with refs
+function | Description
+--- | --- | ---
+**this.refs.camera.playFirstDevice():** | Function that start the camera with the first camera available.
+**this.refs.camera.getDataUri([sizeFactor]):** | Function that return the dataUri of the current frame of the camera. The sizeFactor is used to get a desired resolution. The sizeFactor of 1 get the same resolution of the camera while sizeFactor of 0.5 get the half resolution of the camera.
+**this.refs.camera.stopStreams():** | Function that stop the camera.
+
+## Props
+parameter | PropType | Description
+--- | --- | ---
+**ref:** | string | The reference used to get the image URI with the call the internal functions as [playFirstDevice(), getDataUri(), stopStreams()]
+**handleError(error):** | func | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
+**onCameraStop():** | func | Callback called when the camera is stopped.
+**onCameraStart():** | func | Callback called when the camera is started.
+**autoPlay:** | bool | Boolean value to start the first camera automatically when the component is loaded.
+
+## ToDo
+1. Select camera (front or back), right now it take by default the first camera available.
+2. Get a list of supported resolution.
+3. Force a resolution.
+4. Use redux instead of refs ?
 
 ## FAQ
 1. <b>What if i want to improve the code or add functionalities?</b>
