@@ -42,7 +42,9 @@ export default class Camera extends React.Component {
         track.stop();
       });
       this.setState({videoSrc: ""});
-      this.props.onCameraStop();
+      if(this.props.onCameraStop){
+        this.props.onCameraStop();
+      }
     }
   }
 
@@ -64,6 +66,11 @@ export default class Camera extends React.Component {
       }
     }
     this.setState({videoInputs});
+
+    // Auto start the video if autoPlay is true
+    if(this.props.autoPlay) {
+      this.playFirstDevice();
+    }
   }
 
   _getStreamDevice = (deviceId) => {
@@ -84,7 +91,9 @@ export default class Camera extends React.Component {
       stream,
       videoSrc
     });
-    this.props.onCameraStart();
+    if(this.props.onCameraStart){
+      this.props.onCameraStart();
+    }
   }
 
   _handleError = (error) => {
@@ -101,6 +110,7 @@ export default class Camera extends React.Component {
 
 Camera.propTypes = {
   handleError: PropTypes.func.isRequired,
+  autoPlay: PropTypes.bool.isRequired,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func
 }

@@ -43,11 +43,10 @@ class App extends Component {
       dataUris: [],
       isCameraRunning: false
     };
-    this.camera = {};
   }
 
   getDataUri = () => {
-    let dataUri = this.camera.getDataUri(IMAGE_THUMB_SIZE_FACTOR);
+    let dataUri = this.refs.camera.getDataUri(IMAGE_THUMB_SIZE_FACTOR);
     this.setState({
       dataUris: this.state.dataUris.concat(dataUri)
     });
@@ -89,16 +88,14 @@ class App extends Component {
     ? <div className="txt-green"> Camera ON </div>
     : <div className="txt-red"> Camera OFF </div>
 
-
     return (
       <div className="App">
 
         <div className="camera">
           <Camera
-            ref={instance => {
-              this.camera = instance;
-            }}
+            ref="camera"
             handleError = {this.handleError}
+            autoPlay={true}
             onCameraStart = {this.onCameraStart}
             onCameraStop = {this.onCameraStop}
           />
@@ -106,8 +103,8 @@ class App extends Component {
           { infoCamera }
 
           <Buttons
-            onStopStreams = {()=>{this.camera.stopStreams()}}
-            onPlayFirstDevice = {()=>{this.camera.playFirstDevice()}}
+            onStopStreams = {()=>{this.refs.camera.stopStreams()}}
+            onPlayFirstDevice = {()=>{this.refs.camera.playFirstDevice()}}
             onGetDataUri = {()=>{this.getDataUri()}}
             onClearPhotos = {()=>{this.onClearPhotos()}}
           />
