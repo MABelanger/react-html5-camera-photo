@@ -1,5 +1,3 @@
-const IMAGE_WIDTH_THUMB = 360;
-
 const _getImageSizeFull = (videoWidth, videoHeight) => {
   return {
     imageWidth: videoWidth,
@@ -7,8 +5,10 @@ const _getImageSizeFull = (videoWidth, videoHeight) => {
   };
 }
 
-const _getImageSizeThumb = (videoWidth, videoHeight) => {
-  let imageWidth = IMAGE_WIDTH_THUMB;
+const _getImageSizeThumb = (videoWidth, videoHeight, sizeFactor) => {
+  // let imageWidth = IMAGE_WIDTH_THUMB;
+
+  let imageWidth = videoWidth * parseFloat(sizeFactor);
 
   // calc the ratio
   let ratio = videoWidth / imageWidth;
@@ -22,23 +22,23 @@ const _getImageSizeThumb = (videoWidth, videoHeight) => {
   };
 }
 
-const _getImageSize = (videoWidth, videoHeight) => {
+const _getImageSize = (videoWidth, videoHeight, sizeFactor) => {
   console.log('videoWidth', videoWidth)
   console.log('videoHeight', videoHeight)
 
   // return _getImageSizeFull(videoWidth, videoHeight)
-  return _getImageSizeThumb(videoWidth, videoHeight);
+  return _getImageSizeThumb(videoWidth, videoHeight, sizeFactor);
 }
 
 class Utilities {
 
-  static getDataUri = (video) => {
+  static getDataUri = (video, sizeFactor) => {
 
     let videoWidth = video.videoWidth
     let videoHeight = video.videoHeight;
 
-    let {imageWidth, imageHeight} = _getImageSize(videoWidth, videoHeight);
-    console.log(imageWidth, imageHeight)
+    let {imageWidth, imageHeight} = _getImageSize(videoWidth, videoHeight, sizeFactor);
+    console.log(imageWidth, imageHeight, sizeFactor)
 
     let canvas = document.createElement('canvas');
     canvas.width = imageWidth;

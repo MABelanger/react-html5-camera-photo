@@ -3,6 +3,8 @@ import Camera from '../lib';
 import Images from './Images';
 import './App.css';
 
+const IMAGE_THUMB_SIZE_FACTOR = .1;
+
 const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
@@ -45,7 +47,7 @@ class App extends Component {
   }
 
   getDataUri = () => {
-    let dataUri = this.camera.getDataUri();
+    let dataUri = this.camera.getDataUri(IMAGE_THUMB_SIZE_FACTOR);
     this.setState({
       dataUris: this.state.dataUris.concat(dataUri)
     });
@@ -86,6 +88,7 @@ class App extends Component {
   let infoCamera = this.state.isCameraRunning
     ? <div className="txt-green"> Camera ON </div>
     : <div className="txt-red"> Camera OFF </div>
+
 
     return (
       <div className="App">
