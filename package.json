@@ -8,10 +8,10 @@
     "buildHtml": "node scripts/buildHtml.js",
     "buildNpm": "node scripts/buildNpm.js",
     "demo": "node scripts/demo.js",
-    "predeploy": "npm run buildDeploy",
-    "deploy": "gh-pages -d build",
+    "predeployHtml": "npm run buildHtml",
+    "deployHtml": "gh-pages -d build",
     "test": "node scripts/test.js --env=jsdom",
-    "prepublish": "npm run build"
+    "prepublish": "npm run buildNpm"
   },
   "repository": {
     "type": "git",
