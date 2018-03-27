@@ -85,7 +85,8 @@ Function accessible by the `refs` ex:. "camera"
 ### Public API with refs
 function | Description
 --- | ---
-**this.refs.camera.playFirstDevice():** | Function that start the camera with the first camera available.
+**this.refs.camera.playFirstDevice():** | Function that start the camera with the first camera available often camera front.
+**this.refs.camera.playLastDevice():** | Function that start the camera with the last camera available often camera back.
 **this.refs.camera.getDataUri([sizeFactor]):** | Function that return the dataUri of the current frame of the camera. The sizeFactor is used to get a desired resolution. Example, a sizeFactor of 1 get the same resolution of the camera while sizeFactor of 0.5 get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
 **this.refs.camera.stopStreams():** | Function that stop the camera.
 
@@ -96,6 +97,7 @@ Properties | Type | Description
 **onCameraError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
+**onVideoClick():** (optional) | Event | Callback called when the video is clicked.
 **autoPlay:**  (optional, defaults to false) | boolean | Boolean value to start the first camera automatically when the component is loaded.
 
 ## ToDo
