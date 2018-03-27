@@ -14,7 +14,7 @@ class App extends Component {
     console.error(error)
   }
 
-  getDataUri = () => {
+  setDataUri = () => {
     let dataUri = this.refs.camera.getDataUri();
     this.setState({dataUri});
   }
@@ -30,7 +30,7 @@ class App extends Component {
 
         <button
           onClick={(e) => {
-            this.getDataUri();
+            this.setDataUri();
           }}
         >Photo</button>
 

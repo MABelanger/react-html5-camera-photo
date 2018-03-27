@@ -62,7 +62,7 @@ class App extends Component {
     };
   }
 
-  getDataUri = () => {
+  setDataUri = () => {
     let dataUri = this.refs.camera.getDataUri(IMAGE_THUMB_SIZE_FACTOR);
     this.setState({
       dataUris: this.state.dataUris.concat(dataUri)
@@ -115,7 +115,7 @@ class App extends Component {
             autoPlay={false}
             onCameraStart = {this.onCameraStart}
             onCameraStop = {this.onCameraStop}
-            onVideoClick = {()=>{this.getDataUri()}}
+            onVideoClick = {()=>{this.setDataUri()}}
           />
 
           { infoCamera }
@@ -123,7 +123,7 @@ class App extends Component {
           <Buttons
             onStopStreams = {()=>{this.refs.camera.stopStreams()}}
             onPlayLastDevice = {()=>{this.refs.camera.playLastDevice()}}
-            onGetDataUri = {()=>{this.getDataUri()}}
+            onGetDataUri = {()=>{this.setDataUri()}}
             onClearPhotos = {()=>{this.onClearPhotos()}}
           />
         </div>
