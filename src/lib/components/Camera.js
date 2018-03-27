@@ -31,6 +31,12 @@ export default class Camera extends React.Component {
     this._getStreamDevice(firstDevice.deviceId);
   }
 
+  playLastDevice = () => {
+    let lastIndex = this.state.videoInputs.length -1;
+    let lastDevice = this.state.videoInputs[ lastIndex ];
+    this._getStreamDevice(lastDevice.deviceId);
+  }
+
   getDataUri = (sizeFactor=1) => {
     let dataUri = Utilities.getDataUri(this.refs.video, sizeFactor);
     return dataUri;
@@ -103,7 +109,12 @@ export default class Camera extends React.Component {
 
   render() {
     return (
-      <video src={this.state.videoSrc} ref="video" autoPlay="true"/>
+      <video
+        src={this.state.videoSrc}
+        ref="video"
+        autoPlay="true"
+        onClick={this.props.onVideoClick}
+      />
     );
   }
 }
@@ -112,5 +123,6 @@ Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,
   autoPlay: PropTypes.bool,
   onCameraStart: PropTypes.func,
-  onCameraStop: PropTypes.func
+  onCameraStop: PropTypes.func,
+  onVideoClick: PropTypes.func
 }

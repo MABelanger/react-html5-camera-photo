@@ -77,6 +77,8 @@ class App extends Component {
 export default App;
 ```
 
+For more complex example checkout the demo [/src/demo/AppStandardUsage.js](./src/demo/AppStandardUsage.js):
+
 ## API
 Function accessible by the `refs` ex:. "camera"
 

@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
 import Camera from '../lib';
-import Images from './Images';
-import './App.css';
+import './AppStandardUsage.css';
 
 const IMAGE_THUMB_SIZE_FACTOR = .1;
 
-const Buttons = ({ onStopStreams, onPlayFirstDevice, onGetDataUri, onClearPhotos }) => {
+const Image = ({ dataUri }) => {
+  // if no dataUri or dataUri is data empty, use gif blank 1px
+  let dataUriImage = (!dataUri || dataUri === "data:,")
+    ? "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+    : dataUri;
+  return(
+      <img alt="camera" src={dataUriImage}/>
+  );
+}
+
+export const Images = ({ dataUris }) => {
+  return(
+    dataUris.reverse().map((dataUri, index) => {
+      return <Image key={index} dataUri={dataUri}/>
+    })
+  );
+}
+
+const Buttons = ({ onStopStreams, onPlayLastDevice, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
       <button
         onClick={(e) => {
-          onPlayFirstDevice();
+          onPlayLastDevice();
         }}
       >Play</button>
 
@@ -95,16 +112,17 @@ class App extends Component {
           <Camera
             ref="camera"
             onCameraError = {this.onCameraError}
-            autoPlay={true}
+            autoPlay={false}
             onCameraStart = {this.onCameraStart}
             onCameraStop = {this.onCameraStop}
+            onVideoClick = {()=>{this.getDataUri()}}
           />
 
           { infoCamera }
 
           <Buttons
             onStopStreams = {()=>{this.refs.camera.stopStreams()}}
-            onPlayFirstDevice = {()=>{this.refs.camera.playFirstDevice()}}
+            onPlayLastDevice = {()=>{this.refs.camera.playLastDevice()}}
             onGetDataUri = {()=>{this.getDataUri()}}
             onClearPhotos = {()=>{this.onClearPhotos()}}
           />
