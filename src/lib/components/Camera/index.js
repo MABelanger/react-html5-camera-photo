@@ -13,8 +13,11 @@ export default class Camera extends React.Component {
   }
 
   componentDidMount() {
-    this.cameraHelper = new CameraHelper(this.refs.video, false);
-    this.cameraHelper.enumerateDevice();
+    this.cameraHelper = new CameraHelper(this.refs.video, this.props.autoPlay);
+    this.cameraHelper.enumerateDevice()
+    .catch((error)=>{
+      this.props.onCameraError(error);
+    });
   }
 
   /*
@@ -25,6 +28,9 @@ export default class Camera extends React.Component {
     .then(()=>{
       this.props.onCameraStart();
     })
+    .catch((error)=>{
+      this.props.onCameraError(error);
+    });
   }
 
   playLastDevice = () => {
@@ -32,6 +38,9 @@ export default class Camera extends React.Component {
     .then(()=>{
       this.props.onCameraStart();
     })
+    .catch((error) => {
+      this.props.onCameraError(error);
+    });
   }
 
   getDataUri = (sizeFactor) => {

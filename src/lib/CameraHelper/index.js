@@ -99,9 +99,7 @@ export default class CameraHelper {
     });
   }
 
-  _gotStream = (stream) => {
-    this.stream = stream;
-
+  _setVideoSrc = (stream) => {
     if ("srcObject" in this.videoElement) {
       this.videoElement.srcObject = stream;
     }
@@ -110,10 +108,11 @@ export default class CameraHelper {
       let videoSrc = this.windowURL.createObjectURL(stream);
       this.videoElement.src = videoSrc;
     }
+  }
 
-    if(this.onCameraStart){
-      this.onCameraStart();
-    }
+  _gotStream = (stream) => {
+    this.stream = stream;
+    this._setVideoSrc(stream);
   }
 
 }
