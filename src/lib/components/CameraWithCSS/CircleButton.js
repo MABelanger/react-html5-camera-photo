@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 
 import './styles/circleButton.css';
 
-export const CircleButton = ({ onVideoClick }) => (
-  <div onClick={onVideoClick} id="outer-circle">
+export const CircleButton = ({ onClick }) => (
+  <div onClick={onClick} id="outer-circle">
   bibi
-    <div onClick={onVideoClick} id="inner-circle">
+    <div onClick={onClick} id="inner-circle">
     </div>
   </div>
 )
 
 CircleButton.propTypes = {
-
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CircleButton;

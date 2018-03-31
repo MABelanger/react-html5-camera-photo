@@ -4,18 +4,17 @@ import Utilities from './services/Utilities';
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
 
-export default class CameraJs {
+export default class CameraHelper {
 
   constructor(videoElement, autoPlay) {
     this.videoElement = videoElement;
     this.autoPlay = autoPlay;
     this.videoInputs = [];
     this.stream = null;
+    this.windowURL = Utilities.getWindowURL();
+    this.mediaDevices = Utilities.getNavigatorMediaDevices();
   }
 
-  /*
-   * Public fct accessed by ref
-   */
   playFirstDevice = () => {
     let firstDevice = this.videoInputs[0];
     return this._getStreamDevice(firstDevice.deviceId);
@@ -47,10 +46,10 @@ export default class CameraJs {
 
   enumerateDevice = () => {
     return new Promise((resolve, reject) => {
-      Utilities.getNavigatorMediaDevices().enumerateDevices()
+      this.mediaDevices.enumerateDevices()
         .then((deviceInfos) => {
-            this._gotDevices(deviceInfos)
-            resolve(deviceInfos)
+          this._gotDevices(deviceInfos)
+          resolve(deviceInfos)
         })
         .catch((error) => {
           this.stopStreams();
@@ -62,9 +61,6 @@ export default class CameraJs {
   /*
    * private fct
    */
-
-   // https://github.com/jhuckaby/webcamjs/blob/master/webcam.js
-
   _gotDevices = (deviceInfos) => {
     let videoInputs = [];
     for (let i = 0; i !== deviceInfos.length; ++i) {
@@ -86,7 +82,7 @@ export default class CameraJs {
     let constraints = Utilities.getConstraints(deviceId);
 
     return new Promise((resolve, reject) => {
-      Utilities.getNavigatorMediaDevices().getUserMedia(constraints)
+      this.mediaDevices.getUserMedia(constraints)
           .then((stream) => {
             this._gotStream(stream);
             resolve();
@@ -100,8 +96,15 @@ export default class CameraJs {
 
   _gotStream = (stream) => {
     this.stream = stream;
-    let videoSrc = Utilities.getWindowURL().createObjectURL(stream);
-    this.videoElement.src = videoSrc;
+
+    if ("srcObject" in this.videoElement) {
+      this.videoElement.srcObject = stream;
+    }
+    else {
+      // using URL.createObjectURL() as fallback for old browsers
+      let videoSrc = this.windowURL.createObjectURL(stream);
+      this.videoElement.src = videoSrc;
+    }
 
     if(this.onCameraStart){
       this.onCameraStart();

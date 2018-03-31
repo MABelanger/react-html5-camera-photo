@@ -1,7 +1,6 @@
-import {CameraWithCSS, Camera, CameraJs} from './components';
+import {CameraWithCSS, Camera} from './components';
 
 export {
   Camera,
-  CameraWithCSS,
-  CameraJs
+  CameraWithCSS
 };

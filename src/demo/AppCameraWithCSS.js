@@ -11,8 +11,7 @@ class AppCamera extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataUris: [],
-      isCameraRunning: false
+      dataUri: ""
     };
   }
 
@@ -20,13 +19,21 @@ class AppCamera extends Component {
 
   }
 
+  setDataUri = (dataUri) => {
+    console.log(dataUri)
+    this.setState({dataUri});
+  }
 
   render() {
 
-
     return (
       <div className="App">
-        <CameraWithCSS/>
+        <CameraWithCSS
+          onSetDataUri = {(dataUri) => {
+            this.setDataUri(dataUri)
+          }}
+        />
+        <img alt="camera" src={this.state.dataUri}/>
       </div>
     );
   }

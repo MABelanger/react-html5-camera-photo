@@ -53,7 +53,7 @@ class Utilities {
       video: {
         optional: [
           {sourceId: deviceId},
-          // {minWidth: 320},
+          {maxWidth: 128},
           // {minWidth: 640},
           // {minWidth: 800},
           // {minWidth: 900},
@@ -73,7 +73,9 @@ class Utilities {
     return constraints;
   }
 
-  // https://github.com/jhuckaby/webcamjs/blob/master/webcam.js
+  /*
+  Inspiration : https://github.com/jhuckaby/webcamjs/blob/master/webcam.js
+  */
   static getNavigatorMediaDevices = () => {
     let NMDevice = null;
     let isNewAPI = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -86,18 +88,26 @@ class Utilities {
       let NMDeviceOld = navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
       // Setup getUserMedia, with polyfill for older browsers
   		// Adapted from: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
-      NMDevice = {
+
+      let polyfillGetUserMedia = {
         getUserMedia: function(c) {
           return new Promise(function(y, n) {
             NMDeviceOld.call(navigator, c, y, n);
           });
         }
-      }
+      };
+
+      // Overwrite getUserMedia() with the polyfill
+      NMDevice = Object.assign(NMDeviceOld,
+        polyfillGetUserMedia
+      );
     }
 
     // If is no navigator.mediaDevices || navigator.mozGetUserMedia || navigator.webkitGetUserMedia
     // then is not supported so return null
     return NMDevice;
+
+
   }
 
   static getWindowURL = () => {
