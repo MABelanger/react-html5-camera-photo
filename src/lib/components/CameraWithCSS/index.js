@@ -1,25 +1,84 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import CameraHelper from '../../CameraHelper';
 import CircleButton from './CircleButton';
 
-export default class CameraWithCSS extends React.Component {
+const Buttons = ({ onStopStreams, onPlayLastDevice, onGetDataUri, onClearPhotos }) => {
+  return(
+    <div>
+      <button
+        onClick={(e) => {
+          onPlayLastDevice();
+        }}
+      >Play</button>
 
-  constructor(){
-    super();
+      <button
+        onClick={(e) => {
+          onGetDataUri();
+        }}
+      >Photo</button>
+
+      <button
+        onClick={(e) => {
+          onStopStreams();
+        }}
+      >Stop</button>
+
+      <button
+        onClick={(e) => {
+          onClearPhotos();
+        }}
+      >Clear</button>
+    </div>
+  );
+}
+
+
+/*
+Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
+*/
+export default class Camera extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
     this.cameraHelper = null;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.cameraHelper = new CameraHelper(this.refs.video, false);
-    this.cameraHelper.enumerateDevice()
-    .then(() => {
-      this.cameraHelper.playFirstDevice()
+    this.cameraHelper.enumerateDevice();
+  }
+
+  /*
+   * Public fct accessed by ref
+   */
+  playFirstDevice = () => {
+    this.cameraHelper.playFirstDevice()
+    .then(()=>{
+      this.props.onCameraStart();
     })
-    .catch((error)=>{
-      console.log('error', error)
-    });
+  }
+
+  playLastDevice = () => {
+    this.cameraHelper.playLastDevice()
+    .then(()=>{
+      this.props.onCameraStart();
+    })
+  }
+
+  getDataUri = () => {
+    return this.cameraHelper.getDataUri();
+  }
+
+  stopStreams = () => {
+    this.cameraHelper.stopStreams()
+      .then(() => {
+        this.props.onCameraStop()
+      })
+      .catch((error)=>{
+          console.log(error)
+      });
   }
 
   render() {
@@ -36,4 +95,12 @@ export default class CameraWithCSS extends React.Component {
       </div>
     );
   }
+}
+
+Camera.propTypes = {
+  onCameraError: PropTypes.func.isRequired,
+  autoPlay: PropTypes.bool,
+  onCameraStart: PropTypes.func,
+  onCameraStop: PropTypes.func,
+  onVideoClick: PropTypes.func
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from './services/Utilities';
+import CameraHelper from '../../CameraHelper';
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
@@ -9,111 +9,50 @@ export default class Camera extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      videoInputs: [],
-      stream: null,
-      videoSrc: ""
-    };
+    this.cameraHelper = null;
   }
 
   componentDidMount() {
-    if(this.state.videoInputs.length === 0) {
-      this._enumerateDevice();
-    }
+    this.cameraHelper = new CameraHelper(this.refs.video, false);
+    this.cameraHelper.enumerateDevice();
   }
 
   /*
    * Public fct accessed by ref
    */
   playFirstDevice = () => {
-    let firstDevice = this.state.videoInputs[0];
-    this._getStreamDevice(firstDevice.deviceId);
+    this.cameraHelper.playFirstDevice()
+    .then(()=>{
+      this.props.onCameraStart();
+    })
   }
 
   playLastDevice = () => {
-    let lastIndex = this.state.videoInputs.length -1;
-    let lastDevice = this.state.videoInputs[ lastIndex ];
-    this._getStreamDevice(lastDevice.deviceId);
+    this.cameraHelper.playFirstDevice()
+    .then(()=>{
+      this.props.onCameraStart();
+    })
   }
 
-  getDataUri = (sizeFactor=1) => {
-    let dataUri = Utilities.getDataUri(this.refs.video, sizeFactor);
-    return dataUri;
+  getDataUri = (sizeFactor) => {
+    return this.cameraHelper.getDataUri(sizeFactor);
   }
 
   stopStreams = () => {
-    if (this.state.stream) {
-      this.state.stream.getTracks().forEach(function(track) {
-        track.stop();
+    this.cameraHelper.stopStreams()
+      .then(() => {
+        this.props.onCameraStop()
+      })
+      .catch((error)=>{
+          console.log(error)
       });
-      this.setState({videoSrc: ""});
-      if(this.props.onCameraStop){
-        this.props.onCameraStop();
-      }
-    }
-  }
-
-  /*
-   * private fct
-   */
-  _enumerateDevice = () => {
-    navigator.mediaDevices.enumerateDevices()
-      .then(this._gotDevices)
-      .catch(this._handleError);
-  }
-
-  _gotDevices = (deviceInfos) => {
-    let videoInputs = [];
-    for (let i = 0; i !== deviceInfos.length; ++i) {
-      let deviceInfo = deviceInfos[i];
-      if (deviceInfo.kind === 'videoinput') { // && deviceInfo.label.includes('back')
-        videoInputs.push(deviceInfo);
-      }
-    }
-    this.setState({videoInputs});
-
-    // Auto start the video if autoPlay is true
-    if(this.props.autoPlay) {
-      this.playFirstDevice();
-    }
-  }
-
-  _getStreamDevice = (deviceId) => {
-    this.stopStreams();
-    let constraints = Utilities.getConstraints(deviceId);
-
-    navigator.mediaDevices.getUserMedia(constraints)
-        .then(this._gotStream)
-        .catch(this._handleError);
-  }
-
-  _gotStream = (stream) => {
-    let videoSrc = window.URL.createObjectURL(stream);
-    // the "stream" state is only used to be able to stop it.
-    // to display the video we need to set "videoSrc" state.
-    // Update the state, triggering the component to re-render with the correct stream
-    this.setState({
-      stream,
-      videoSrc
-    });
-    if(this.props.onCameraStart){
-      this.props.onCameraStart();
-    }
-  }
-
-  _handleError = (error) => {
-    this.props.onCameraError(error);
-    this.stopStreams();
   }
 
   render() {
     return (
       <video
-        src={this.state.videoSrc}
         ref="video"
         autoPlay="true"
-        onClick={this.props.onVideoClick}
       />
     );
   }

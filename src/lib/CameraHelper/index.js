@@ -11,16 +11,22 @@ export default class CameraHelper {
     this.autoPlay = autoPlay;
     this.videoInputs = [];
     this.stream = null;
+
+    // Thet the right object depending on the browser.
     this.windowURL = Utilities.getWindowURL();
     this.mediaDevices = Utilities.getNavigatorMediaDevices();
   }
 
   playFirstDevice = () => {
+    // stop the stream before playing it.
+    this.stopStreams().catch(()=>{});
     let firstDevice = this.videoInputs[0];
     return this._getStreamDevice(firstDevice.deviceId);
   }
 
   playLastDevice = () => {
+    // stop the stream before playing it.
+    this.stopStreams().catch(()=>{});
     let lastIndex = this.videoInputs.length -1;
     let lastDevice = this.videoInputs[ lastIndex ];
     return this._getStreamDevice(lastDevice.deviceId);
@@ -32,16 +38,17 @@ export default class CameraHelper {
   }
 
   stopStreams = () => {
-    if (this.stream) {
-      this.stream.getTracks().forEach(function(track) {
-        track.stop();
-      });
-      this.videoElement.src = "";
-
-      if(this.onCameraStop){
-        this.onCameraStop();
+    return new Promise((resolve, reject) => {
+      if (this.stream) {
+        this.stream.getTracks().forEach(function(track) {
+          track.stop();
+        });
+        this.videoElement.src = "";
+        this.stream = null;
+        resolve();
       }
-    }
+      reject("no stream!")
+    });
   }
 
   enumerateDevice = () => {
@@ -78,10 +85,8 @@ export default class CameraHelper {
   }
 
   _getStreamDevice = (deviceId) => {
-    this.stopStreams();
-    let constraints = Utilities.getConstraints(deviceId);
-
     return new Promise((resolve, reject) => {
+      let constraints = Utilities.getConstraints(deviceId);
       this.mediaDevices.getUserMedia(constraints)
           .then((stream) => {
             this._gotStream(stream);

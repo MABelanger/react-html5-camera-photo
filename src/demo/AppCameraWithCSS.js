@@ -24,6 +24,13 @@ class AppCamera extends Component {
     this.setState({dataUri});
   }
 
+  onCameraStop = () => {
+    console.log('camera stop');
+    this.setState({
+      isCameraRunning: false
+    });
+  }
+
   render() {
 
     return (
@@ -32,6 +39,7 @@ class AppCamera extends Component {
           onSetDataUri = {(dataUri) => {
             this.setDataUri(dataUri)
           }}
+          onCameraStop = {this.onCameraStop}
         />
         <img alt="camera" src={this.state.dataUri}/>
       </div>
