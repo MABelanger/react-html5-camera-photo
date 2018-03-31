@@ -15,9 +15,9 @@ export default class Camera extends React.Component {
   componentDidMount() {
     this.cameraHelper = new CameraHelper(this.refs.video, this.props.autoPlay);
     this.cameraHelper.enumerateDevice()
-    .catch((error)=>{
-      this.props.onCameraError(error);
-    });
+      .catch((error)=>{
+        this.props.onCameraError(error);
+      });
   }
 
   /*
@@ -25,22 +25,22 @@ export default class Camera extends React.Component {
    */
   playFirstDevice = () => {
     this.cameraHelper.playFirstDevice()
-    .then(()=>{
-      this.props.onCameraStart();
-    })
-    .catch((error)=>{
-      this.props.onCameraError(error);
-    });
+      .then(()=>{
+        this.props.onCameraStart();
+      })
+      .catch((error)=>{
+        this.props.onCameraError(error);
+      });
   }
 
   playLastDevice = () => {
     this.cameraHelper.playFirstDevice()
-    .then(()=>{
-      this.props.onCameraStart();
-    })
-    .catch((error) => {
-      this.props.onCameraError(error);
-    });
+      .then(()=>{
+        this.props.onCameraStart();
+      })
+      .catch((error) => {
+        this.props.onCameraError(error);
+      });
   }
 
   getDataUri = (sizeFactor) => {
@@ -50,10 +50,10 @@ export default class Camera extends React.Component {
   stopStreams = () => {
     this.cameraHelper.stopStreams()
       .then(() => {
-        this.props.onCameraStop()
+        this.props.onCameraStop();
       })
       .catch((error)=>{
-          console.log(error)
+          console.log(error);
       });
   }
 

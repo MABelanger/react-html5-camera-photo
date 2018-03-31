@@ -17,54 +17,6 @@ export default class CameraHelper {
     this.mediaDevices = Utilities.getNavigatorMediaDevices();
   }
 
-  playFirstDevice = () => {
-    // stop the stream before playing it.
-    this.stopStreams().catch(()=>{});
-    let firstDevice = this.videoInputs[0];
-    return this._getStreamDevice(firstDevice.deviceId);
-  }
-
-  playLastDevice = () => {
-    // stop the stream before playing it.
-    this.stopStreams().catch(()=>{});
-    let lastIndex = this.videoInputs.length -1;
-    let lastDevice = this.videoInputs[ lastIndex ];
-    return this._getStreamDevice(lastDevice.deviceId);
-  }
-
-  getDataUri = (sizeFactor=1) => {
-    let dataUri = Utilities.getDataUri(this.videoElement, sizeFactor);
-    return dataUri;
-  }
-
-  stopStreams = () => {
-    return new Promise((resolve, reject) => {
-      if (this.stream) {
-        this.stream.getTracks().forEach(function(track) {
-          track.stop();
-        });
-        this.videoElement.src = "";
-        this.stream = null;
-        resolve();
-      }
-      reject("no stream!")
-    });
-  }
-
-  enumerateDevice = () => {
-    return new Promise((resolve, reject) => {
-      this.mediaDevices.enumerateDevices()
-        .then((deviceInfos) => {
-          this._gotDevices(deviceInfos)
-          resolve(deviceInfos)
-        })
-        .catch((error) => {
-          this.stopStreams();
-          reject(error)
-        });
-    });
-  }
-
   /*
    * private fct
    */
@@ -115,4 +67,54 @@ export default class CameraHelper {
     this._setVideoSrc(stream);
   }
 
+  /*
+   * public fct
+   */
+  playFirstDevice = () => {
+    // stop the stream before playing it.
+    this.stopStreams().catch(()=>{});
+    let firstDevice = this.videoInputs[0];
+    return this._getStreamDevice(firstDevice.deviceId);
+  }
+
+  playLastDevice = () => {
+    // stop the stream before playing it.
+    this.stopStreams().catch(()=>{});
+    let lastIndex = this.videoInputs.length -1;
+    let lastDevice = this.videoInputs[ lastIndex ];
+    return this._getStreamDevice(lastDevice.deviceId);
+  }
+
+  getDataUri = (sizeFactor=1) => {
+    let dataUri = Utilities.getDataUri(this.videoElement, sizeFactor);
+    return dataUri;
+  }
+
+  stopStreams = () => {
+    return new Promise((resolve, reject) => {
+      if (this.stream) {
+        this.stream.getTracks().forEach(function(track) {
+          track.stop();
+        });
+        this.videoElement.src = "";
+        this.stream = null;
+        resolve();
+      }
+      reject("no stream!")
+    });
+  }
+
+  enumerateDevice = () => {
+    return new Promise((resolve, reject) => {
+      this.mediaDevices.enumerateDevices()
+        .then((deviceInfos) => {
+          this._gotDevices(deviceInfos)
+          resolve(deviceInfos)
+        })
+        .catch((error) => {
+          this.stopStreams();
+          reject(error)
+        });
+    });
+  }
 }
