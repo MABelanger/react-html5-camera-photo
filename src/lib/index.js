@@ -1,2 +1,7 @@
-import Camera from './components/Camera';
-export default Camera;
+import {CameraWithCSS, Camera, CameraJs} from './components';
+
+export {
+  Camera,
+  CameraWithCSS,
+  CameraJs
+};

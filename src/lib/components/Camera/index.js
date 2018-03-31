@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../services/Utilities';
+import Utilities from './services/Utilities';
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
