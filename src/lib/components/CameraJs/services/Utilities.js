@@ -72,6 +72,39 @@ class Utilities {
 
     return constraints;
   }
+
+  // https://github.com/jhuckaby/webcamjs/blob/master/webcam.js
+  static getNavigatorMediaDevices = () => {
+    let NMDevice = null;
+    let isNewAPI = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    let isOldAPI = !!(navigator.mozGetUserMedia || navigator.webkitGetUserMedia);
+
+    if(isNewAPI) {
+      NMDevice = navigator.mediaDevices;
+
+    } else if(isOldAPI){
+      let NMDeviceOld = navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+      // Setup getUserMedia, with polyfill for older browsers
+  		// Adapted from: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+      NMDevice = {
+        getUserMedia: function(c) {
+          return new Promise(function(y, n) {
+            NMDeviceOld.call(navigator, c, y, n);
+          });
+        }
+      }
+    }
+
+    // If is no navigator.mediaDevices || navigator.mozGetUserMedia || navigator.webkitGetUserMedia
+    // then is not supported so return null
+    return NMDevice;
+  }
+
+  static getWindowURL = () => {
+    let windowURL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+    return windowURL;
+  }
+
 }
 
 export default Utilities;

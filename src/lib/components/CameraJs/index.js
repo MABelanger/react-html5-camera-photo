@@ -3,6 +3,7 @@ import Utilities from './services/Utilities';
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
+
 export default class CameraJs {
 
   constructor(videoElement, autoPlay) {
@@ -10,7 +11,6 @@ export default class CameraJs {
     this.autoPlay = autoPlay;
     this.videoInputs = [];
     this.stream = null;
-    this.videoSrc = "";
   }
 
   /*
@@ -47,7 +47,7 @@ export default class CameraJs {
 
   enumerateDevice = () => {
     return new Promise((resolve, reject) => {
-      navigator.mediaDevices.enumerateDevices()
+      Utilities.getNavigatorMediaDevices().enumerateDevices()
         .then((deviceInfos) => {
             this._gotDevices(deviceInfos)
             resolve(deviceInfos)
@@ -62,6 +62,9 @@ export default class CameraJs {
   /*
    * private fct
    */
+
+   // https://github.com/jhuckaby/webcamjs/blob/master/webcam.js
+
   _gotDevices = (deviceInfos) => {
     let videoInputs = [];
     for (let i = 0; i !== deviceInfos.length; ++i) {
@@ -83,7 +86,7 @@ export default class CameraJs {
     let constraints = Utilities.getConstraints(deviceId);
 
     return new Promise((resolve, reject) => {
-      navigator.mediaDevices.getUserMedia(constraints)
+      Utilities.getNavigatorMediaDevices().getUserMedia(constraints)
           .then((stream) => {
             this._gotStream(stream);
             resolve();
@@ -96,7 +99,8 @@ export default class CameraJs {
   }
 
   _gotStream = (stream) => {
-    let videoSrc = window.URL.createObjectURL(stream);
+    this.stream = stream;
+    let videoSrc = Utilities.getWindowURL().createObjectURL(stream);
     this.videoElement.src = videoSrc;
 
     if(this.onCameraStart){
