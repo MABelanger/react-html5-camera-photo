@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {CameraWithCSS} from '../lib';
-
+import './AppCameraWithCSS.css';
 
 
 const IMAGE_THUMB_SIZE_FACTOR = .1;
-
 
 class AppCamera extends Component {
 
