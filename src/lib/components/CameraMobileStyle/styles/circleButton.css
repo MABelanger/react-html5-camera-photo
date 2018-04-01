@@ -43,7 +43,7 @@
   z-index: 2;
 }
 
-#inner-circle.is-clicked{
+#inner-circle.is-clicked {
   height: 38px;
   width: 38px;
   margin: -19px 0px 0px -19px;
