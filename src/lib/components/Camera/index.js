@@ -52,7 +52,7 @@ export default class Camera extends React.Component {
       .then(() => {
         this.props.onCameraStop();
       })
-      .catch((error)=>{
+      .catch((error) => {
           console.log(error);
       });
   }

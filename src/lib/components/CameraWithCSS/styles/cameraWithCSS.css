@@ -1,0 +1,17 @@
+.container-container {
+  position: relative;
+  background-color: pink;
+  text-align: center;
+}
+
+video {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width: 300px;
+}
+
+img {
+  width: 300px;
+  display:block;
+}

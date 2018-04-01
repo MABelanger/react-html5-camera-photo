@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import CameraHelper from '../../CameraHelper';
 import CircleButton from './CircleButton';
 
+import './styles/cameraWithCSS.css';
+
+import './'
+
 const Buttons = ({ onStopStreams, onPlayLastDevice, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
@@ -43,11 +47,18 @@ export default class Camera extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.cameraHelper = null;
+    this.state = {
+      dataUri : "",
+      isShowVideo: true
+    };
   }
 
   componentDidMount() {
-    this.cameraHelper = new CameraHelper(this.refs.video, false);
-    this.cameraHelper.enumerateDevice();
+    this.cameraHelper = new CameraHelper(this.refs.video, this.props.autoPlay);
+    this.cameraHelper.enumerateDevice()
+      .catch((error)=>{
+        this.props.onCameraError(error);
+      });
   }
 
   /*
@@ -55,44 +66,77 @@ export default class Camera extends React.Component {
    */
   playFirstDevice = () => {
     this.cameraHelper.playFirstDevice()
-    .then(()=>{
-      this.props.onCameraStart();
-    })
+      .then(()=>{
+        this.props.onCameraStart();
+      })
+      .catch((error)=>{
+        this.props.onCameraError(error);
+      });
   }
 
   playLastDevice = () => {
-    this.cameraHelper.playLastDevice()
-    .then(()=>{
-      this.props.onCameraStart();
-    })
+    this.cameraHelper.playFirstDevice()
+      .then(()=>{
+        this.props.onCameraStart();
+      })
+      .catch((error) => {
+        this.props.onCameraError(error);
+      });
   }
 
-  getDataUri = () => {
-    return this.cameraHelper.getDataUri();
+  getDataUri = (sizeFactor) => {
+    return this.cameraHelper.getDataUri(sizeFactor);
   }
 
   stopStreams = () => {
     this.cameraHelper.stopStreams()
       .then(() => {
-        this.props.onCameraStop()
+        this.props.onCameraStop();
       })
-      .catch((error)=>{
-          console.log(error)
+      .catch((error) => {
+          console.log(error);
       });
   }
 
+  getShowHideStyle(isDisplay) {
+    let displayStyle = isDisplay
+      ? {display: 'inline-block'}
+      : {display: 'none'}
+
+    return displayStyle;
+  }
+
   render() {
+    let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
+    let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
     return (
-      <div className="camera">
-        <video
-          ref="video"
-          autoPlay="true"
-        />
+      <div>
+        <div className="container-container">
+          <img
+            style = {showImgStyle}
+            alt="camera"
+            src={this.state.dataUri}
+          />
+          <video
+            style = {showVideoStyle}
+            ref="video"
+            autoPlay="true"
+          />
         <CircleButton onClick={()=>{
           let dataUri = this.cameraHelper.getDataUri();
-          this.props.onSetDataUri(dataUri);
+          this.setState({
+            dataUri,
+            isShowVideo: false
+          });
+          setTimeout(()=>{
+            this.setState({
+              isShowVideo: true
+            });
+          }, 900)
         }}/>
+        </div>
       </div>
+
     );
   }
 }
