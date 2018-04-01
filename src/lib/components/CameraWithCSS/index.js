@@ -111,7 +111,7 @@ export default class Camera extends React.Component {
     let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
     return (
       <div>
-        <div className="container-container">
+        <div className="container-camera">
           <img
             style = {showImgStyle}
             alt="camera"
@@ -122,21 +122,20 @@ export default class Camera extends React.Component {
             ref="video"
             autoPlay="true"
           />
-        <CircleButton onClick={()=>{
-          let dataUri = this.cameraHelper.getDataUri();
-          this.setState({
-            dataUri,
-            isShowVideo: false
-          });
-          setTimeout(()=>{
+          <CircleButton onClick={()=>{
+            let dataUri = this.cameraHelper.getDataUri();
             this.setState({
-              isShowVideo: true
+              dataUri,
+              isShowVideo: false
             });
-          }, 900)
-        }}/>
+            setTimeout(()=>{
+              this.setState({
+                isShowVideo: true
+              });
+            }, 900)
+          }}/>
         </div>
       </div>
-
     );
   }
 }
