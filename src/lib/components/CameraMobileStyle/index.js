@@ -86,13 +86,13 @@ export default class Camera extends React.Component {
         <div className={classes}>
         </div>
         <img
-          className="camera-with-css"
+          className="camera-mobile-style"
           style = {showImgStyle}
           alt="camera"
           src={this.state.dataUri}
         />
         <video
-          className="camera-with-css"
+          className="camera-mobile-style"
           style = {showVideoStyle}
           ref="video"
           autoPlay="true"
