@@ -96,18 +96,21 @@ export default class Camera extends React.Component {
           autoPlay="true"
         />
         <CircleButton
+          isClicked={!this.state.isShowVideo}
           onClick={()=>{
-            this.props.onTakePhoto();
-            let dataUri = this.cameraHelper.getDataUri();
-            this.setState({
-              dataUri,
-              isShowVideo: false
-            });
-            setTimeout(()=>{
+
+              this.props.onTakePhoto();
+              let dataUri = this.cameraHelper.getDataUri();
               this.setState({
-                isShowVideo: true
+                dataUri,
+                isShowVideo: false
               });
-            }, 900)
+              setTimeout(()=>{
+                this.setState({
+                  isShowVideo: true
+                });
+              }, 900)
+
           }}
         />
       </div>

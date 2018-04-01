@@ -3,14 +3,24 @@ import PropTypes from 'prop-types';
 
 import './styles/circleButton.css';
 
-export const CircleButton = ({ onClick }) => (
-  <div id="container-circles">
-    <div onClick={onClick} id="outer-circle">
-      <div id="inner-circle">
+export const CircleButton = ({ onClick, isClicked }) => {
+  const innerCircleClasses = isClicked ? 'is-clicked' : '';
+  return (
+    <div id="container-circles">
+      <div
+        id="outer-circle"
+        onClick={(e)=>{
+          if(!isClicked){
+            onClick();
+          }
+        }}
+      >
+        <div id="inner-circle" className={innerCircleClasses}>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 CircleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
