@@ -6,7 +6,7 @@ import './styles/circleButton.css';
 export const CircleButton = ({ onClick }) => (
   <div className="container-circles">
     <div onClick={onClick} id="outer-circle">
-      <div onClick={onClick} id="inner-circle">
+      <div id="inner-circle">
       </div>
     </div>
   </div>
