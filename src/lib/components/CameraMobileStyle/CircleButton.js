@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './styles/circleButton.css';
 
 export const CircleButton = ({ onClick }) => (
-  <div className="container-circles">
+  <div id="container-circles">
     <div onClick={onClick} id="outer-circle">
       <div id="inner-circle">
       </div>

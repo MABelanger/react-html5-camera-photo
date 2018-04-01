@@ -1,7 +1,7 @@
-.container-circles {
-  position: absolute;
+#container-circles {
+  position: relative;
   left: 50%;
-  bottom: 30px;
+  bottom: 75px;
   width:1px;
   text-align: center;
   font-size: 18px;

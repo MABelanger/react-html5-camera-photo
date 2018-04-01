@@ -82,17 +82,15 @@ export default class Camera extends React.Component {
     const classes = `${doTransition} normal`;
 
     return (
-      <div className="container-camera">
+      <div className="camera-mobile-style">
         <div className={classes}>
         </div>
         <img
-          className="camera-mobile-style"
           style = {showImgStyle}
           alt="camera"
           src={this.state.dataUri}
         />
         <video
-          className="camera-mobile-style"
           style = {showVideoStyle}
           ref="video"
           autoPlay="true"

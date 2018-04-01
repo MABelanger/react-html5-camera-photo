@@ -1,27 +1,27 @@
-.container-camera {
+.camera-mobile-style {
   position: relative;
   text-align: center;
 }
 
-video.camera-mobile-style {
+.camera-mobile-style > video {
   display:block;
   margin-left:auto;
   margin-right:auto;
   width: 768px;
 }
 
-img.camera-mobile-style {
+.camera-mobile-style > img {
   width: 768px;
   display:block;
 }
 
 @media(max-width:768px){
-  video.camera-mobile-style, img.camera-mobile-style {
+  .camera-mobile-style > video, .camera-mobile-style > img{
     width: 100%;
   }
 }
 
-.normal {
+.camera-mobile-style > .normal {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -29,7 +29,7 @@ img.camera-mobile-style {
   transition:opacity .9s ease-out;
 }
 
-.dotransition {
+.camera-mobile-style > .dotransition {
   opacity: 0;
   background: white;
 }
