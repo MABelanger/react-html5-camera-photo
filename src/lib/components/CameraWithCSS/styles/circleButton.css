@@ -2,7 +2,7 @@ body {
   background-color: black;
 }
 
-#container-circles {
+.container-circles {
   position: absolute;
   left: 50%;
   bottom: 30px;

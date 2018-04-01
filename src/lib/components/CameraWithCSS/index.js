@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import CameraHelper from '../../CameraHelper';
 import CircleButton from './CircleButton';
+import Image from './Image';
 
 import './styles/cameraWithCSS.css';
 
@@ -76,9 +77,17 @@ export default class Camera extends React.Component {
   render() {
     let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
     let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
+
+    const doTransition = this.state.isShowVideo ? '' : 'dotransition';
+    const classes = `${doTransition} normal`;
+
     return (
-      <div>
-        <div className="container-camera">
+      <div className="container-camera">
+
+        <div className="container-img-fade">
+          <div className={classes}>
+            Allo
+          </div>
           <img
             style = {showImgStyle}
             alt="camera"
@@ -89,7 +98,10 @@ export default class Camera extends React.Component {
             ref="video"
             autoPlay="true"
           />
-          <CircleButton onClick={()=>{
+        </div>
+
+        <CircleButton
+          onClick={()=>{
             let dataUri = this.cameraHelper.getDataUri();
             this.setState({
               dataUri,
@@ -100,8 +112,8 @@ export default class Camera extends React.Component {
                 isShowVideo: true
               });
             }, 900)
-          }}/>
-        </div>
+          }}
+        />
       </div>
     );
   }

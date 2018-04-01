@@ -15,3 +15,26 @@ img {
   width: 300px;
   display:block;
 }
+
+.container-img-fade{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+}
+
+.normal {
+  position: absolute;
+  border: 1px solid black;
+  left: 0;
+  height: 100%;
+  width: 300px;
+  opacity :1;
+  transition:opacity .9s ease-out;
+}
+.dotransition {
+  color: red;
+  opacity: 0;
+  background: white;
+
+}
