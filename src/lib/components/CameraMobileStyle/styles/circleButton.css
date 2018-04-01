@@ -1,14 +1,14 @@
 #container-circles {
   position: relative;
   left: 50%;
-  bottom: 75px;
+  bottom: 90px;
   width:1px;
   text-align: center;
   font-size: 18px;
 }
 
 #outer-circle {
-  position: relative;
+  position: absolute;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   left: -37px;
@@ -23,7 +23,7 @@
 }
 
 #inner-circle {
-  position: relative;
+  position: absolute;
   background: white;
   border-radius: 50%;
   height: 44px;
@@ -31,7 +31,7 @@
   /*
    Put top edge and left edge in the center
   */
-  top: 16px;
+  top: 38px;
   left: 50%;
   margin: -22px 0px 0px -22px;
   z-index: 2;
