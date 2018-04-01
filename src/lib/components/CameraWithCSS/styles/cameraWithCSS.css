@@ -3,20 +3,20 @@
   text-align: center;
 }
 
-video {
+video.camera-with-css {
   display:block;
   margin-left:auto;
   margin-right:auto;
   width: 768px;
 }
 
-img {
+img.camera-with-css {
   width: 768px;
   display:block;
 }
 
 @media(max-width:768px){
-  video, img {
+  video.camera-with-css, img.camera-with-css {
     width: 100%;
   }
 }

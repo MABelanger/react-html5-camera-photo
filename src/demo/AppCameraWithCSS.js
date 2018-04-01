@@ -18,6 +18,16 @@ class AppCamera extends Component {
 
   }
 
+  onCameraError = (error) => {
+    let {code, message, name} = error;
+    let strError = `
+      Camera Error:
+        code: ${code}
+        message: ${message}
+        name: ${name}`;
+    console.error(strError);
+  }
+
   onCameraStop = () => {
     console.log('camera stop');
     this.setState({
@@ -34,12 +44,12 @@ class AppCamera extends Component {
     this._playClickAudio();
   }
 
-
   render() {
 
     return (
       <div className="App">
         <CameraWithCSS
+          onCameraError = {this.onCameraError}
           onCameraStop = {this.onCameraStop}
           onTakePhoto = {()=>{
             this.onTakePhoto();

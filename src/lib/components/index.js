@@ -5,3 +5,5 @@ export {
   Camera,
   CameraWithCSS
 };
+
+export default Camera;
