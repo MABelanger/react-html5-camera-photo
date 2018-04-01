@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {CameraMobileStyle} from '../lib';
 import './AppCameraMobileStyle.css';
 
-
-const IMAGE_THUMB_SIZE_FACTOR = .1;
-
 class AppCamera extends Component {
 
   constructor(props, context) {

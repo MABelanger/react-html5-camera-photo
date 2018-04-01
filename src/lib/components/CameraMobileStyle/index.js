@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import CameraHelper from '../../CameraHelper';
 import CircleButton from './CircleButton';
-import Image from './Image';
 
 import './styles/cameraMobileStyle.css';
 
