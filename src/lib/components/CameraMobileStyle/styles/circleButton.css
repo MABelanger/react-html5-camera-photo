@@ -6,34 +6,39 @@
 
 #outer-circle {
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
   left: -37px;
+
   height: 75px;
   width: 75px;
-  z-index: 1;
-  opacity: 1;
+
   /*
-   Child elements with relative positioning will be
-   positioned relative to this div
+    opacity of 0.4
   */
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+
+  z-index: 1;
 }
 
 #inner-circle {
   position: absolute;
-  background: white;
-  border-radius: 50%;
+  left: 50%;
+  top: 38px;
+
   height: 44px;
   width: 44px;
-  /*
-   Put top edge and left edge in the center
-  */
-  top: 38px;
-  left: 50%;
-  margin: -22px 0px 0px -22px;
-  z-index: 2;
+
+  background: white;
+  border-radius: 50%;
+
   /*
    Offset the position correctly with
    minus half of the width and minus half of the height
   */
+  margin: -22px 0px 0px -22px;
+
+  /*
+    On the top of outer-circle
+  */
+  z-index: 2;
 }
