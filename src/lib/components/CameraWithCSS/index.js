@@ -84,21 +84,21 @@ export default class Camera extends React.Component {
     return (
       <div className="container-camera">
 
-        <div className="container-img-fade">
-          <div className={classes}>
-            Allo
-          </div>
-          <img
-            style = {showImgStyle}
-            alt="camera"
-            src={this.state.dataUri}
-          />
-          <video
-            style = {showVideoStyle}
-            ref="video"
-            autoPlay="true"
-          />
-        </div>
+      <div className={classes}>
+        Allo
+      </div>
+        <img
+          style = {showImgStyle}
+          alt="camera"
+          src={this.state.dataUri}
+        />
+
+
+        <video
+          style = {showVideoStyle}
+          ref="video"
+          autoPlay="true"
+        />
 
         <CircleButton
           onClick={()=>{
