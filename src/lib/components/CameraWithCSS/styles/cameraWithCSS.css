@@ -8,32 +8,29 @@ video {
   display:block;
   margin-left:auto;
   margin-right:auto;
-  width: 300px;
+  width: 768px;
 }
 
 img {
-  width: 300px;
+  width: 768px;
   display:block;
 }
 
-.container-img-fade{
-  position: relative;
-  width: 200px;
-  height: 200px;
-  left: 50%;
+@media(max-width:768px){
+  video, img {
+    width: 100%;
+  }
 }
 
 .normal {
   position: absolute;
-  border: 1px solid black;
   height: 100%;
   width: 100%;
   opacity :1;
   transition:opacity .9s ease-out;
 }
+
 .dotransition {
-  color: red;
   opacity: 0;
   background: white;
-
 }

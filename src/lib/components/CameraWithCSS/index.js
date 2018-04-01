@@ -84,16 +84,13 @@ export default class Camera extends React.Component {
     return (
       <div className="container-camera">
 
-      <div className={classes}>
-        Allo
-      </div>
+        <div className={classes}>
+        </div>
         <img
           style = {showImgStyle}
           alt="camera"
           src={this.state.dataUri}
         />
-
-
         <video
           style = {showVideoStyle}
           ref="video"

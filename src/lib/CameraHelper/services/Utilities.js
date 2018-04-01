@@ -53,7 +53,7 @@ class Utilities {
       video: {
         optional: [
           {sourceId: deviceId},
-          {maxWidth: 128},
+
           // {minWidth: 640},
           // {minWidth: 800},
           // {minWidth: 900},
