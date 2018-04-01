@@ -9,11 +9,13 @@ export const CircleButton = ({ onClick, isClicked }) => {
     <div id="container-circles">
       <div
         id="outer-circle"
-        onClick={(e)=>{
-          if(!isClicked){
-            onClick();
+        onClick = {
+          (e) => {
+            if(!isClicked){
+              onClick();
+            }
           }
-        }}
+        }
       >
         <div id="inner-circle" className={innerCircleClasses}>
         </div>

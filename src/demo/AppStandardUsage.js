@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Camera from '../lib';
-import './AppStandardUsage.css';
+//import './AppStandardUsage.css';
 
 const IMAGE_THUMB_SIZE_FACTOR = .1;
 
