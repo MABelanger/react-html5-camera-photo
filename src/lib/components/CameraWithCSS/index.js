@@ -6,39 +6,6 @@ import CircleButton from './CircleButton';
 
 import './styles/cameraWithCSS.css';
 
-import './'
-
-const Buttons = ({ onStopStreams, onPlayLastDevice, onGetDataUri, onClearPhotos }) => {
-  return(
-    <div>
-      <button
-        onClick={(e) => {
-          onPlayLastDevice();
-        }}
-      >Play</button>
-
-      <button
-        onClick={(e) => {
-          onGetDataUri();
-        }}
-      >Photo</button>
-
-      <button
-        onClick={(e) => {
-          onStopStreams();
-        }}
-      >Stop</button>
-
-      <button
-        onClick={(e) => {
-          onClearPhotos();
-        }}
-      >Clear</button>
-    </div>
-  );
-}
-
-
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
