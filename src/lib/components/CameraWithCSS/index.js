@@ -83,7 +83,6 @@ export default class Camera extends React.Component {
 
     return (
       <div className="container-camera">
-
         <div className={classes}>
         </div>
         <img
@@ -96,7 +95,6 @@ export default class Camera extends React.Component {
           ref="video"
           autoPlay="true"
         />
-
         <CircleButton
           onClick={()=>{
             let dataUri = this.cameraHelper.getDataUri();
