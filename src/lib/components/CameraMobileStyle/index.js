@@ -5,7 +5,7 @@ import CameraHelper from '../../CameraHelper';
 import CircleButton from './CircleButton';
 import Image from './Image';
 
-import './styles/cameraWithCSS.css';
+import './styles/cameraMobileStyle.css';
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/

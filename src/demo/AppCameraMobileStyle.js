@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {CameraWithCSS} from '../lib';
-import './AppCameraWithCSS.css';
+import {CameraMobileStyle} from '../lib';
+import './AppCameraMobileStyle.css';
 
 
 const IMAGE_THUMB_SIZE_FACTOR = .1;
@@ -48,7 +48,7 @@ class AppCamera extends Component {
 
     return (
       <div className="App">
-        <CameraWithCSS
+        <CameraMobileStyle
           onCameraError = {this.onCameraError}
           onCameraStop = {this.onCameraStop}
           onTakePhoto = {()=>{

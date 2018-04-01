@@ -1,9 +1,9 @@
 import Camera from './Camera';
-import CameraWithCSS from './CameraWithCSS';
+import CameraMobileStyle from './CameraMobileStyle';
 
 export {
   Camera,
-  CameraWithCSS
+  CameraMobileStyle
 };
 
 export default Camera;
