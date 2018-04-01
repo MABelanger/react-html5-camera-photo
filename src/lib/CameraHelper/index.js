@@ -43,7 +43,7 @@ export default class CameraHelper {
       this.mediaDevices.getUserMedia(constraints)
           .then((stream) => {
             this._gotStream(stream);
-            resolve();
+            resolve(stream);
           })
           .catch((error) => {
             this.stopStreams();
