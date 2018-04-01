@@ -1,13 +1,15 @@
-const _getImageSizeThumb = (videoWidth, videoHeight, sizeFactor) => {
-  // let imageWidth = IMAGE_WIDTH_THUMB;
+const _getImageSize = (videoWidth, videoHeight, sizeFactor) => {
 
+  console.log('videoWidth, videoHeight:', videoWidth, videoHeight);
+
+  // calc the imageWidth
   let imageWidth = videoWidth * parseFloat(sizeFactor);
-
   // calc the ratio
   let ratio = videoWidth / imageWidth;
-
   // calc the imageHeight
   let imageHeight = videoHeight / ratio;
+
+  console.log('imageWidth, imageHeight, sizeFactor:', imageWidth, imageHeight, sizeFactor);
 
   return {
     imageWidth,
@@ -15,31 +17,20 @@ const _getImageSizeThumb = (videoWidth, videoHeight, sizeFactor) => {
   };
 }
 
-const _getImageSize = (videoWidth, videoHeight, sizeFactor) => {
-  console.log('videoWidth', videoWidth)
-  console.log('videoHeight', videoHeight)
-
-  // return _getImageSizeFull(videoWidth, videoHeight)
-  return _getImageSizeThumb(videoWidth, videoHeight, sizeFactor);
-}
-
 class Utilities {
 
-  static getDataUri = (video, sizeFactor) => {
-
-    let videoWidth = video.videoWidth
-    let videoHeight = video.videoHeight;
-
+  static getDataUri = (videoElement, sizeFactor) => {
+    let {videoWidth, videoHeight} = videoElement;
     let {imageWidth, imageHeight} = _getImageSize(videoWidth, videoHeight, sizeFactor);
-    console.log(imageWidth, imageHeight, sizeFactor)
 
+    // Build the canvas size et draw the image to context from videoElement
     let canvas = document.createElement('canvas');
     canvas.width = imageWidth;
     canvas.height = imageHeight;
     let context = canvas.getContext('2d');
+    context.drawImage(videoElement, 0, 0, imageWidth, imageHeight);
 
-    context.drawImage(video, 0, 0, imageWidth, imageHeight);
-
+    // Get dataUri from canvas
     let dataUri = canvas.toDataURL('image/png');
     return dataUri;
   }
@@ -106,8 +97,6 @@ class Utilities {
     // If is no navigator.mediaDevices || navigator.mozGetUserMedia || navigator.webkitGetUserMedia
     // then is not supported so return null
     return NMDevice;
-
-
   }
 
   static getWindowURL = () => {

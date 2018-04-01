@@ -13,7 +13,7 @@ export default class CameraHelper {
     this.stream = null;
 
 
-    // Thet the right object depending on the browser.
+    // Set the right object depending on the browser.
     this.windowURL = Utilities.getWindowURL();
     this.mediaDevices = Utilities.getNavigatorMediaDevices();
   }
