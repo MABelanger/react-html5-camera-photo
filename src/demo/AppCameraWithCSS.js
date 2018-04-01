@@ -25,12 +25,25 @@ class AppCamera extends Component {
     });
   }
 
+  _playClickAudio() {
+    let audio = new Audio('click.mp3');
+    audio.play();
+  }
+
+  onTakePhoto = () => {
+    this._playClickAudio();
+  }
+
+
   render() {
 
     return (
       <div className="App">
         <CameraWithCSS
           onCameraStop = {this.onCameraStop}
+          onTakePhoto = {()=>{
+            this.onTakePhoto();
+          }}
           autoPlay={true}
         />
       </div>

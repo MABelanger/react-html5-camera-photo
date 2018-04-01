@@ -97,6 +97,7 @@ export default class Camera extends React.Component {
         />
         <CircleButton
           onClick={()=>{
+            this.props.onTakePhoto();
             let dataUri = this.cameraHelper.getDataUri();
             this.setState({
               dataUri,
@@ -119,5 +120,5 @@ Camera.propTypes = {
   autoPlay: PropTypes.bool,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func,
-  onVideoClick: PropTypes.func
+  onTakePhoto: PropTypes.func
 }
