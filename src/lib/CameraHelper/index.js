@@ -33,7 +33,7 @@ export default class CameraHelper {
 
     // Auto start the video if autoPlay is true
     if(this.autoPlay) {
-      this.playFirstDevice();
+      this.playLastDevice();
     }
   }
 
