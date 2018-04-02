@@ -1,36 +1,36 @@
-const SUPPORTED_FACING_MODE = ['user', 'environment', 'left', 'right'];
+const SUPPORTED_FACING_MODES = ['user', 'environment', 'left', 'right'];
 
-const FACING_MODE = {
+const FACING_MODES = {
   'USER' : 'user',
   'ENVIRONMENT': 'environment',
   'LEFT': 'left',
   'RIGHT': 'right'
 }
 
-const _getImageSize = (videoWidth, videoHeight, sizeFactor) => {
-
-  console.log('videoWidth, videoHeight:', videoWidth, videoHeight);
-
-  // calc the imageWidth
-  let imageWidth = videoWidth * parseFloat(sizeFactor);
-  // calc the ratio
-  let ratio = videoWidth / imageWidth;
-  // calc the imageHeight
-  let imageHeight = videoHeight / ratio;
-
-  console.log('imageWidth, imageHeight, sizeFactor:', imageWidth, imageHeight, sizeFactor);
-
-  return {
-    imageWidth,
-    imageHeight
-  };
-}
-
 class MediaServices {
+
+  static _getImageSize = (videoWidth, videoHeight, sizeFactor) => {
+
+    console.log('videoWidth, videoHeight:', videoWidth, videoHeight);
+
+    // calc the imageWidth
+    let imageWidth = videoWidth * parseFloat(sizeFactor);
+    // calc the ratio
+    let ratio = videoWidth / imageWidth;
+    // calc the imageHeight
+    let imageHeight = videoHeight / ratio;
+
+    console.log('imageWidth, imageHeight, sizeFactor:', imageWidth, imageHeight, sizeFactor);
+
+    return {
+      imageWidth,
+      imageHeight
+    };
+  }
 
   static getDataUri = (videoElement, sizeFactor) => {
     let {videoWidth, videoHeight} = videoElement;
-    let {imageWidth, imageHeight} = _getImageSize(videoWidth, videoHeight, sizeFactor);
+    let {imageWidth, imageHeight} = MediaServices._getImageSize(videoWidth, videoHeight, sizeFactor);
 
     // Build the canvas size et draw the image to context from videoElement
     let canvas = document.createElement('canvas');
@@ -99,7 +99,7 @@ class MediaServices {
     };
 
     // set facingMode
-    if(SUPPORTED_FACING_MODE.indexOf(idealFacingMode) > -1) {
+    if(SUPPORTED_FACING_MODES.indexOf(idealFacingMode) > -1) {
       idealConstraints.video.facingMode = { ideal: idealFacingMode };
     }
 
@@ -116,8 +116,8 @@ class MediaServices {
     return idealConstraints;
   }
 
-  static get FACING_MODE() {
-    return FACING_MODE;
+  static get FACING_MODES() {
+    return FACING_MODES;
   }
 
 }

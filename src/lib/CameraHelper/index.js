@@ -6,7 +6,7 @@ Inspiration :
   https://github.com/samdutton/simpl/blob/gh-pages/getusermedia/sources/js/main.js
 */
 
-export default class CameraHelper {
+class CameraHelper {
 
   constructor(videoElement, autoPlay) {
     this.videoElement = videoElement;
@@ -16,18 +16,12 @@ export default class CameraHelper {
     // Set the right object depending on the browser.
     this.windowURL = MediaServices.getWindowURL();
     this.mediaDevices = MediaServices.getNavigatorMediaDevices();
+
   }
 
   /*
    * private fct
    */
-  _gotDevices = (deviceInfos) => {
-    // Auto start the video if autoPlay is true
-    if(this.autoPlay) {
-      this.playEnvironmentDevice();
-    }
-  }
-
   _getStreamDevice = (facingMode, idealResolution) => {
     return new Promise((resolve, reject) => {
       let idealConstraints = MediaServices.getIdealConstraints(facingMode, idealResolution);
@@ -68,7 +62,7 @@ export default class CameraHelper {
 
     let facingModeUser = null;
     if(MediaServices.isSupportedFacingMode()){
-      facingModeUser = MediaServices.FACING_MODE.USER;
+      facingModeUser = MediaServices.FACING_MODES.USER;
     }
     return this._getStreamDevice(facingModeUser, idealResolution);
   }
@@ -79,7 +73,7 @@ export default class CameraHelper {
 
     let facingModeEnvironment = null;
     if(MediaServices.isSupportedFacingMode()){
-      facingModeEnvironment = MediaServices.FACING_MODE.ENVIRONMENT;
+      facingModeEnvironment = MediaServices.FACING_MODES.ENVIRONMENT;
     }
     return this._getStreamDevice(facingModeEnvironment, idealResolution);
   }
@@ -103,17 +97,9 @@ export default class CameraHelper {
     });
   }
 
-  enumerateDevice = () => {
-    return new Promise((resolve, reject) => {
-      this.mediaDevices.enumerateDevices()
-        .then((deviceInfos) => {
-          this._gotDevices(deviceInfos)
-          resolve(deviceInfos)
-        })
-        .catch((error) => {
-          this.stopStreams();
-          reject(error)
-        });
-    });
+  getFacingModes() {
+    return MediaServices.FACING_MODES;
   }
 }
+
+export default CameraHelper;

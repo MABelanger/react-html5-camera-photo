@@ -21,11 +21,25 @@ export default class Camera extends React.Component {
   }
 
   componentDidMount() {
-    this.cameraHelper = new CameraHelper(this.refs.video, this.props.autoPlay);
-    this.cameraHelper.enumerateDevice()
-      .catch((error)=>{
-        this.props.onCameraError(error);
-      });
+    this.cameraHelper = new CameraHelper(this.refs.video);
+
+    const FACING_MODES = this.cameraHelper.getFacingModes();
+
+    if( this.props.autoPlay ){
+
+      // by default the camera is set to Environement
+      let playDevice = this.cameraHelper.playEnvironmentDevice;
+
+      if(this.props.facingMode === FACING_MODES.USER) {
+        playDevice = this.cameraHelper.playUserDevice;
+      }
+
+      playDevice()
+        .catch((error)=>{
+          this.props.onCameraError(error);
+        });
+    }
+
   }
 
   /*
@@ -120,6 +134,7 @@ export default class Camera extends React.Component {
 Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,
   autoPlay: PropTypes.bool,
+  facingMode: PropTypes.string,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func,
   onTakePhoto: PropTypes.func
