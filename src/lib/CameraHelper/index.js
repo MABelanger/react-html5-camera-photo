@@ -14,7 +14,6 @@ export default class CameraHelper {
     this.autoPlay = autoPlay;
     this.stream = null;
 
-
     // Set the right object depending on the browser.
     this.windowURL = Utilities.getWindowURL();
     this.mediaDevices = MediaUtils.getNavigatorMediaDevices();
@@ -32,11 +31,6 @@ export default class CameraHelper {
 
   _getStreamDevice = (facingMode, idealResolution) => {
     return new Promise((resolve, reject) => {
-      // let desiredResolution = {
-      //   width: 640,
-      //   height: 480
-      // }
-
       let idealConstraints = MediaUtils.getIdealConstraints(facingMode, idealResolution);
       this.mediaDevices.getUserMedia(idealConstraints)
           .then((stream) => {
