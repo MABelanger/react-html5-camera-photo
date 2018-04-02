@@ -31,8 +31,8 @@ export default class Camera extends React.Component {
   /*
    * Public fct accessed by ref
    */
-  playFirstDevice = () => {
-    this.cameraHelper.playFirstDevice()
+  playUserDevice = () => {
+    this.cameraHelper.playUserDevice()
       .then(()=>{
         this.props.onCameraStart();
       })
@@ -41,8 +41,8 @@ export default class Camera extends React.Component {
       });
   }
 
-  playLastDevice = () => {
-    this.cameraHelper.playLastDevice()
+  playEnvironmentDevice = () => {
+    this.cameraHelper.playEnvironmentDevice()
       .then(()=>{
         this.props.onCameraStart();
       })

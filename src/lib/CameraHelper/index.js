@@ -1,7 +1,10 @@
 import Utilities from './services/Utilities';
+import MediaUtils from './services/MediaUtils';
 
 /*
-Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
+Inspiration :
+  https://www.html5rocks.com/en/tutorials/getusermedia/intro/
+  https://github.com/samdutton/simpl/blob/gh-pages/getusermedia/sources/js/main.js
 */
 
 export default class CameraHelper {
@@ -15,32 +18,31 @@ export default class CameraHelper {
 
     // Set the right object depending on the browser.
     this.windowURL = Utilities.getWindowURL();
-    this.mediaDevices = Utilities.getNavigatorMediaDevices();
+    this.mediaDevices = MediaUtils.getNavigatorMediaDevices();
   }
 
   /*
    * private fct
    */
   _gotDevices = (deviceInfos) => {
-    let videoInputs = [];
-    for (let i = 0; i !== deviceInfos.length; ++i) {
-      let deviceInfo = deviceInfos[i];
-      if (deviceInfo.kind === 'videoinput') { // && deviceInfo.label.includes('back')
-        videoInputs.push(deviceInfo);
-      }
-    }
-    this.videoInputs = videoInputs;
+    this.videoInputs = MediaUtils.getVideoInputs(deviceInfos);
 
     // Auto start the video if autoPlay is true
     if(this.autoPlay) {
-      this.playLastDevice();
+      this.playEnvironmentDevice();
     }
   }
 
-  _getStreamDevice = (deviceId) => {
+  _getStreamDevice = (facingMode) => {
     return new Promise((resolve, reject) => {
-      let constraints = Utilities.getConstraints(deviceId);
-      this.mediaDevices.getUserMedia(constraints)
+      // let desiredResolution = {
+      //   width: 640,
+      //   height: 480
+      // }
+      let desiredResolution = {}
+
+      let idealConstraints = MediaUtils.getIdealConstraints(facingMode, desiredResolution);
+      this.mediaDevices.getUserMedia(idealConstraints)
           .then((stream) => {
             this._gotStream(stream);
             resolve(stream);
@@ -71,19 +73,18 @@ export default class CameraHelper {
   /*
    * public fct
    */
-  playFirstDevice = () => {
+  playUserDevice = () => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
-    let firstDevice = this.videoInputs[0];
-    return this._getStreamDevice(firstDevice.deviceId);
+    let facingModeUser = MediaUtils.FACING_MODE.USER;
+    return this._getStreamDevice(facingModeUser);
   }
 
-  playLastDevice = () => {
+  playEnvironmentDevice = () => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
-    let lastIndex = this.videoInputs.length -1;
-    let lastDevice = this.videoInputs[ lastIndex ];
-    return this._getStreamDevice(lastDevice.deviceId);
+    let facingModeEnvironment = MediaUtils.FACING_MODE.ENVIRONMENT;
+    return this._getStreamDevice(facingModeEnvironment);
   }
 
   getDataUri = (sizeFactor=1) => {
