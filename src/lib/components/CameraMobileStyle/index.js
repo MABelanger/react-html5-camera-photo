@@ -49,8 +49,8 @@ class Camera extends React.Component {
     return this.cameraHelper.getDataUri(sizeFactor);
   }
 
-  stopStreams = () => {
-    this.cameraHelper.stopStreams()
+  stopDevice = () => {
+    this.cameraHelper.stopDevice()
       .then(() => {
         this.props.onCameraStop();
       })
@@ -111,11 +111,11 @@ class Camera extends React.Component {
   }
 }
 
-export default Camera;
-
 export  {
   FACING_MODES
-}
+};
+
+export default Camera;
 
 Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,

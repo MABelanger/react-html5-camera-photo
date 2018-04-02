@@ -47,8 +47,8 @@ export default class Camera extends React.Component {
     return this.cameraHelper.getDataUri(sizeFactor);
   }
 
-  stopStreams = () => {
-    this.cameraHelper.stopStreams()
+  stopDevice = () => {
+    this.cameraHelper.stopDevice()
       .then(() => {
         this.props.onCameraStop();
       })

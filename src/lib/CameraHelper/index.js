@@ -30,7 +30,7 @@ class CameraHelper {
             resolve(stream);
           })
           .catch((error) => {
-            this.stopStreams();
+            this.stopDevice();
             reject(error);
           });
     });
@@ -58,7 +58,7 @@ class CameraHelper {
 
   playDevice = (idealFacingMode={}, idealResolution={}) => {
     // stop the stream before playing it.
-    this.stopStreams().catch(()=>{});
+    this.stopDevice().catch(()=>{});
     return this._getStreamDevice(idealFacingMode, idealResolution);
   }
 
@@ -67,7 +67,7 @@ class CameraHelper {
     return dataUri;
   }
 
-  stopStreams = () => {
+  stopDevice = () => {
     return new Promise((resolve, reject) => {
       if (this.stream) {
         this.stream.getTracks().forEach(function(track) {
