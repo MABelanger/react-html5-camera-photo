@@ -22,12 +22,12 @@ export const Images = ({ dataUris }) => {
   );
 }
 
-const Buttons = ({ onStopStreams, onPlayLastDevice, onGetDataUri, onClearPhotos }) => {
+const Buttons = ({ onStopStreams, onPlayEnvironmentDevice, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
       <button
         onClick={(e) => {
-          onPlayLastDevice();
+          onPlayEnvironmentDevice();
         }}
       >Play</button>
 
@@ -122,7 +122,7 @@ class App extends Component {
 
           <Buttons
             onStopStreams = {()=>{this.refs.camera.stopStreams()}}
-            onPlayLastDevice = {()=>{this.refs.camera.playLastDevice()}}
+            onPlayEnvironmentDevice = {()=>{this.refs.camera.playEnvironmentDevice()}}
             onGetDataUri = {()=>{this.setDataUri()}}
             onClearPhotos = {()=>{this.onClearPhotos()}}
           />
