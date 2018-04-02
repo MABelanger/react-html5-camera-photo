@@ -75,20 +75,6 @@ class Constraints {
     return idealConstraints;
   }
 
-  // https://www.w3.org/TR/mediacapture-streams/#def-constraint-facingMode
-  static getVideoInputs = (deviceInfos) => {
-    let videoInputs = [];
-    for (let i = 0; i !== deviceInfos.length; ++i) {
-      let deviceInfo = deviceInfos[i];
-      console.log(deviceInfo)
-      // https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo/kind
-      if (deviceInfo.kind === 'videoinput') { // && deviceInfo.label.includes('back')
-        videoInputs.push(deviceInfo);
-      }
-    }
-    return videoInputs;
-  }
-
   static get FACING_MODE() {
     return FACING_MODE;
   }

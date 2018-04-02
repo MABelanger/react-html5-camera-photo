@@ -12,7 +12,6 @@ export default class CameraHelper {
   constructor(videoElement, autoPlay) {
     this.videoElement = videoElement;
     this.autoPlay = autoPlay;
-    this.videoInputs = [];
     this.stream = null;
 
 
@@ -25,8 +24,6 @@ export default class CameraHelper {
    * private fct
    */
   _gotDevices = (deviceInfos) => {
-    this.videoInputs = MediaUtils.getVideoInputs(deviceInfos);
-
     // Auto start the video if autoPlay is true
     if(this.autoPlay) {
       this.playEnvironmentDevice();
