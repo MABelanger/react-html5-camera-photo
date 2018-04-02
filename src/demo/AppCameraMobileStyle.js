@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {CameraMobileStyle} from '../lib';
+import {CameraMobileStyle, FACING_MODES} from '../lib';
 import './AppCameraMobileStyle.css';
 
 class AppCamera extends Component {
@@ -52,7 +52,7 @@ class AppCamera extends Component {
             this.onTakePhoto();
           }}
           autoPlay={true}
-          idealFacingMode="environment"
+          idealFacingMode={FACING_MODES.ENVIRONMENT}
           idealResolution={{width:640, height:480}}
         />
       </div>

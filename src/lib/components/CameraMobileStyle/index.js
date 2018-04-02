@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CameraHelper from '../../CameraHelper';
+import CameraHelper, {FACING_MODES} from '../../CameraHelper';
 import CircleButton from '../CircleButton';
 
 import './styles/cameraMobileStyle.css';
@@ -9,7 +9,7 @@ import './styles/cameraMobileStyle.css';
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
-export default class Camera extends React.Component {
+class Camera extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -22,9 +22,6 @@ export default class Camera extends React.Component {
 
   componentDidMount() {
     this.cameraHelper = new CameraHelper(this.refs.video);
-
-    this.FACING_MODES = this.cameraHelper.getFacingModes();
-
     if( this.props.autoPlay ){
       let {idealFacingMode, idealResolution} = this.props;
       this.playDevice(idealFacingMode, idealResolution);
@@ -112,6 +109,12 @@ export default class Camera extends React.Component {
       </div>
     );
   }
+}
+
+export default Camera;
+
+export  {
+  FACING_MODES
 }
 
 Camera.propTypes = {

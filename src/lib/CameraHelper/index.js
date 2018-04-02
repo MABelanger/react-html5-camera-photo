@@ -8,9 +8,8 @@ Inspiration :
 
 class CameraHelper {
 
-  constructor(videoElement, autoPlay) {
+  constructor(videoElement) {
     this.videoElement = videoElement;
-    this.autoPlay = autoPlay;
     this.stream = null;
 
     // Set the right object depending on the browser.
@@ -82,9 +81,8 @@ class CameraHelper {
     });
   }
 
-  getFacingModes() {
-    return MediaServices.FACING_MODES;
-  }
 }
+
+export const FACING_MODES = MediaServices.FACING_MODES;
 
 export default CameraHelper;
