@@ -44,31 +44,13 @@ class Constraints {
     return NMDevice;
   }
 
-  /*
-   * Resolution spect : https://webrtchacks.com/getusermedia-resolutions-3/
-   let constraints = {
-     audio: false,
-     video: {
-       optional: [
-         {sourceId: deviceId},
+  // https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API/Constraints
+  static isSupportedFacingMode = () => {
+     // navigator.mediaDevices
+     return Constraints.getNavigatorMediaDevices().getSupportedConstraints().facingMode;
+  }
 
-         // {minWidth: 640},
-         // {minWidth: 800},
-         // {minWidth: 900},
-         // {minWidth: 1024},
-         // {minWidth: 1280},
-         // {minWidth: 1920},
-         // {minWidth: 2560}
-       ]
-     }
-   };
-
-   // if deviceId add it to the constraints
-   if(deviceId) {
-     constraints.video.optional.unshift({sourceId: deviceId})
-   }
-   */
-  static getIdealConstraints = (idealFacingMode, idealResolution) => {
+  static getIdealConstraints = (idealFacingMode={}, idealResolution={}) => {
 
     var idealConstraints = {
       audio: false,
@@ -93,36 +75,7 @@ class Constraints {
     return idealConstraints;
   }
 
-
-  // https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API/Constraints
-  static isSupportedFacingMode = () => {
-    // navigator.mediaDevices
-    return this.getNavigatorMediaDevices().getSupportedConstraints().facingMode;
-  }
-
   // https://www.w3.org/TR/mediacapture-streams/#def-constraint-facingMode
-  static getBackDeviceId = (videoInputs) => {
-    for (let i = 0; i !== videoInputs.length; ++i) {
-      let deviceInfo = videoInputs[i];
-      // if label include back it is the back videoInputs
-      // but some browser do not include back so return the last device in the array.
-      if(deviceInfo.label.includes('back') || (videoInputs.length -1 === i) ){
-        return deviceInfo.deviceId;
-      }
-    }
-  }
-
-  static getFrontDeviceId = (videoInputs) => {
-    for (let i = 0; i !== videoInputs.length; ++i) {
-      let deviceInfo = videoInputs[i];
-      // if label include back it is the back videoInputs
-      // but some browser do not include back so return the last device in the array.
-      if(deviceInfo.label.includes('front') || (videoInputs.length -1 === i) ){
-        return deviceInfo.deviceId;
-      }
-    }
-  }
-
   static getVideoInputs = (deviceInfos) => {
     let videoInputs = [];
     for (let i = 0; i !== deviceInfos.length; ++i) {

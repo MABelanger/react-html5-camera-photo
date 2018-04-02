@@ -73,18 +73,26 @@ export default class CameraHelper {
   /*
    * public fct
    */
-  playUserDevice = () => {
+  playUserDevice = (idealResolution) => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
-    let facingModeUser = MediaUtils.FACING_MODE.USER;
-    return this._getStreamDevice(facingModeUser);
+
+    let facingModeUser = null;
+    if(MediaUtils.isSupportedFacingMode()){
+      facingModeUser = MediaUtils.FACING_MODE.USER;
+    }
+    return this._getStreamDevice(facingModeUser, idealResolution);
   }
 
-  playEnvironmentDevice = () => {
+  playEnvironmentDevice = (idealResolution) => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
-    let facingModeEnvironment = MediaUtils.FACING_MODE.ENVIRONMENT;
-    return this._getStreamDevice(facingModeEnvironment);
+
+    let facingModeEnvironment = null;
+    if(MediaUtils.isSupportedFacingMode()){
+      facingModeEnvironment = MediaUtils.FACING_MODE.ENVIRONMENT;
+    }
+    return this._getStreamDevice(facingModeEnvironment, idealResolution);
   }
 
   getDataUri = (sizeFactor=1) => {

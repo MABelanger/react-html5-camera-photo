@@ -23,8 +23,8 @@ export default class Camera extends React.Component {
   /*
    * Public fct accessed by ref
    */
-  playUserDevice = () => {
-    this.cameraHelper.playUserDevice()
+  playUserDevice = (idealResolution) => {
+    this.cameraHelper.playUserDevice(idealResolution)
       .then(()=>{
         this.props.onCameraStart();
       })
@@ -33,8 +33,8 @@ export default class Camera extends React.Component {
       });
   }
 
-  playEnvironmentDevice = () => {
-    this.cameraHelper.playUserDevice()
+  playEnvironmentDevice = (idealResolution) => {
+    this.cameraHelper.playUserDevice(idealResolution)
       .then(()=>{
         this.props.onCameraStart();
       })
