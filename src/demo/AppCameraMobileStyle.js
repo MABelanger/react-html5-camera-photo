@@ -12,6 +12,13 @@ class AppCamera extends Component {
   }
 
   componentDidMount(){
+    setTimeout(()=>{
+      this.refs.camera.stopCamera()
+    }, 1000)
+
+    setTimeout(()=>{
+      this.refs.camera.startCamera()
+    }, 3000)
 
   }
 
@@ -46,6 +53,7 @@ class AppCamera extends Component {
     return (
       <div className="App">
         <CameraMobileStyle
+          ref="camera"
           onCameraError = {this.onCameraError}
           onCameraStop = {this.onCameraStop}
           onTakePhoto = {()=>{

@@ -24,7 +24,7 @@ class Camera extends React.Component {
     this.cameraHelper = new CameraHelper(this.refs.video);
     if( this.props.autoPlay ){
       let {idealFacingMode, idealResolution} = this.props;
-      this.playDevice(idealFacingMode, idealResolution);
+      this.startCamera(idealFacingMode, idealResolution);
     }
 
   }
@@ -33,7 +33,7 @@ class Camera extends React.Component {
    * Public fct accessed by ref
    */
 
-  playDevice(idealFacingMode, idealResolution) {
+  startCamera = (idealFacingMode, idealResolution) => {
    this.cameraHelper.playDevice(idealFacingMode, idealResolution)
      .then(()=>{
        if(this.props.onCameraStart) {
@@ -49,7 +49,8 @@ class Camera extends React.Component {
     return this.cameraHelper.getDataUri(sizeFactor);
   }
 
-  stopDevice = () => {
+  stopCamera = () => {
+    console.log('stop() called ')
     this.cameraHelper.stopDevice()
       .then(() => {
         this.props.onCameraStop();
