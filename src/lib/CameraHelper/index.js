@@ -1,5 +1,4 @@
-import Utilities from './services/Utilities';
-import MediaUtils from './services/MediaUtils';
+import MediaServices from './services/MediaServices';
 
 /*
 Inspiration :
@@ -15,8 +14,8 @@ export default class CameraHelper {
     this.stream = null;
 
     // Set the right object depending on the browser.
-    this.windowURL = Utilities.getWindowURL();
-    this.mediaDevices = MediaUtils.getNavigatorMediaDevices();
+    this.windowURL = MediaServices.getWindowURL();
+    this.mediaDevices = MediaServices.getNavigatorMediaDevices();
   }
 
   /*
@@ -31,7 +30,7 @@ export default class CameraHelper {
 
   _getStreamDevice = (facingMode, idealResolution) => {
     return new Promise((resolve, reject) => {
-      let idealConstraints = MediaUtils.getIdealConstraints(facingMode, idealResolution);
+      let idealConstraints = MediaServices.getIdealConstraints(facingMode, idealResolution);
       this.mediaDevices.getUserMedia(idealConstraints)
           .then((stream) => {
             this._gotStream(stream);
@@ -68,8 +67,8 @@ export default class CameraHelper {
     this.stopStreams().catch(()=>{});
 
     let facingModeUser = null;
-    if(MediaUtils.isSupportedFacingMode()){
-      facingModeUser = MediaUtils.FACING_MODE.USER;
+    if(MediaServices.isSupportedFacingMode()){
+      facingModeUser = MediaServices.FACING_MODE.USER;
     }
     return this._getStreamDevice(facingModeUser, idealResolution);
   }
@@ -79,14 +78,14 @@ export default class CameraHelper {
     this.stopStreams().catch(()=>{});
 
     let facingModeEnvironment = null;
-    if(MediaUtils.isSupportedFacingMode()){
-      facingModeEnvironment = MediaUtils.FACING_MODE.ENVIRONMENT;
+    if(MediaServices.isSupportedFacingMode()){
+      facingModeEnvironment = MediaServices.FACING_MODE.ENVIRONMENT;
     }
     return this._getStreamDevice(facingModeEnvironment, idealResolution);
   }
 
   getDataUri = (sizeFactor=1) => {
-    let dataUri = Utilities.getDataUri(this.videoElement, sizeFactor);
+    let dataUri = MediaServices.getDataUri(this.videoElement, sizeFactor);
     return dataUri;
   }
 
