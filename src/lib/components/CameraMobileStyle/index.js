@@ -23,21 +23,11 @@ export default class Camera extends React.Component {
   componentDidMount() {
     this.cameraHelper = new CameraHelper(this.refs.video);
 
-    const FACING_MODES = this.cameraHelper.getFacingModes();
+    this.FACING_MODES = this.cameraHelper.getFacingModes();
 
     if( this.props.autoPlay ){
-
-      // by default the camera is set to Environement
-      let playDevice = this.cameraHelper.playEnvironmentDevice;
-
-      if(this.props.facingMode === FACING_MODES.USER) {
-        playDevice = this.cameraHelper.playUserDevice;
-      }
-
-      playDevice()
-        .catch((error)=>{
-          this.props.onCameraError(error);
-        });
+      let {idealFacingMode, idealResolution} = this.props;
+      this.playDevice(idealFacingMode, idealResolution);
     }
 
   }
@@ -45,25 +35,18 @@ export default class Camera extends React.Component {
   /*
    * Public fct accessed by ref
    */
-  playUserDevice = (idealResolution) => {
-    this.cameraHelper.playUserDevice(idealResolution)
-      .then(()=>{
-        this.props.onCameraStart();
-      })
-      .catch((error)=>{
-        this.props.onCameraError(error);
-      });
-  }
 
-  playEnvironmentDevice = (idealResolution) => {
-    this.cameraHelper.playEnvironmentDevice(idealResolution)
-      .then(()=>{
-        this.props.onCameraStart();
-      })
-      .catch((error) => {
-        this.props.onCameraError(error);
-      });
-  }
+   playDevice(idealFacingMode, idealResolution) {
+     this.cameraHelper.playDevice(idealFacingMode, idealResolution)
+       .then(()=>{
+         if(this.props.onCameraStart) {
+           this.props.onCameraStart();
+         }
+       })
+       .catch((error)=>{
+         this.props.onCameraError(error);
+       });
+   }
 
   getDataUri = (sizeFactor) => {
     return this.cameraHelper.getDataUri(sizeFactor);

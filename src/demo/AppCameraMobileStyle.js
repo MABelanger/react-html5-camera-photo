@@ -52,8 +52,8 @@ class AppCamera extends Component {
             this.onTakePhoto();
           }}
           autoPlay={true}
-          facingMode="user"
-          idealResolution={{width:40, height:40}}
+          idealFacingMode="environment"
+          idealResolution={{width:640, height:480}}
         />
       </div>
     );

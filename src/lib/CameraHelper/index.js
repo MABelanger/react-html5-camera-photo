@@ -22,9 +22,9 @@ class CameraHelper {
   /*
    * private fct
    */
-  _getStreamDevice = (facingMode, idealResolution) => {
+  _getStreamDevice = (idealFacingMode, idealResolution) => {
     return new Promise((resolve, reject) => {
-      let idealConstraints = MediaServices.getIdealConstraints(facingMode, idealResolution);
+      let idealConstraints = MediaServices.getIdealConstraints(idealFacingMode, idealResolution);
       this.mediaDevices.getUserMedia(idealConstraints)
           .then((stream) => {
             this._gotStream(stream);
@@ -56,26 +56,11 @@ class CameraHelper {
   /*
    * public fct
    */
-  playUserDevice = (idealResolution={}) => {
+
+  playDevice = (idealFacingMode={}, idealResolution={}) => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
-
-    let facingModeUser = null;
-    if(MediaServices.isSupportedFacingMode()){
-      facingModeUser = MediaServices.FACING_MODES.USER;
-    }
-    return this._getStreamDevice(facingModeUser, idealResolution);
-  }
-
-  playEnvironmentDevice = (idealResolution={}) => {
-    // stop the stream before playing it.
-    this.stopStreams().catch(()=>{});
-
-    let facingModeEnvironment = null;
-    if(MediaServices.isSupportedFacingMode()){
-      facingModeEnvironment = MediaServices.FACING_MODES.ENVIRONMENT;
-    }
-    return this._getStreamDevice(facingModeEnvironment, idealResolution);
+    return this._getStreamDevice(idealFacingMode, idealResolution);
   }
 
   getDataUri = (sizeFactor=1) => {
