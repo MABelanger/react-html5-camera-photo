@@ -36,17 +36,17 @@ export default class Camera extends React.Component {
    * Public fct accessed by ref
    */
 
-   playDevice(idealFacingMode, idealResolution) {
-     this.cameraHelper.playDevice(idealFacingMode, idealResolution)
-       .then(()=>{
-         if(this.props.onCameraStart) {
-           this.props.onCameraStart();
-         }
-       })
-       .catch((error)=>{
-         this.props.onCameraError(error);
-       });
-   }
+  playDevice(idealFacingMode, idealResolution) {
+   this.cameraHelper.playDevice(idealFacingMode, idealResolution)
+     .then(()=>{
+       if(this.props.onCameraStart) {
+         this.props.onCameraStart();
+       }
+     })
+     .catch((error)=>{
+       this.props.onCameraError(error);
+     });
+  }
 
   getDataUri = (sizeFactor) => {
     return this.cameraHelper.getDataUri(sizeFactor);
