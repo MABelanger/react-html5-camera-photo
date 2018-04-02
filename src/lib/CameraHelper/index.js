@@ -33,15 +33,14 @@ export default class CameraHelper {
     }
   }
 
-  _getStreamDevice = (facingMode) => {
+  _getStreamDevice = (facingMode, idealResolution) => {
     return new Promise((resolve, reject) => {
       // let desiredResolution = {
       //   width: 640,
       //   height: 480
       // }
-      let desiredResolution = {}
 
-      let idealConstraints = MediaUtils.getIdealConstraints(facingMode, desiredResolution);
+      let idealConstraints = MediaUtils.getIdealConstraints(facingMode, idealResolution);
       this.mediaDevices.getUserMedia(idealConstraints)
           .then((stream) => {
             this._gotStream(stream);
@@ -73,7 +72,7 @@ export default class CameraHelper {
   /*
    * public fct
    */
-  playUserDevice = (idealResolution) => {
+  playUserDevice = (idealResolution={}) => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
 
@@ -84,7 +83,7 @@ export default class CameraHelper {
     return this._getStreamDevice(facingModeUser, idealResolution);
   }
 
-  playEnvironmentDevice = (idealResolution) => {
+  playEnvironmentDevice = (idealResolution={}) => {
     // stop the stream before playing it.
     this.stopStreams().catch(()=>{});
 
