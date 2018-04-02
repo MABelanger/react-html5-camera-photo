@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CameraHelper from '../../CameraHelper';
-import CircleButton from './CircleButton';
+import CircleButton from '../CircleButton';
 
 import './styles/cameraMobileStyle.css';
 

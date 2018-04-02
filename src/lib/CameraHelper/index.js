@@ -101,7 +101,7 @@ export default class CameraHelper {
         this.stream = null;
         resolve();
       }
-      reject("no stream!")
+      reject("no stream to stop!")
     });
   }
 
