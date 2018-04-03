@@ -25,7 +25,7 @@ class App extends Component {
         <Camera
           ref="camera"
           onCameraError={this.onCameraError}
-          autoPlay={true}
+          autoStart={true}
         />
 
         <button

@@ -25,7 +25,7 @@ class CameraMobileStyle extends React.Component {
 
   componentDidMount() {
     this.cameraHelper = new CameraHelper(this.refs.video);
-    if( this.props.autoPlay ){
+    if( this.props.autoStart ){
       let {idealFacingMode, idealResolution} = this.props;
       console.log('idealFacingMode', idealFacingMode)
       this.startCamera(idealFacingMode, idealResolution);
@@ -38,7 +38,7 @@ class CameraMobileStyle extends React.Component {
    */
 
   startCamera = (idealFacingMode, idealResolution) => {
-   this.cameraHelper.playDevice(idealFacingMode, idealResolution)
+   this.cameraHelper.startDevice(idealFacingMode, idealResolution)
      .then(()=>{
        this.setState({isCameraStarted: true})
        if(this.props.onCameraStart) {
@@ -139,7 +139,7 @@ class CameraMobileStyle extends React.Component {
         <video
           style = {showVideoStyle}
           ref="video"
-          autoPlay="true"
+          autoStart="true"
         />
         <StopStartButton
           isOpen={this.state.isCameraStarted}
@@ -165,7 +165,7 @@ export default CameraMobileStyle;
 
 CameraMobileStyle.propTypes = {
   onCameraError: PropTypes.func.isRequired,
-  autoPlay: PropTypes.bool,
+  autoStart: PropTypes.bool,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
   onCameraStart: PropTypes.func,

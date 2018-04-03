@@ -14,7 +14,7 @@ class Camera extends React.Component {
 
   componentDidMount() {
     this.cameraHelper = new CameraHelper(this.refs.video);
-    this.cameraHelper.playDevice()
+    this.cameraHelper.startDevice()
       .catch((error)=>{
         this.props.onCameraError(error);
       });
@@ -24,7 +24,7 @@ class Camera extends React.Component {
    * Public fct accessed by ref
    */
   startCamera = (idealFacingMode, idealResolution) => {
-    this.cameraHelper.playDevice(idealFacingMode, idealResolution)
+    this.cameraHelper.startDevice(idealFacingMode, idealResolution)
       .then(()=>{
         this.setState({isCameraStarted: true})
         if(this.props.onCameraStart) {
@@ -58,7 +58,7 @@ class Camera extends React.Component {
     return (
       <video
         ref="video"
-        autoPlay="true"
+        autoStart="true"
       />
     );
   }
@@ -72,7 +72,7 @@ export default Camera;
 
 Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,
-  autoPlay: PropTypes.bool,
+  autoStart: PropTypes.bool,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
   onCameraStart: PropTypes.func,

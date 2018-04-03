@@ -57,7 +57,7 @@ class CameraHelper {
    * public fct
    */
 
-  playDevice = (idealFacingMode={}, idealResolution={}) => {
+  startDevice = (idealFacingMode={}, idealResolution={}) => {
     // stop the stream before playing it.
     this.stopDevice().catch(()=>{});
     return this._getStreamDevice(idealFacingMode, idealResolution);

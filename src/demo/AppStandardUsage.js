@@ -112,7 +112,7 @@ class App extends Component {
           <Camera
             ref="camera"
             onCameraError = {this.onCameraError}
-            autoPlay={false}
+            autoStart={false}
             onCameraStart = {this.onCameraStart}
             onCameraStop = {this.onCameraStop}
             onVideoClick = {()=>{this.setDataUri()}}
