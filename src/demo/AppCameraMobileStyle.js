@@ -12,13 +12,6 @@ class AppCamera extends Component {
   }
 
   componentDidMount(){
-    setTimeout(()=>{
-      this.refs.camera.stopCamera()
-    }, 1000)
-
-    setTimeout(()=>{
-      this.refs.camera.startCamera()
-    }, 3000)
 
   }
 

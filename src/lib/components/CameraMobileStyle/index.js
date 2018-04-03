@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import CameraHelper, {FACING_MODES} from '../../CameraHelper';
 import CircleButton from '../CircleButton';
+import StopStartButton from '../StopStartButton';
 
 import './styles/cameraMobileStyle.css';
+
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
@@ -16,7 +18,8 @@ class Camera extends React.Component {
     this.cameraHelper = null;
     this.state = {
       dataUri : "",
-      isShowVideo: true
+      isShowVideo: true,
+      isCameraStarted: false
     };
   }
 
@@ -36,6 +39,7 @@ class Camera extends React.Component {
   startCamera = (idealFacingMode, idealResolution) => {
    this.cameraHelper.playDevice(idealFacingMode, idealResolution)
      .then(()=>{
+       this.setState({isCameraStarted: true})
        if(this.props.onCameraStart) {
          this.props.onCameraStart();
        }
@@ -53,7 +57,10 @@ class Camera extends React.Component {
     console.log('stop() called ')
     this.cameraHelper.stopDevice()
       .then(() => {
-        this.props.onCameraStop();
+        this.setState({isCameraStarted: false})
+        if(this.props.onCameraStop){
+          this.props.onCameraStop();
+        }
       })
       .catch((error) => {
           console.log(error);
@@ -68,16 +75,49 @@ class Camera extends React.Component {
     return displayStyle;
   }
 
+
+  _renderCircleButton(isVisible){
+    console.log('isVisible', isVisible)
+    if(!isVisible){
+      return null;
+    }
+    // else ....
+    return(
+      <CircleButton
+        isClicked={!this.state.isShowVideo}
+        onClick={()=>{
+
+            this.props.onTakePhoto();
+            let dataUri = this.cameraHelper.getDataUri();
+            this.setState({
+              dataUri,
+              isShowVideo: false
+            });
+            setTimeout(()=>{
+              this.setState({
+                isShowVideo: true
+              });
+            }, 900)
+
+        }}
+      />
+    );
+  }
+
+
   render() {
     let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
     let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
 
-    const doTransition = this.state.isShowVideo ? '' : 'dotransition';
-    const classes = `${doTransition} normal`;
+    const flashDoTransition = this.state.isShowVideo ? '' : 'dotransition';
+    const flashClasses = `${flashDoTransition} normal`;
+
+    let circleButton = this._renderCircleButton(this.state.isCameraStarted);
+    console.log('this.state.isCameraStarted', this.state.isCameraStarted)
 
     return (
       <div className="camera-mobile-style">
-        <div className={classes}>
+        <div className={flashClasses}>
         </div>
         <img
           style = {showImgStyle}
@@ -89,24 +129,17 @@ class Camera extends React.Component {
           ref="video"
           autoPlay="true"
         />
-        <CircleButton
-          isClicked={!this.state.isShowVideo}
-          onClick={()=>{
+        <StopStartButton
+          isOpen={this.state.isCameraStarted}
+          onClickStart={()=>{
+            this.startCamera()
+          }}
 
-              this.props.onTakePhoto();
-              let dataUri = this.cameraHelper.getDataUri();
-              this.setState({
-                dataUri,
-                isShowVideo: false
-              });
-              setTimeout(()=>{
-                this.setState({
-                  isShowVideo: true
-                });
-              }, 900)
-
+          onClickStop={()=>{
+            this.stopCamera()
           }}
         />
+        {circleButton}
       </div>
     );
   }

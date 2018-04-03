@@ -25,7 +25,7 @@ export const CircleButton = ({ onClick, isClicked }) => {
 }
 
 CircleButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default CircleButton;
