@@ -58,7 +58,7 @@ class Camera extends React.Component {
     return (
       <video
         ref="video"
-        autoStart="true"
+        autoPlay="true"
       />
     );
   }

@@ -139,7 +139,7 @@ class CameraMobileStyle extends React.Component {
         <video
           style = {showVideoStyle}
           ref="video"
-          autoStart="true"
+          autoPlay="true"
         />
         <StopStartButton
           isOpen={this.state.isCameraStarted}
