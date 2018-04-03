@@ -104,21 +104,30 @@ class Camera extends React.Component {
     );
   }
 
+  _renderFlashWhiteDiv(isShowVideo){
+    const flashDoTransition = isShowVideo ? '' : 'dotransition';
+    const flashClasses = `${flashDoTransition} normal`;
+    return(
+      <div className={flashClasses}>
+      </div>
+    )
+  }
+
 
   render() {
     let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
     let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
 
-    const flashDoTransition = this.state.isShowVideo ? '' : 'dotransition';
-    const flashClasses = `${flashDoTransition} normal`;
+
 
     let circleButton = this._renderCircleButton(this.state.isCameraStarted);
+    let flashWhiteDiv = this._renderFlashWhiteDiv(this.state.isShowVideo);
+
     console.log('this.state.isCameraStarted', this.state.isCameraStarted)
 
     return (
       <div className="camera-mobile-style">
-        <div className={flashClasses}>
-        </div>
+        {flashWhiteDiv}
         <img
           style = {showImgStyle}
           alt="camera"
