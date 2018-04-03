@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CameraHelper from '../../CameraHelper';
+import CameraHelper, {FACING_MODES} from '../../CameraHelper';
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
-export default class Camera extends React.Component {
+class Camera extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -13,8 +13,8 @@ export default class Camera extends React.Component {
   }
 
   componentDidMount() {
-    this.cameraHelper = new CameraHelper(this.refs.video, this.props.autoPlay);
-    this.cameraHelper.enumerateDevice()
+    this.cameraHelper = new CameraHelper(this.refs.video);
+    this.cameraHelper.playDevice()
       .catch((error)=>{
         this.props.onCameraError(error);
       });
@@ -23,22 +23,15 @@ export default class Camera extends React.Component {
   /*
    * Public fct accessed by ref
    */
-  playUserDevice = (idealResolution) => {
-    this.cameraHelper.playUserDevice(idealResolution)
+  startCamera = (idealFacingMode, idealResolution) => {
+    this.cameraHelper.playDevice(idealFacingMode, idealResolution)
       .then(()=>{
-        this.props.onCameraStart();
+        this.setState({isCameraStarted: true})
+        if(this.props.onCameraStart) {
+          this.props.onCameraStart();
+        }
       })
       .catch((error)=>{
-        this.props.onCameraError(error);
-      });
-  }
-
-  playEnvironmentDevice = (idealResolution) => {
-    this.cameraHelper.playUserDevice(idealResolution)
-      .then(()=>{
-        this.props.onCameraStart();
-      })
-      .catch((error) => {
         this.props.onCameraError(error);
       });
   }
@@ -47,10 +40,14 @@ export default class Camera extends React.Component {
     return this.cameraHelper.getDataUri(sizeFactor);
   }
 
-  stopDevice = () => {
+  stopCamera = () => {
+    console.log('stop() called ')
     this.cameraHelper.stopDevice()
       .then(() => {
-        this.props.onCameraStop();
+        this.setState({isCameraStarted: false})
+        if(this.props.onCameraStop){
+          this.props.onCameraStop();
+        }
       })
       .catch((error) => {
           console.log(error);
@@ -67,10 +64,18 @@ export default class Camera extends React.Component {
   }
 }
 
+export  {
+  FACING_MODES
+};
+
+export default Camera;
+
 Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,
   autoPlay: PropTypes.bool,
+  idealFacingMode: PropTypes.string,
+  idealResolution: PropTypes.object,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func,
-  onVideoClick: PropTypes.func
+  onTakePhoto: PropTypes.func
 }

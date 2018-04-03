@@ -11,7 +11,7 @@ import './styles/cameraMobileStyle.css';
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
-class Camera extends React.Component {
+class CameraMobileStyle extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -161,9 +161,9 @@ export  {
   FACING_MODES
 };
 
-export default Camera;
+export default CameraMobileStyle;
 
-Camera.propTypes = {
+CameraMobileStyle.propTypes = {
   onCameraError: PropTypes.func.isRequired,
   autoPlay: PropTypes.bool,
   idealFacingMode: PropTypes.string,

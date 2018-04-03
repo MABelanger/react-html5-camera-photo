@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Camera from '../lib';
-//import './AppStandardUsage.css';
+import './AppStandardUsage.css';
 
 const IMAGE_THUMB_SIZE_FACTOR = .1;
 
@@ -22,12 +22,12 @@ export const Images = ({ dataUris }) => {
   );
 }
 
-const Buttons = ({ onStopDevice, onPlayDevice, onGetDataUri, onClearPhotos }) => {
+const Buttons = ({ onStopCamera, onStartCamera, onGetDataUri, onClearPhotos }) => {
   return(
     <div>
       <button
         onClick={(e) => {
-          onPlayDevice();
+          onStartCamera();
         }}
       >Play</button>
 
@@ -39,7 +39,7 @@ const Buttons = ({ onStopDevice, onPlayDevice, onGetDataUri, onClearPhotos }) =>
 
       <button
         onClick={(e) => {
-          onStopDevice();
+          onStopCamera();
         }}
       >Stop</button>
 
@@ -121,8 +121,8 @@ class App extends Component {
           { infoCamera }
 
           <Buttons
-            onStopDevice = {()=>{this.refs.camera.stopDevice()}}
-            onPlayDevice = {()=>{this.refs.camera.playDevice()}}
+            onStopCamera = {()=>{this.refs.camera.stopCamera()}}
+            onStartCamera = {()=>{this.refs.camera.startCamera()}}
             onGetDataUri = {()=>{this.setDataUri()}}
             onClearPhotos = {()=>{this.onClearPhotos()}}
           />
