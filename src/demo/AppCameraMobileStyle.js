@@ -43,6 +43,7 @@ class AppCamera extends Component {
 
   render() {
 
+    console.log('FACING_MODES.ENVIRONMENT', FACING_MODES.ENVIRONMENT)
     return (
       <div className="App">
         <CameraMobileStyle

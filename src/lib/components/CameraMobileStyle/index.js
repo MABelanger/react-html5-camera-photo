@@ -27,6 +27,7 @@ class Camera extends React.Component {
     this.cameraHelper = new CameraHelper(this.refs.video);
     if( this.props.autoPlay ){
       let {idealFacingMode, idealResolution} = this.props;
+      console.log('idealFacingMode', idealFacingMode)
       this.startCamera(idealFacingMode, idealResolution);
     }
 
@@ -125,6 +126,8 @@ class Camera extends React.Component {
 
     console.log('this.state.isCameraStarted', this.state.isCameraStarted)
 
+    let {idealFacingMode, idealResolution} = this.props;
+
     return (
       <div className="camera-mobile-style">
         {flashWhiteDiv}
@@ -145,7 +148,7 @@ class Camera extends React.Component {
           }}
 
           onClickStop={()=>{
-            this.stopCamera()
+            this.stopCamera(idealFacingMode, idealResolution)
           }}
         />
         {circleButton}

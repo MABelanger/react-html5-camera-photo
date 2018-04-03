@@ -24,6 +24,7 @@ class CameraHelper {
   _getStreamDevice = (idealFacingMode, idealResolution) => {
     return new Promise((resolve, reject) => {
       let idealConstraints = MediaServices.getIdealConstraints(idealFacingMode, idealResolution);
+      console.log('bibi', idealConstraints)
       this.mediaDevices.getUserMedia(idealConstraints)
           .then((stream) => {
             this._gotStream(stream);
