@@ -144,11 +144,11 @@ class Camera extends React.Component {
         <StopStartButton
           isOpen={this.state.isCameraStarted}
           onClickStart={()=>{
-            this.startCamera()
+            this.startCamera(idealFacingMode, idealResolution)
           }}
 
           onClickStop={()=>{
-            this.stopCamera(idealFacingMode, idealResolution)
+            this.stopCamera()
           }}
         />
         {circleButton}
