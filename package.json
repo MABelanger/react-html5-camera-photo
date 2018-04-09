@@ -11,7 +11,10 @@
     "predeployHtml": "npm run buildHtml",
     "deployHtml": "gh-pages -d build",
     "test": "node scripts/test.js --env=jsdom",
-    "prepublish": "npm run buildNpm"
+    "prepublish": "npm run buildNpm",
+    "eslint:src": "eslint --ignore-pattern !**/*.{test,mock}.js src/",
+    "eslint:watch": "esw --color --ignore-pattern !**/*.{test,mock}.js src/ -w",
+    "eslint:fix": "eslint --fix src/"
   },
   "repository": {
     "type": "git",
@@ -31,7 +34,9 @@
   ],
   "homepage": "https://mabelanger.github.io/react-html5-camera-photo/",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "jslib-html5-camera-photo": "^0.0.0-beta.2"
+  },
   "devDependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
@@ -45,13 +50,17 @@
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
-    "eslint": "4.10.0",
+    "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.0.1",
+    "eslint-config-standard": "^11.0.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",

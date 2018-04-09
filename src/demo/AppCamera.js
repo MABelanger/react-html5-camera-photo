@@ -5,6 +5,7 @@ import './AppCamera.css';
 class AppCamera extends Component {
   constructor (props, context) {
     super(props, context);
+    this.cameraRef = React.createRef();
     this.state = {
       dataUri: ''
     };
@@ -44,7 +45,7 @@ class AppCamera extends Component {
     return (
       <div className="App">
         <Camera
-          ref="camera"
+          ref={this.cameraRef}
           onCameraError = {this.onCameraError}
           onCameraStop = {this.onCameraStop}
           onTakePhoto = {() => {
