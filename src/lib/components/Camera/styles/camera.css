@@ -25,7 +25,7 @@
   transition:opacity .9s ease-out;
 }
 
-.camera-mobile-style > .dotransition {
+.camera-mobile-style > .do-transition {
   opacity: 0;
   background: white;
 }

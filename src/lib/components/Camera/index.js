@@ -23,25 +23,22 @@ class Camera extends React.Component {
   }
 
   componentDidMount () {
-    console.log('this.videoRef', this.videoRef.current);
     this.cameraHelper = new LibCameraPhoto(this.videoRef.current);
     if (this.props.autoStart) {
       let {idealFacingMode, idealResolution} = this.props;
-      console.log('idealFacingMode', idealFacingMode);
       this.startCamera(idealFacingMode, idealResolution);
     }
   }
 
   /*
-   * Public fct accessed by ref
+   * Public fct accessed by refs
    */
-
   startCamera (idealFacingMode, idealResolution) {
     this.cameraHelper.startCamera(idealFacingMode, idealResolution)
-      .then(() => {
+      .then((stream) => {
         this.setState({isCameraStarted: true});
         if (this.props.onCameraStart) {
-          this.props.onCameraStart();
+          this.props.onCameraStart(stream);
         }
       })
       .catch((error) => {
@@ -54,7 +51,6 @@ class Camera extends React.Component {
   }
 
   stopCamera () {
-    console.log('stop() called ');
     this.cameraHelper.stopCamera()
       .then(() => {
         this.setState({isCameraStarted: false});
@@ -63,7 +59,7 @@ class Camera extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(error);
+        this.props.onCameraError(error);
       });
   }
 
@@ -76,7 +72,6 @@ class Camera extends React.Component {
   }
 
   _renderCircleButton (isVisible) {
-    console.log('isVisible', isVisible);
     if (!isVisible) {
       return null;
     }
@@ -102,7 +97,7 @@ class Camera extends React.Component {
   }
 
   _renderFlashWhiteDiv (isShowVideo) {
-    const flashDoTransition = isShowVideo ? '' : 'dotransition';
+    const flashDoTransition = isShowVideo ? '' : 'do-transition';
     const flashClasses = `${flashDoTransition} normal`;
     return (
       <div className={flashClasses}>
@@ -115,8 +110,6 @@ class Camera extends React.Component {
     let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
     let circleButton = this._renderCircleButton(this.state.isCameraStarted);
     let flashWhiteDiv = this._renderFlashWhiteDiv(this.state.isShowVideo);
-
-    console.log('this.state.isCameraStarted', this.state.isCameraStarted);
 
     let {idealFacingMode, idealResolution} = this.props;
 
@@ -148,9 +141,6 @@ class Camera extends React.Component {
     );
   }
 }
-
-export const FACING_MODES = LibCameraPhoto.FACING_MODES;
-console.log('LibCameraPhoto.FACING_MODES', LibCameraPhoto.FACING_MODES);
 
 export default Camera;
 

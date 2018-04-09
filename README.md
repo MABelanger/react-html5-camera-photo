@@ -101,10 +101,7 @@ Properties | Type | Description
 **autoPlay:**  (optional, defaults to false) | boolean | Boolean value to start the first camera automatically when the component is loaded.
 
 ## ToDo
-1. Select camera (front or back), right now it take by default the first camera available.
-2. Get a list of supported resolution.
-3. Force a resolution.
-4. Use redux instead of refs ?
+
 
 ## FAQ
 1. <b>What if i want to improve the code or add functionalities?</b>
