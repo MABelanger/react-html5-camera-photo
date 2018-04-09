@@ -139,10 +139,10 @@ export default Camera;
 
 Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,
+  onTakePhoto: PropTypes.func.isRequired,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
-  onCameraStop: PropTypes.func,
-  onTakePhoto: PropTypes.func
+  onCameraStop: PropTypes.func
 };
