@@ -24,10 +24,8 @@ class Camera extends React.Component {
 
   componentDidMount () {
     this.cameraHelper = new LibCameraPhoto(this.videoRef.current);
-    if (this.props.autoStart) {
-      let {idealFacingMode, idealResolution} = this.props;
-      this.startCamera(idealFacingMode, idealResolution);
-    }
+    let {idealFacingMode, idealResolution} = this.props;
+    this.startCamera(idealFacingMode, idealResolution);
   }
 
   /*
@@ -71,6 +69,11 @@ class Camera extends React.Component {
     return displayStyle;
   }
 
+  _playClickAudio () {
+    let audio = new Audio('click.mp3');
+    audio.play();
+  }
+
   _renderCircleButton (isVisible) {
     if (!isVisible) {
       return null;
@@ -80,8 +83,9 @@ class Camera extends React.Component {
       <CircleButton
         isClicked={!this.state.isShowVideo}
         onClick={() => {
-          this.props.onTakePhoto();
+          this._playClickAudio();
           let dataUri = this.cameraHelper.getDataUri();
+          this.props.onTakePhoto(dataUri);
           this.setState({
             dataUri,
             isShowVideo: false

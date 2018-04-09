@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './AppCamera';
+import App from './AppMinimumUsage';
 
 import registerServiceWorker from './registerServiceWorker';
 
