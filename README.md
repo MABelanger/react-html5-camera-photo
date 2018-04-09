@@ -69,7 +69,6 @@ For more complex example checkout the demo [/src/demo/AppStandardUsage.js](./src
 Properties | Type | Description
 --- | --- | ---
 **onCameraError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
-**onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
 **onTakePhoto(dataUri):** | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
 **idealFacingMode** (Optional) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser.
