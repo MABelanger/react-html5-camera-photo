@@ -1,9 +1,7 @@
-import {CameraMobileStyle, Camera, FACING_MODES} from './components';
+import {Camera} from './components';
 
 export {
-  Camera,
-  CameraMobileStyle,
-  FACING_MODES
+  Camera
 };
 
 export default Camera;

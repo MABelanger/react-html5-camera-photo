@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import {CameraMobileStyle, FACING_MODES} from '../lib';
-import './AppCameraMobileStyle.css';
+import {Camera} from '../lib';
+import './AppCamera.css';
 
 class AppCamera extends Component {
-
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
     this.state = {
-      dataUri: ""
+      dataUri: ''
     };
   }
 
-  componentDidMount(){
+  componentDidMount () {
 
   }
 
-  onCameraError = (error) => {
+  onCameraError (error) {
     let {code, message, name} = error;
     let strError = `
       Camera Error:
@@ -25,37 +24,35 @@ class AppCamera extends Component {
     console.error(strError);
   }
 
-  onCameraStop = () => {
+  onCameraStop () {
     console.log('camera stop');
     this.setState({
       isCameraRunning: false
     });
   }
 
-  _playClickAudio() {
+  _playClickAudio () {
     let audio = new Audio('click.mp3');
     audio.play();
   }
 
-  onTakePhoto = () => {
+  onTakePhoto () {
     this._playClickAudio();
   }
 
-  render() {
-
-    console.log('FACING_MODES.ENVIRONMENT', FACING_MODES.ENVIRONMENT)
+  render () {
     return (
       <div className="App">
-        <CameraMobileStyle
+        <Camera
           ref="camera"
           onCameraError = {this.onCameraError}
           onCameraStop = {this.onCameraStop}
-          onTakePhoto = {()=>{
+          onTakePhoto = {() => {
             this.onTakePhoto();
           }}
           autoStart={true}
-          idealFacingMode={FACING_MODES.ENVIRONMENT}
-          idealResolution={{width:640, height:480}}
+          idealFacingMode={'environment'}
+          idealResolution={{width: 640, height: 480}}
         />
       </div>
     );

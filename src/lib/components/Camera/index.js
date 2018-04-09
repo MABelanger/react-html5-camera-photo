@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CameraHelper, {FACING_MODES} from '../../CameraHelper';
+
+import LibCameraPhoto from 'jslib-html5-camera-photo';
+import CircleButton from '../CircleButton';
+import StopStartButton from '../StopStartButton';
+
+import './styles/camera.css';
+
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
@@ -10,30 +16,38 @@ class Camera extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.cameraHelper = null;
+    this.state = {
+      dataUri : "",
+      isShowVideo: true,
+      isCameraStarted: false
+    };
   }
 
   componentDidMount() {
-    this.cameraHelper = new CameraHelper(this.refs.video);
-    this.cameraHelper.startDevice()
-      .catch((error)=>{
-        this.props.onCameraError(error);
-      });
+    this.cameraHelper = new LibCameraPhoto(this.refs.video);
+    if( this.props.autoStart ){
+      let {idealFacingMode, idealResolution} = this.props;
+      console.log('idealFacingMode', idealFacingMode)
+      this.startCamera(idealFacingMode, idealResolution);
+    }
+
   }
 
   /*
    * Public fct accessed by ref
    */
+
   startCamera = (idealFacingMode, idealResolution) => {
-    this.cameraHelper.startDevice(idealFacingMode, idealResolution)
-      .then(()=>{
-        this.setState({isCameraStarted: true})
-        if(this.props.onCameraStart) {
-          this.props.onCameraStart();
-        }
-      })
-      .catch((error)=>{
-        this.props.onCameraError(error);
-      });
+   this.cameraHelper.startCamera(idealFacingMode, idealResolution)
+     .then(()=>{
+       this.setState({isCameraStarted: true})
+       if(this.props.onCameraStart) {
+         this.props.onCameraStart();
+       }
+     })
+     .catch((error)=>{
+       this.props.onCameraError(error);
+     });
   }
 
   getDataUri = (sizeFactor) => {
@@ -42,7 +56,7 @@ class Camera extends React.Component {
 
   stopCamera = () => {
     console.log('stop() called ')
-    this.cameraHelper.stopDevice()
+    this.cameraHelper.stopCamera()
       .then(() => {
         this.setState({isCameraStarted: false})
         if(this.props.onCameraStop){
@@ -54,19 +68,95 @@ class Camera extends React.Component {
       });
   }
 
-  render() {
-    return (
-      <video
-        ref="video"
-        autoPlay="true"
+  getShowHideStyle(isDisplay) {
+    let displayStyle = isDisplay
+      ? {display: 'inline-block'}
+      : {display: 'none'}
+
+    return displayStyle;
+  }
+
+
+  _renderCircleButton(isVisible){
+    console.log('isVisible', isVisible)
+    if(!isVisible){
+      return null;
+    }
+    // else ....
+    return(
+      <CircleButton
+        isClicked={!this.state.isShowVideo}
+        onClick={()=>{
+
+            this.props.onTakePhoto();
+            let dataUri = this.cameraHelper.getDataUri();
+            this.setState({
+              dataUri,
+              isShowVideo: false
+            });
+            setTimeout(()=>{
+              this.setState({
+                isShowVideo: true
+              });
+            }, 900)
+        }}
       />
+    );
+  }
+
+  _renderFlashWhiteDiv(isShowVideo){
+    const flashDoTransition = isShowVideo ? '' : 'dotransition';
+    const flashClasses = `${flashDoTransition} normal`;
+    return(
+      <div className={flashClasses}>
+      </div>
+    )
+  }
+
+
+  render() {
+    let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
+    let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
+    let circleButton = this._renderCircleButton(this.state.isCameraStarted);
+    let flashWhiteDiv = this._renderFlashWhiteDiv(this.state.isShowVideo);
+
+    console.log('this.state.isCameraStarted', this.state.isCameraStarted)
+
+    let {idealFacingMode, idealResolution} = this.props;
+
+    return (
+      <div className="camera-mobile-style">
+        {flashWhiteDiv}
+        <img
+          style = {showImgStyle}
+          alt="camera"
+          src={this.state.dataUri}
+        />
+        <video
+          style = {showVideoStyle}
+          ref="video"
+          autoPlay="true"
+        />
+        <StopStartButton
+          isOpen={this.state.isCameraStarted}
+          onClickStart={()=>{
+            this.startCamera(idealFacingMode, idealResolution)
+          }}
+
+          onClickStop={()=>{
+            this.stopCamera()
+          }}
+        />
+        {circleButton}
+      </div>
     );
   }
 }
 
-export  {
-  FACING_MODES
-};
+
+
+export const FACING_MODES = LibCameraPhoto.FACING_MODES;
+console.log('LibCameraPhoto.FACING_MODES', LibCameraPhoto.FACING_MODES);
 
 export default Camera;
 

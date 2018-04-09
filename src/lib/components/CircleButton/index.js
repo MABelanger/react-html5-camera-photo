@@ -11,7 +11,7 @@ export const CircleButton = ({ onClick, isClicked }) => {
         id="outer-circle"
         onClick = {
           (e) => {
-            if(!isClicked){
+            if (!isClicked) {
               onClick();
             }
           }
@@ -21,8 +21,8 @@ export const CircleButton = ({ onClick, isClicked }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 CircleButton.propTypes = {
   onClick: PropTypes.func.isRequired

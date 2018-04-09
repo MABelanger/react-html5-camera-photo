@@ -1,10 +1,5 @@
 import Camera from './Camera';
-import CameraMobileStyle, {FACING_MODES} from './CameraMobileStyle';
-
 export {
-  Camera,
-  CameraMobileStyle,
-  FACING_MODES
+  Camera
 };
-
 export default Camera;
