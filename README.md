@@ -71,7 +71,7 @@ Properties | Type | Description
 **onCameraError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
-**onTakePhoto:** | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
+**onTakePhoto(dataUri):** | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
 **idealFacingMode** (Optional) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser.
 **idealResolution** (Optional) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
 **sizeFactor** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
