@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import LibCameraPhoto from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
-import StopStartButton from '../StopStartButton';
+// import StopStartButton from '../StopStartButton';
 
 import './styles/camera.css';
 
@@ -68,10 +68,6 @@ class Camera extends React.Component {
   }
 
   _renderCircleButton (isVisible) {
-    if (!isVisible) {
-      return null;
-    }
-    // else ....
     return (
       <CircleButton
         isClicked={!this.state.isShowVideo}
@@ -105,10 +101,8 @@ class Camera extends React.Component {
   render () {
     let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
     let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
-    let circleButton = this._renderCircleButton(this.state.isCameraStarted);
+    let circleButton = this._renderCircleButton();
     let flashWhiteDiv = this._renderFlashWhiteDiv(this.state.isShowVideo);
-
-    let {idealFacingMode, idealResolution} = this.props;
 
     return (
       <div className="camera-mobile-style">
@@ -123,22 +117,24 @@ class Camera extends React.Component {
           ref={this.videoRef}
           autoPlay="true"
         />
-        <StopStartButton
-          isOpen={this.state.isCameraStarted}
-          onClickStart={() => {
-            this.startCamera(idealFacingMode, idealResolution);
-          }}
-
-          onClickStop={() => {
-            this.stopCamera();
-          }}
-        />
         {circleButton}
       </div>
     );
   }
 }
 
+/*
+<StopStartButton
+  isOpen={this.state.isCameraStarted}
+  onClickStart={() => {
+    this.startCamera(idealFacingMode, idealResolution);
+  }}
+
+  onClickStop={() => {
+    this.stopCamera();
+  }}
+/>
+*/
 export default Camera;
 
 Camera.propTypes = {
