@@ -42,7 +42,7 @@ class App extends Component {
   }
 
   onTakePhoto (dataUri) {
-    // Do stuff with the photo...
+    // Do stuff with the dataUri photo...
     console.log('takePhoto');
   }
 
