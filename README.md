@@ -1,7 +1,7 @@
 # react-html5-camera-photo
 
 The first objective of this package comes from the need to get the same look and feal of a native mobile camera app but with a react component.
-For those who want to build with their own css and need an abstraction of `getUserMedia()` take a look of [jslib-html5-camera-photo](https://github.com/mabelanger/jslib-html5-camera-photo)
+For those who want to build with their own css and need an abstraction of `getUserMedia()` take a look of [jslib-html5-camera-photo](https://github.com/mabelanger/jslib-html5-camera-photo) with react.
 
 ## Requirement
 React
