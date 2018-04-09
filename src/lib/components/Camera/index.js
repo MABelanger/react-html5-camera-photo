@@ -28,9 +28,6 @@ class Camera extends React.Component {
     this.startCamera(idealFacingMode, idealResolution);
   }
 
-  /*
-   * Public fct accessed by refs
-   */
   startCamera (idealFacingMode, idealResolution) {
     this.cameraHelper.startCamera(idealFacingMode, idealResolution)
       .then((stream) => {
@@ -42,10 +39,6 @@ class Camera extends React.Component {
       .catch((error) => {
         this.props.onCameraError(error);
       });
-  }
-
-  getDataUri (sizeFactor) {
-    return this.cameraHelper.getDataUri(sizeFactor);
   }
 
   stopCamera () {
@@ -84,7 +77,7 @@ class Camera extends React.Component {
         isClicked={!this.state.isShowVideo}
         onClick={() => {
           this._playClickAudio();
-          let dataUri = this.cameraHelper.getDataUri();
+          let dataUri = this.cameraHelper.getDataUri(this.props.sizeFactor);
           this.props.onTakePhoto(dataUri);
           this.setState({
             dataUri,
@@ -150,9 +143,9 @@ export default Camera;
 
 Camera.propTypes = {
   onCameraError: PropTypes.func.isRequired,
-  autoStart: PropTypes.bool,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
+  sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func,
   onTakePhoto: PropTypes.func
