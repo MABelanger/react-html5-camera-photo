@@ -154,8 +154,8 @@ class Camera extends React.Component {
 export default Camera;
 
 Camera.propTypes = {
-  onCameraError: PropTypes.func.isRequired,
   onTakePhoto: PropTypes.func.isRequired,
+  onCameraError: PropTypes.func,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
   isMaxResolution: PropTypes.bool,
