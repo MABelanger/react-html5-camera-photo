@@ -24,21 +24,24 @@ class Camera extends React.Component {
 
   componentDidMount () {
     this.cameraHelper = new LibCameraPhoto(this.videoRef.current);
-    let {idealFacingMode, idealResolution} = this.props;
-    this.startCamera(idealFacingMode, idealResolution);
+    const {idealFacingMode, idealResolution, isMaxResolution} = this.props;
+    if (isMaxResolution) {
+      this.startCameraMaxResolution(idealFacingMode);
+    } else {
+      this.startCameraIdealResolution(idealFacingMode, idealResolution);
+    }
   }
 
-  startCamera (idealFacingMode, idealResolution) {
-    this.cameraHelper.startCamera(idealFacingMode, idealResolution)
-      .then((stream) => {
-        this.setState({isCameraStarted: true});
-        if (this.props.onCameraStart) {
-          this.props.onCameraStart(stream);
-        }
-      })
-      .catch((error) => {
-        this.props.onCameraError(error);
-      });
+  startCameraIdealResolution (idealFacingMode, idealResolution) {
+    let promiseStartCamera =
+        this.cameraHelper.startCamera(idealFacingMode, idealResolution);
+    this._startCamera(promiseStartCamera);
+  }
+
+  startCameraMaxResolution (idealFacingMode) {
+    let promiseStartCamera =
+        this.cameraHelper.startCameraMaxResolution(idealFacingMode);
+    this._startCamera(promiseStartCamera);
   }
 
   stopCamera () {
@@ -60,6 +63,19 @@ class Camera extends React.Component {
       : {display: 'none'};
 
     return displayStyle;
+  }
+
+  _startCamera (promiseStartCamera) {
+    promiseStartCamera
+      .then((stream) => {
+        this.setState({isCameraStarted: true});
+        if (this.props.onCameraStart) {
+          this.props.onCameraStart(stream);
+        }
+      })
+      .catch((error) => {
+        this.props.onCameraError(error);
+      });
   }
 
   _playClickAudio () {
@@ -142,6 +158,7 @@ Camera.propTypes = {
   onTakePhoto: PropTypes.func.isRequired,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
+  isMaxResolution: PropTypes.bool,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func
