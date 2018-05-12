@@ -25,7 +25,6 @@ Both Yarn and npm download packages from the npm registry.
 
 parameter | Description
 --- | ---
-**onCameraError(error):** | Event function called when error while opening the camera. Often the permission.
 **onTakePhoto(dataUri):** | Event function called when a photo is taken. the dataUri is passed as a parameter.
 
 
@@ -35,12 +34,6 @@ import React, { Component } from 'react';
 import Camera from 'react-html5-camera-photo';
 
 class App extends Component {
-  onCameraError (error) {
-    let {code, message, name} = error;
-    let strError = `Camera Error: code: ${code} message: ${message} name: ${name}`;
-    console.error(strError);
-  }
-
   onTakePhoto (dataUri) {
     // Do stuff with the dataUri photo...
     console.log('takePhoto');
@@ -50,7 +43,6 @@ class App extends Component {
     return (
       <div className="App">
         <Camera
-          onCameraError = {this.onCameraError}
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
         />
       </div>
@@ -68,7 +60,7 @@ For more complex example checkout the demo [/src/demo/AppStandardUsage.js](./src
 ### PropTypes
 Properties | Type | Description
 --- | --- | ---
-**onCameraError(error):** (required) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
+**onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
 **onTakePhoto(dataUri):** (required) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
 **idealFacingMode** (Optional) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser.
