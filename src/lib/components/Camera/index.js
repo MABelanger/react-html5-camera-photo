@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import LibCameraPhoto from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
+// import click from './data/click.base64.json';
+
 // import StopStartButton from '../StopStartButton';
 
 import './styles/camera.css';
@@ -13,7 +15,7 @@ Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 class Camera extends React.Component {
   constructor (props, context) {
     super(props, context);
-    this.cameraHelper = null;
+    this.libCameraPhoto = null;
     this.videoRef = React.createRef();
     this.state = {
       dataUri: '',
@@ -23,7 +25,7 @@ class Camera extends React.Component {
   }
 
   componentDidMount () {
-    this.cameraHelper = new LibCameraPhoto(this.videoRef.current);
+    this.libCameraPhoto = new LibCameraPhoto(this.videoRef.current);
     const {idealFacingMode, idealResolution, isMaxResolution} = this.props;
     if (isMaxResolution) {
       this.startCameraMaxResolution(idealFacingMode);
@@ -32,20 +34,33 @@ class Camera extends React.Component {
     }
   }
 
+  startCamera (promiseStartCamera) {
+    promiseStartCamera
+      .then((stream) => {
+        this.setState({isCameraStarted: true});
+        if (this.props.onCameraStart) {
+          this.props.onCameraStart(stream);
+        }
+      })
+      .catch((error) => {
+        this.props.onCameraError(error);
+      });
+  }
+
   startCameraIdealResolution (idealFacingMode, idealResolution) {
     let promiseStartCamera =
-        this.cameraHelper.startCamera(idealFacingMode, idealResolution);
-    this._startCamera(promiseStartCamera);
+        this.libCameraPhoto.startCamera(idealFacingMode, idealResolution);
+    this.startCamera(promiseStartCamera);
   }
 
   startCameraMaxResolution (idealFacingMode) {
     let promiseStartCamera =
-        this.cameraHelper.startCameraMaxResolution(idealFacingMode);
-    this._startCamera(promiseStartCamera);
+        this.libCameraPhoto.startCameraMaxResolution(idealFacingMode);
+    this.startCamera(promiseStartCamera);
   }
 
   stopCamera () {
-    this.cameraHelper.stopCamera()
+    this.libCameraPhoto.stopCamera()
       .then(() => {
         this.setState({isCameraStarted: false});
         if (this.props.onCameraStop) {
@@ -65,47 +80,40 @@ class Camera extends React.Component {
     return displayStyle;
   }
 
-  _startCamera (promiseStartCamera) {
-    promiseStartCamera
-      .then((stream) => {
-        this.setState({isCameraStarted: true});
-        if (this.props.onCameraStart) {
-          this.props.onCameraStart(stream);
-        }
-      })
-      .catch((error) => {
-        this.props.onCameraError(error);
-      });
-  }
-
-  _playClickAudio () {
+  playClickAudio () {
+    // let clickBinary = window.atob(click.base64);
+    // console.log('clickBinary', clickBinary);
+    // decode base64 to binary
+    // pass it to Audio
     let audio = new Audio('click.mp3');
     audio.play();
   }
 
-  _renderCircleButton (isVisible) {
+  takePhoto () {
+    this.playClickAudio();
+    let dataUri = this.libCameraPhoto.getDataUri(this.props.sizeFactor);
+    this.props.onTakePhoto(dataUri);
+    this.setState({
+      dataUri,
+      isShowVideo: false
+    });
+    setTimeout(() => {
+      this.setState({
+        isShowVideo: true
+      });
+    }, 900);
+  }
+
+  renderCircleButton (isVisible) {
     return (
       <CircleButton
         isClicked={!this.state.isShowVideo}
-        onClick={() => {
-          this._playClickAudio();
-          let dataUri = this.cameraHelper.getDataUri(this.props.sizeFactor);
-          this.props.onTakePhoto(dataUri);
-          this.setState({
-            dataUri,
-            isShowVideo: false
-          });
-          setTimeout(() => {
-            this.setState({
-              isShowVideo: true
-            });
-          }, 900);
-        }}
+        onClick={() => this.takePhoto()}
       />
     );
   }
 
-  _renderFlashWhiteDiv (isShowVideo) {
+  renderFlashWhiteDiv (isShowVideo) {
     const flashDoTransition = isShowVideo ? '' : 'do-transition';
     const flashClasses = `${flashDoTransition} normal`;
     return (
@@ -115,25 +123,23 @@ class Camera extends React.Component {
   }
 
   render () {
-    let showVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
-    let showImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
-    let circleButton = this._renderCircleButton();
-    let flashWhiteDiv = this._renderFlashWhiteDiv(this.state.isShowVideo);
+    let showHideVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
+    let showHideImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
 
     return (
-      <div className="camera-mobile-style">
-        {flashWhiteDiv}
+      <div className="react-html5-camera-photo">
+        {this.renderFlashWhiteDiv(this.state.isShowVideo)}
         <img
-          style = {showImgStyle}
+          style = {showHideImgStyle}
           alt="camera"
           src={this.state.dataUri}
         />
         <video
-          style = {showVideoStyle}
+          style = {showHideVideoStyle}
           ref={this.videoRef}
           autoPlay="true"
         />
-        {circleButton}
+        {this.renderCircleButton()}
       </div>
     );
   }

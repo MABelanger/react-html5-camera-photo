@@ -1,23 +1,23 @@
-.camera-mobile-style {
+.react-html5-camera-photo {
   position: relative;
   text-align: center;
 }
 
-.camera-mobile-style > video {
+.react-html5-camera-photo > video {
   width: 768px;
 }
 
-.camera-mobile-style > img {
+.react-html5-camera-photo > img {
   width: 768px;
 }
 
 @media(max-width:768px){
-  .camera-mobile-style > video, .camera-mobile-style > img{
+  .react-html5-camera-photo > video, .react-html5-camera-photo > img{
     width: 100%;
   }
 }
 
-.camera-mobile-style > .normal {
+.react-html5-camera-photo > .normal {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -25,7 +25,7 @@
   transition:opacity .9s ease-out;
 }
 
-.camera-mobile-style > .do-transition {
+.react-html5-camera-photo > .do-transition {
   opacity: 0;
   background: white;
 }
