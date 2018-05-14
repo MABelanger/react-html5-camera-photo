@@ -89,14 +89,16 @@ class Camera extends React.Component {
     audio.play();
   }
 
-  takePhoto () {
+  takePhoto (sizeFactor) {
     this.playClickAudio();
-    let dataUri = this.libCameraPhoto.getDataUri(this.props.sizeFactor);
+    let dataUri = this.libCameraPhoto.getDataUri(sizeFactor);
     this.props.onTakePhoto(dataUri);
+
     this.setState({
       dataUri,
       isShowVideo: false
     });
+
     setTimeout(() => {
       this.setState({
         isShowVideo: true
@@ -108,7 +110,7 @@ class Camera extends React.Component {
     return (
       <CircleButton
         isClicked={!this.state.isShowVideo}
-        onClick={() => this.takePhoto()}
+        onClick={() => this.takePhoto(this.props.sizeFactor)}
       />
     );
   }
