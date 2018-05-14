@@ -332,9 +332,9 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new CopyWebpackPlugin([
-      { from: `${paths.appPublic}/click.mp3`, to: paths.appBuild },
-    ]),
+    // new CopyWebpackPlugin([
+    //   { from: `${paths.appPublic}/click.mp3`, to: paths.appBuild },
+    // ]),
   ],
 
   // Some libraries import Node modules but don't use them in the browser.
