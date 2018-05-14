@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import LibCameraPhoto from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
+import {getShowHideStyle} from './helpers';
 // import click from './data/click.base64.json';
 
 // import StopStartButton from '../StopStartButton';
@@ -72,14 +73,6 @@ class Camera extends React.Component {
       });
   }
 
-  getShowHideStyle (isDisplay) {
-    let displayStyle = isDisplay
-      ? {display: 'inline-block'}
-      : {display: 'none'};
-
-    return displayStyle;
-  }
-
   playClickAudio () {
     // let clickBinary = window.atob(click.base64);
     // console.log('clickBinary', clickBinary);
@@ -115,8 +108,8 @@ class Camera extends React.Component {
     );
   }
 
-  renderFlashWhiteDiv (isShowVideo) {
-    const flashDoTransition = isShowVideo ? '' : 'do-transition';
+  renderWhiteFlash (isShowWhiteFlash) {
+    const flashDoTransition = isShowWhiteFlash ? 'do-transition' : '';
     const flashClasses = `${flashDoTransition} normal`;
     return (
       <div className={flashClasses}>
@@ -125,12 +118,12 @@ class Camera extends React.Component {
   }
 
   render () {
-    let showHideVideoStyle = this.getShowHideStyle(this.state.isShowVideo);
-    let showHideImgStyle = this.getShowHideStyle(!this.state.isShowVideo);
+    let showHideVideoStyle = getShowHideStyle(this.state.isShowVideo);
+    let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
 
     return (
       <div className="react-html5-camera-photo">
-        {this.renderFlashWhiteDiv(this.state.isShowVideo)}
+        {this.renderWhiteFlash(!this.state.isShowVideo)}
         <img
           style = {showHideImgStyle}
           alt="camera"
