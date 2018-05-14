@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LibCameraPhoto from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
 import {getShowHideStyle} from './helpers';
-// import click from './data/click.base64.json';
+import click from './data/click.base64.json';
 
 // import StopStartButton from '../StopStartButton';
 
@@ -74,11 +74,7 @@ class Camera extends React.Component {
   }
 
   playClickAudio () {
-    // let clickBinary = window.atob(click.base64);
-    // console.log('clickBinary', clickBinary);
-    // decode base64 to binary
-    // pass it to Audio
-    let audio = new Audio('click.mp3');
+    let audio = new Audio('data:audio/mp3;base64,' + click.base64);
     audio.play();
   }
 
