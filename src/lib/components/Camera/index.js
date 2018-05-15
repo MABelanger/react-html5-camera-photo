@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import LibCameraPhoto from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
 import {getShowHideStyle} from './helpers';
-import clickSound from './data/click-sound.base64.json';
-
 // import StopStartButton from '../StopStartButton';
+import clickSound from './data/click-sound.base64.json';
 
 import './styles/camera.css';
 
@@ -113,6 +112,21 @@ class Camera extends React.Component {
     );
   }
 
+  // renderStopStartButton () {
+  //   return (
+  //     <StopStartButton
+  //       isOpen={this.state.isCameraStarted}
+  //       onClickStart={() => {
+  //         this.startCamera(idealFacingMode, idealResolution);
+  //       }}
+  //
+  //       onClickStop={() => {
+  //         this.stopCamera();
+  //       }}
+  //     />
+  //   );
+  // }
+
   render () {
     let showHideVideoStyle = getShowHideStyle(this.state.isShowVideo);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
@@ -136,18 +150,6 @@ class Camera extends React.Component {
   }
 }
 
-/*
-<StopStartButton
-  isOpen={this.state.isCameraStarted}
-  onClickStart={() => {
-    this.startCamera(idealFacingMode, idealResolution);
-  }}
-
-  onClickStop={() => {
-    this.stopCamera();
-  }}
-/>
-*/
 export default Camera;
 
 Camera.propTypes = {
