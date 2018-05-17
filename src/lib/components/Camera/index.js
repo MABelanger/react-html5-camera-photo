@@ -34,6 +34,10 @@ class Camera extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    this.stopCamera();
+  }
+
   startCamera (promiseStartCamera) {
     promiseStartCamera
       .then((stream) => {
