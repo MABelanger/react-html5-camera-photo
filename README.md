@@ -66,6 +66,56 @@ Properties | Type | Description
 **idealResolution** (Optional) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
 **isMaxResolution** (Optional) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
 **sizeFactor** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
+**imageType**: Used to get the desired image type between `jpg` or `png`. to specify the imageType use the constant IMAGE_TYPES, for example to specify jpg format use IMAGE_TYPES.JPG. The default imageType is `png`.
+**imageCompression**: Used to get the desired compression when `jpg` is selected. choose a compression between `[0, 1]`, 1 is maximum, 0 is minimum. The default value imageCompression is `0.92`.
+
+## Example with all props used
+```js
+import React, { Component } from 'react';
+import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+
+class App extends Component {
+  onTakePhoto (dataUri) {
+    // Do stuff with the photo...
+    console.log('takePhoto');
+  }
+
+  onCameraError (error) {
+    console.error('onCameraError', error);
+  }
+
+  onCameraStart (stream) {
+    console.log('onCameraStart');
+  }
+
+  onCameraStop () {
+    console.log('onCameraStop');
+  }
+
+  render () {
+    return (
+      <div className="App">
+        <Camera
+          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+          onCameraError = { (error) => { this.onCameraError(error); } }
+          idealFacingMode = {FACING_MODES.ENVIRONMENT}
+          idealResolution = {{width: 640, height: 480}}
+          imageType = {IMAGE_TYPES.JPG}
+          imageCompression = {0.97}
+          isMaxResolution = {false}
+          sizeFactor = {1}
+          onCameraStart = { (stream) => { this.onCameraStart(stream); } }
+          onCameraStop = { () => { this.onCameraStop(); } }
+        />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
 
 ## FAQ
 1. <b>What if i want to improve the code or add functionalities?</b>
