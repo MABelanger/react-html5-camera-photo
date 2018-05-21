@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LibCameraPhoto from 'jslib-html5-camera-photo';
+import LibCameraPhoto, { FACING_MODES, IMAGE_TYPES } from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
 import {getShowHideStyle} from './helpers';
 // import StopStartButton from '../StopStartButton';
@@ -9,6 +9,7 @@ import clickSound from './data/click-sound.base64.json';
 
 import './styles/camera.css';
 
+console.log('FACING_MODES', FACING_MODES);
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
@@ -81,9 +82,9 @@ class Camera extends React.Component {
     audio.play();
   }
 
-  takePhoto (sizeFactor) {
+  takePhoto (sizeFactor, imageType, imageCompression) {
     this.playClickAudio();
-    let dataUri = this.libCameraPhoto.getDataUri(sizeFactor);
+    let dataUri = this.libCameraPhoto.getDataUri(sizeFactor, imageType, imageCompression);
     this.props.onTakePhoto(dataUri);
 
     this.setState({
@@ -102,7 +103,11 @@ class Camera extends React.Component {
     return (
       <CircleButton
         isClicked={!this.state.isShowVideo}
-        onClick={() => this.takePhoto(this.props.sizeFactor)}
+        onClick={() => {
+          const {sizeFactor, imageType, imageCompression} = this.props;
+          console.log(sizeFactor, imageType, imageCompression);
+          this.takePhoto(sizeFactor, imageType, imageCompression);
+        }}
       />
     );
   }
@@ -154,6 +159,11 @@ class Camera extends React.Component {
   }
 }
 
+export {
+  FACING_MODES,
+  IMAGE_TYPES
+};
+
 export default Camera;
 
 Camera.propTypes = {
@@ -161,6 +171,8 @@ Camera.propTypes = {
   onCameraError: PropTypes.func,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
+  imageType: PropTypes.string,
+  imageCompression: PropTypes.number,
   isMaxResolution: PropTypes.bool,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
