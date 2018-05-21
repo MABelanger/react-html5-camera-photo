@@ -9,7 +9,6 @@ import clickSound from './data/click-sound.base64.json';
 
 import './styles/camera.css';
 
-console.log('FACING_MODES', FACING_MODES);
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
 */
@@ -105,7 +104,6 @@ class Camera extends React.Component {
         isClicked={!this.state.isShowVideo}
         onClick={() => {
           const {sizeFactor, imageType, imageCompression} = this.props;
-          console.log(sizeFactor, imageType, imageCompression);
           this.takePhoto(sizeFactor, imageType, imageCompression);
         }}
       />
