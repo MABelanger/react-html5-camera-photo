@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import LibCameraPhoto, { FACING_MODES, IMAGE_TYPES } from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
-import {getShowHideStyle} from './helpers';
+import {getShowHideStyle, getVideoStyles} from './helpers';
 // import StopStartButton from '../StopStartButton';
 import clickSound from './data/click-sound.base64.json';
 
@@ -81,9 +81,10 @@ class Camera extends React.Component {
     audio.play();
   }
 
-  takePhoto (sizeFactor, imageType, imageCompression) {
+  takePhoto (configDataUri) {
     this.playClickAudio();
-    let dataUri = this.libCameraPhoto.getDataUri(sizeFactor, imageType, imageCompression);
+
+    let dataUri = this.libCameraPhoto.getDataUri(configDataUri);
     this.props.onTakePhoto(dataUri);
 
     this.setState({
@@ -103,8 +104,14 @@ class Camera extends React.Component {
       <CircleButton
         isClicked={!this.state.isShowVideo}
         onClick={() => {
-          const {sizeFactor, imageType, imageCompression} = this.props;
-          this.takePhoto(sizeFactor, imageType, imageCompression);
+          const {sizeFactor, imageType, imageCompression, imageMirror} = this.props;
+          const configDataUri = {
+            sizeFactor,
+            imageType,
+            imageCompression,
+            imageMirror
+          };
+          this.takePhoto(configDataUri);
         }}
       />
     );
@@ -135,7 +142,9 @@ class Camera extends React.Component {
   // }
 
   render () {
-    let showHideVideoStyle = getShowHideStyle(this.state.isShowVideo);
+    // let showHideVideoStyle = getShowHideStyle(this.state.isShowVideo);
+
+    let videoStyles = getVideoStyles(this.state.isShowVideo, this.props.imageMirror);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
 
     return (
@@ -147,7 +156,7 @@ class Camera extends React.Component {
           src={this.state.dataUri}
         />
         <video
-          style = {showHideVideoStyle}
+          style = {videoStyles}
           ref={this.videoRef}
           autoPlay="true"
         />
@@ -171,6 +180,7 @@ Camera.propTypes = {
   idealResolution: PropTypes.object,
   imageType: PropTypes.string,
   imageCompression: PropTypes.number,
+  imageMirror: PropTypes.bool,
   isMaxResolution: PropTypes.bool,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
