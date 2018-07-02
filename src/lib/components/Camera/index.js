@@ -142,7 +142,6 @@ class Camera extends React.Component {
   // }
 
   render () {
-    // let showHideVideoStyle = getShowHideStyle(this.state.isShowVideo);
     const imageMirror = true;
     let videoStyles = getVideoStyles(this.state.isShowVideo, imageMirror);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
