@@ -185,3 +185,5 @@ Camera.propTypes = {
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func
 };
+
+Camera.defaultProps = { isImageMirror: true };
