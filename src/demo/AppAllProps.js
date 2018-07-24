@@ -31,7 +31,7 @@ class App extends Component {
           imageType = {IMAGE_TYPES.JPG}
           imageCompression = {0.97}
           isMaxResolution = {false}
-          imageMirror = {false}
+          isImageMirror = {false}
           sizeFactor = {1}
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
           onCameraStop = { () => { this.onCameraStop(); } }
