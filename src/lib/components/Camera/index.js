@@ -104,12 +104,12 @@ class Camera extends React.Component {
       <CircleButton
         isClicked={!this.state.isShowVideo}
         onClick={() => {
-          const {sizeFactor, imageType, imageCompression} = this.props;
+          const {sizeFactor, imageType, imageCompression, imageMirror} = this.props;
           const configDataUri = {
             sizeFactor,
             imageType,
             imageCompression,
-            imageMirror: true
+            imageMirror
           };
           this.takePhoto(configDataUri);
         }}
@@ -142,7 +142,7 @@ class Camera extends React.Component {
   // }
 
   render () {
-    const imageMirror = true;
+    const {imageMirror} = this.props;
     let videoStyles = getVideoStyles(this.state.isShowVideo, imageMirror);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
 
@@ -178,6 +178,7 @@ Camera.propTypes = {
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
   imageType: PropTypes.string,
+  imageMirror: PropTypes.bool,
   imageCompression: PropTypes.number,
   isMaxResolution: PropTypes.bool,
   sizeFactor: PropTypes.number,
