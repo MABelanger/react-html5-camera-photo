@@ -32,7 +32,11 @@ class App extends Component {
         <button onClick={(e) => {
           // dynamic properties is : idealFacingMode, idealResolution, isMaxResolution
           this.setState({idealFacingMode: FACING_MODES.USER});
-        }}> FACING_MODE.USER </button>
+        }}> FACING_MODES.USER </button>
+        <button onClick={(e) => {
+          // dynamic properties is : idealFacingMode, idealResolution, isMaxResolution
+          this.setState({idealFacingMode: FACING_MODES.ENVIRONMENT});
+        }}> FACING_MODES.ENVIRONMENT </button>
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
           onCameraError = { (error) => { this.onCameraError(error); } }
