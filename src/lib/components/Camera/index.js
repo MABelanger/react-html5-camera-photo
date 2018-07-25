@@ -109,7 +109,7 @@ class Camera extends React.Component {
             sizeFactor,
             imageType,
             imageCompression,
-            imageMirror: isImageMirror
+            isImageMirror
           };
           this.takePhoto(configDataUri);
         }}
