@@ -34,6 +34,24 @@ class Camera extends React.Component {
     }
   }
 
+  // eslint-disable-next-line
+  UNSAFE_componentWillReceiveProps (nextProps) {
+    const {idealFacingMode, idealResolution, isMaxResolution} = nextProps;
+
+    if (this.props.idealFacingMode !== idealFacingMode ||
+        this.props.idealResolution !== idealResolution ||
+        this.props.isMaxResolution !== isMaxResolution) {
+      this.stopCamera()
+        .then(() => {
+          if (isMaxResolution) {
+            this.startCameraMaxResolution(idealFacingMode);
+          } else {
+            this.startCameraIdealResolution(idealFacingMode, idealResolution);
+          }
+        });
+    }
+  }
+
   componentWillUnmount () {
     this.stopCamera();
   }
@@ -64,16 +82,20 @@ class Camera extends React.Component {
   }
 
   stopCamera () {
-    this.libCameraPhoto.stopCamera()
-      .then(() => {
-        this.setState({isCameraStarted: false});
-        if (this.props.onCameraStop) {
-          this.props.onCameraStop();
-        }
-      })
-      .catch((error) => {
-        this.props.onCameraError(error);
-      });
+    return new Promise((resolve, reject) => {
+      this.libCameraPhoto.stopCamera()
+        .then(() => {
+          this.setState({isCameraStarted: false});
+          if (this.props.onCameraStop) {
+            this.props.onCameraStop();
+          }
+          resolve();
+        })
+        .catch((error) => {
+          this.props.onCameraError(error);
+          reject(error);
+        });
+    });
   }
 
   playClickAudio () {
@@ -150,12 +172,12 @@ class Camera extends React.Component {
       <div className="react-html5-camera-photo">
         {this.renderWhiteFlash(!this.state.isShowVideo)}
         <img
-          style = {showHideImgStyle}
+          style={showHideImgStyle}
           alt="camera"
           src={this.state.dataUri}
         />
         <video
-          style = {videoStyles}
+          style={videoStyles}
           ref={this.videoRef}
           autoPlay="true"
         />
