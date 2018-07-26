@@ -62,12 +62,16 @@ Properties | Type | Description
 **onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
 **onTakePhoto(dataUri):** (required) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
-**idealFacingMode** (Optional) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
-**idealResolution** (Optional) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
-**isMaxResolution** (Optional) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
-**sizeFactor** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
-**imageType**: (Optional) | String | String used to get the desired image type between `jpg` or `png`. to specify the imageType use the constant IMAGE_TYPES, for example to specify jpg format use IMAGE_TYPES.JPG. The default imageType is `png`. Use `IMAGE_TYPES` constant to get the right image type Example:. IMAGE_TYPES.JPG or IMAGE_TYPES.PNG
-**imageCompression**: (Optional) | Number | Number used to get the desired compression when `jpg` is selected. choose a compression between `[0, 1]`, 1 is maximum, 0 is minimum. The default value imageCompression is `0.92`.
+**idealFacingMode:** (Optional) (Dynamic) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
+**idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
+**isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
+**isImageMirror:** (Optional) | Boolean | If is true, the camera image will be mirror, the default is true.
+**sizeFactor:** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
+**imageType:**: (Optional) | String | String used to get the desired image type between `jpg` or `png`. to specify the imageType use the constant IMAGE_TYPES, for example to specify jpg format use IMAGE_TYPES.JPG. The default imageType is `png`. Use `IMAGE_TYPES` constant to get the right image type Example:. IMAGE_TYPES.JPG or IMAGE_TYPES.PNG
+**imageCompression:**: (Optional) | Number | Number used to get the desired compression when `jpg` is selected. choose a compression between `[0, 1]`, 1 is maximum, 0 is minimum. The default value imageCompression is `0.92`.
+
+
+**Dynamic** : If the prop is dynamic, it mean that you can change that prop dynamically without umount the component (removing it). You can do it by a setState() inside the parent component. Checkout the demo example: [./src/demo/AppWithDynamicProperties.js](./src/demo/AppWithDynamicProperties.js)
 
 ## Example with all props used
 ```js
@@ -104,6 +108,7 @@ class App extends Component {
           imageType = {IMAGE_TYPES.JPG}
           imageCompression = {0.97}
           isMaxResolution = {false}
+          isImageMirror = {false}
           sizeFactor = {1}
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
           onCameraStop = { () => { this.onCameraStop(); } }
