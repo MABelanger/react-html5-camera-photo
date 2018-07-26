@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash/isEqual';
 
 // for debugging with git cloned jslib-html5-camera-photo
 // clone jslib-html5-camera-photo inside /src and replace
@@ -42,7 +43,7 @@ class Camera extends React.Component {
     const {idealFacingMode, idealResolution, isMaxResolution} = nextProps;
 
     if (this.props.idealFacingMode !== idealFacingMode ||
-        this.props.idealResolution !== idealResolution ||
+        !isEqual(this.props.idealResolution, idealResolution) ||
         this.props.isMaxResolution !== isMaxResolution) {
       this.stopCamera()
         .then(() => {})
