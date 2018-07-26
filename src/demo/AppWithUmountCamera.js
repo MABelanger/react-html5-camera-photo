@@ -11,7 +11,7 @@ class App extends Component {
     // umount camera after 10 seconds
     setTimeout(() => {
       this.setState({isRemoveCamera: true});
-    }, 10000);
+    }, 2000);
   }
 
   onTakePhoto (dataUri) {

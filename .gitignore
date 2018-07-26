@@ -24,3 +24,6 @@ yarn-error.log*
 # Internal documentations
 /_doc
 /_tmp
+
+# External libs
+src/jslib-html5-camera-photo/

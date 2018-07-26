@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// for debugging with git cloned jslib-html5-camera-photo
+// clone jslib-html5-camera-photo inside /src and replace
+// from 'jslib-html5-camera-photo' -> from '../../../jslib-html5-camera-photo/src/lib';
 import LibCameraPhoto, { FACING_MODES, IMAGE_TYPES } from 'jslib-html5-camera-photo';
 import CircleButton from '../CircleButton';
 import {getShowHideStyle, getVideoStyles} from './helpers';
@@ -42,6 +45,10 @@ class Camera extends React.Component {
         this.props.idealResolution !== idealResolution ||
         this.props.isMaxResolution !== isMaxResolution) {
       this.stopCamera()
+        .then(() => {})
+        .catch((error) => {
+          console.info('react-html5-camera-photo info:', error.message);
+        })
         .then(() => {
           if (isMaxResolution) {
             this.startCameraMaxResolution(idealFacingMode);
@@ -53,19 +60,24 @@ class Camera extends React.Component {
   }
 
   componentWillUnmount () {
-    this.stopCamera();
+    this.stopCamera()
+      .catch((error) => {
+        console.info('react-html5-camera-photo info:', error.message);
+      });
   }
 
   startCamera (promiseStartCamera) {
     promiseStartCamera
       .then((stream) => {
         this.setState({isCameraStarted: true});
-        if (this.props.onCameraStart) {
+        if (typeof this.props.onCameraStart === 'function') {
           this.props.onCameraStart(stream);
         }
       })
       .catch((error) => {
-        this.props.onCameraError(error);
+        if (typeof this.props.onCameraError === 'function') {
+          this.props.onCameraError(error);
+        }
       });
   }
 
@@ -86,13 +98,15 @@ class Camera extends React.Component {
       this.libCameraPhoto.stopCamera()
         .then(() => {
           this.setState({isCameraStarted: false});
-          if (this.props.onCameraStop) {
+          if (typeof this.props.onCameraStop === 'function') {
             this.props.onCameraStop();
           }
           resolve();
         })
         .catch((error) => {
-          this.props.onCameraError(error);
+          if (typeof this.props.onCameraError === 'function') {
+            this.props.onCameraError(error);
+          }
           reject(error);
         });
     });
