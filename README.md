@@ -59,8 +59,9 @@ export default App;
 ### PropTypes
 Properties | Type | Description
 --- | --- | ---
-**onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
+**onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
+**onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
 **onTakePhoto(dataUri):** (required) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
 **idealFacingMode:** (Optional) (Dynamic) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
 **idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
