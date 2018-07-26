@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from '../lib';
 import './reset.css';
 
+/*
+ * dynamic properties is : idealFacingMode, idealResolution, isMaxResolution
+ * In this example we set the idealFacingMode
+ */
 class App extends Component {
   constructor (props, context) {
     super(props, context);
@@ -29,14 +33,14 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <button onClick={(e) => {
-          // dynamic properties is : idealFacingMode, idealResolution, isMaxResolution
+        <button onClick={ (e) => {
           this.setState({idealFacingMode: FACING_MODES.USER});
         }}> FACING_MODES.USER </button>
-        <button onClick={(e) => {
-          // dynamic properties is : idealFacingMode, idealResolution, isMaxResolution
+
+        <button onClick={ (e) => {
           this.setState({idealFacingMode: FACING_MODES.ENVIRONMENT});
         }}> FACING_MODES.ENVIRONMENT </button>
+
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
           onCameraError = { (error) => { this.onCameraError(error); } }
