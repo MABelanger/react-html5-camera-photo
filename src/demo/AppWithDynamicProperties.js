@@ -14,10 +14,6 @@ class App extends Component {
     };
     this.renderButtons = this.renderButtons.bind(this);
   }
-  onTakePhoto (dataUri) {
-    // Do stuff with the photo...
-    console.log('takePhoto');
-  }
 
   renderButtons () {
     return (
@@ -38,8 +34,8 @@ class App extends Component {
       <div className="App">
         { this.renderButtons() }
         <Camera
-          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
           idealFacingMode = {this.state.idealFacingMode}
+          onTakePhoto = { () => {} }
         />
       </div>
     );
