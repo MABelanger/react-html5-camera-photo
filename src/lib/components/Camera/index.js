@@ -26,6 +26,7 @@ class Camera extends React.Component {
       isShowVideo: true,
       isCameraStarted: false
     };
+    this.handleTakePhoto = this.handleTakePhoto.bind(this);
   }
 
   componentDidMount () {
@@ -38,33 +39,42 @@ class Camera extends React.Component {
     }
   }
 
+  isDynamicPropsUpdate (props, nextProps) {
+    return (
+      !isEqual(props.idealFacingMode, nextProps.idealFacingMode) ||
+      !isEqual(props.idealResolution, nextProps.idealResolution) ||
+      !isEqual(props.isMaxResolution, nextProps.isMaxResolution)
+    );
+  }
+
+  restartCamera (idealFacingMode, idealResolution, isMaxResolution) {
+    this.stopCamera()
+      .then()
+      .catch((error) => { this.printCameraInfo(error.message); })
+      .then(() => {
+        if (isMaxResolution) {
+          this.startCameraMaxResolution(idealFacingMode);
+        } else {
+          this.startCameraIdealResolution(idealFacingMode, idealResolution);
+        }
+      });
+  }
+
   // eslint-disable-next-line
   UNSAFE_componentWillReceiveProps (nextProps) {
-    const {idealFacingMode, idealResolution, isMaxResolution} = nextProps;
-
-    if (this.props.idealFacingMode !== idealFacingMode ||
-        !isEqual(this.props.idealResolution, idealResolution) ||
-        this.props.isMaxResolution !== isMaxResolution) {
-      this.stopCamera()
-        .then(() => {})
-        .catch((error) => {
-          console.info('react-html5-camera-photo info:', error.message);
-        })
-        .then(() => {
-          if (isMaxResolution) {
-            this.startCameraMaxResolution(idealFacingMode);
-          } else {
-            this.startCameraIdealResolution(idealFacingMode, idealResolution);
-          }
-        });
+    if (this.isDynamicPropsUpdate(this.props, nextProps)) {
+      const {idealFacingMode, idealResolution, isMaxResolution} = nextProps;
+      this.restartCamera(idealFacingMode, idealResolution, isMaxResolution);
     }
   }
 
   componentWillUnmount () {
     this.stopCamera()
-      .catch((error) => {
-        console.info('react-html5-camera-photo info:', error.message);
-      });
+      .catch((error) => { this.printCameraInfo(error.message); });
+  }
+
+  printCameraInfo (info) {
+    console.info('react-html5-camera-photo info:', info);
   }
 
   startCamera (promiseStartCamera) {
@@ -118,7 +128,10 @@ class Camera extends React.Component {
     audio.play();
   }
 
-  takePhoto (configDataUri) {
+  handleTakePhoto () {
+    const {sizeFactor, imageType, imageCompression, isImageMirror} = this.props;
+    const configDataUri = { sizeFactor, imageType, imageCompression, isImageMirror };
+
     this.playClickAudio();
 
     let dataUri = this.libCameraPhoto.getDataUri(configDataUri);
@@ -136,24 +149,6 @@ class Camera extends React.Component {
     }, 900);
   }
 
-  renderCircleButton (isVisible) {
-    return (
-      <CircleButton
-        isClicked={!this.state.isShowVideo}
-        onClick={() => {
-          const {sizeFactor, imageType, imageCompression, isImageMirror} = this.props;
-          const configDataUri = {
-            sizeFactor,
-            imageType,
-            imageCompression,
-            isImageMirror
-          };
-          this.takePhoto(configDataUri);
-        }}
-      />
-    );
-  }
-
   renderWhiteFlash (isShowWhiteFlash) {
     const flashDoTransition = isShowWhiteFlash ? 'do-transition' : '';
     const flashClasses = `${flashDoTransition} normal`;
@@ -162,21 +157,6 @@ class Camera extends React.Component {
       </div>
     );
   }
-
-  // renderStopStartButton () {
-  //   return (
-  //     <StopStartButton
-  //       isOpen={this.state.isCameraStarted}
-  //       onClickStart={() => {
-  //         this.startCamera(idealFacingMode, idealResolution);
-  //       }}
-  //
-  //       onClickStop={() => {
-  //         this.stopCamera();
-  //       }}
-  //     />
-  //   );
-  // }
 
   render () {
     const {isImageMirror} = this.props;
@@ -197,7 +177,10 @@ class Camera extends React.Component {
           autoPlay="true"
           playsInline
         />
-        {this.renderCircleButton()}
+        <CircleButton
+          isClicked={!this.state.isShowVideo}
+          onClick={this.handleTakePhoto}
+        />
       </div>
     );
   }
