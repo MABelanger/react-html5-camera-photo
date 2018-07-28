@@ -1,5 +1,5 @@
 #container-circles {
-  position: relative;
+  position: absolute;
   left: 50%;
   bottom: 90px;
 }

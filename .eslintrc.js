@@ -15,6 +15,7 @@ module.exports = {
         "react",
     ],
     "rules": {
-        "semi": [2, "always"]
+        "semi": [2, "always"],
+        // "no-unused-vars": ["off", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
     }
 };
