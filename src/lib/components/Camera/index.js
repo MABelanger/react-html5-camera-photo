@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEqual } from 'lodash/isEqual';
 
 // for debugging with git cloned jslib-html5-camera-photo
 // clone jslib-html5-camera-photo inside /src and replace
 // from 'jslib-html5-camera-photo' -> from '../../../jslib-html5-camera-photo/src/lib';
 import LibCameraPhoto, { FACING_MODES, IMAGE_TYPES } from 'jslib-html5-camera-photo';
-import CircleButton from '../CircleButton';
-import {getShowHideStyle, getVideoStyles} from './helpers';
-// import StopStartButton from '../StopStartButton';
-import clickSound from './data/click-sound.base64.json';
 
+import CircleButton from '../CircleButton';
+import WhiteFlash from '../WhiteFlash';
+
+import {getShowHideStyle, getVideoStyles, isDynamicPropsUpdate, playClickAudio, printCameraInfo} from './helpers';
 import './styles/camera.css';
 
 /*
@@ -39,30 +38,9 @@ class Camera extends React.Component {
     }
   }
 
-  isDynamicPropsUpdate (props, nextProps) {
-    return (
-      !isEqual(props.idealFacingMode, nextProps.idealFacingMode) ||
-      !isEqual(props.idealResolution, nextProps.idealResolution) ||
-      !isEqual(props.isMaxResolution, nextProps.isMaxResolution)
-    );
-  }
-
-  restartCamera (idealFacingMode, idealResolution, isMaxResolution) {
-    this.stopCamera()
-      .then()
-      .catch((error) => { this.printCameraInfo(error.message); })
-      .then(() => {
-        if (isMaxResolution) {
-          this.startCameraMaxResolution(idealFacingMode);
-        } else {
-          this.startCameraIdealResolution(idealFacingMode, idealResolution);
-        }
-      });
-  }
-
   // eslint-disable-next-line
   UNSAFE_componentWillReceiveProps (nextProps) {
-    if (this.isDynamicPropsUpdate(this.props, nextProps)) {
+    if (isDynamicPropsUpdate(this.props, nextProps)) {
       const {idealFacingMode, idealResolution, isMaxResolution} = nextProps;
       this.restartCamera(idealFacingMode, idealResolution, isMaxResolution);
     }
@@ -70,11 +48,20 @@ class Camera extends React.Component {
 
   componentWillUnmount () {
     this.stopCamera()
-      .catch((error) => { this.printCameraInfo(error.message); });
+      .catch((error) => { printCameraInfo(error.message); });
   }
 
-  printCameraInfo (info) {
-    console.info('react-html5-camera-photo info:', info);
+  restartCamera (idealFacingMode, idealResolution, isMaxResolution) {
+    this.stopCamera()
+      .then()
+      .catch((error) => { printCameraInfo(error.message); })
+      .then(() => {
+        if (isMaxResolution) {
+          this.startCameraMaxResolution(idealFacingMode);
+        } else {
+          this.startCameraIdealResolution(idealFacingMode, idealResolution);
+        }
+      });
   }
 
   startCamera (promiseStartCamera) {
@@ -123,16 +110,11 @@ class Camera extends React.Component {
     });
   }
 
-  playClickAudio () {
-    let audio = new Audio('data:audio/mp3;base64,' + clickSound.base64);
-    audio.play();
-  }
-
   handleTakePhoto () {
     const {sizeFactor, imageType, imageCompression, isImageMirror} = this.props;
     const configDataUri = { sizeFactor, imageType, imageCompression, isImageMirror };
 
-    this.playClickAudio();
+    playClickAudio();
 
     let dataUri = this.libCameraPhoto.getDataUri(configDataUri);
     this.props.onTakePhoto(dataUri);
@@ -149,15 +131,6 @@ class Camera extends React.Component {
     }, 900);
   }
 
-  renderWhiteFlash (isShowWhiteFlash) {
-    const flashDoTransition = isShowWhiteFlash ? 'do-transition' : '';
-    const flashClasses = `${flashDoTransition} normal`;
-    return (
-      <div className={flashClasses}>
-      </div>
-    );
-  }
-
   render () {
     const {isImageMirror} = this.props;
     let videoStyles = getVideoStyles(this.state.isShowVideo, isImageMirror);
@@ -165,7 +138,9 @@ class Camera extends React.Component {
 
     return (
       <div className="react-html5-camera-photo">
-        {this.renderWhiteFlash(!this.state.isShowVideo)}
+        <WhiteFlash
+          isShowWhiteFlash={!this.state.isShowVideo}
+        />
         <img
           style={showHideImgStyle}
           alt="camera"

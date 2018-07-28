@@ -1,3 +1,7 @@
+import { isEqual } from 'lodash/isEqual';
+
+import clickSound from './data/click-sound.base64.json';
+
 export function getShowHideStyle (isDisplay) {
   const displayStyle = isDisplay
     ? {display: 'inline-block'}
@@ -19,4 +23,21 @@ export function getVideoStyles (isDisplay, imageMirror) {
     ..._getMirrorCameraStyle(imageMirror),
     ...getShowHideStyle(isDisplay)
   };
+}
+
+export function isDynamicPropsUpdate (props, nextProps) {
+  return (
+    !isEqual(props.idealFacingMode, nextProps.idealFacingMode) ||
+    !isEqual(props.idealResolution, nextProps.idealResolution) ||
+    !isEqual(props.isMaxResolution, nextProps.isMaxResolution)
+  );
+}
+
+export function playClickAudio () {
+  let audio = new Audio('data:audio/mp3;base64,' + clickSound.base64);
+  audio.play();
+}
+
+export function printCameraInfo (info) {
+  console.info('react-html5-camera-photo info:', info);
 }

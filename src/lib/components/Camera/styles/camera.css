@@ -16,16 +16,3 @@
     width: 100%;
   }
 }
-
-.react-html5-camera-photo > .normal {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  opacity :1;
-  transition:opacity .9s ease-out;
-}
-
-.react-html5-camera-photo > .do-transition {
-  opacity: 0;
-  background: white;
-}
