@@ -1,2 +1,2 @@
-- add message "white text" when camera is not allow.
+- Add "white text" message when camera is not allowed.
 - Use styled-components instead of css files.

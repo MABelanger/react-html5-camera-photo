@@ -11,8 +11,15 @@
   width: 768px;
 }
 
+.react-html5-camera-photo > .error {
+  width: 768px;
+}
+
 @media(max-width:768px){
-  .react-html5-camera-photo > video, .react-html5-camera-photo > img{
+  .react-html5-camera-photo > video, .react-html5-camera-photo > img {
+    width: 100%;
+  }
+  .react-html5-camera-photo > .error {
     width: 100%;
   }
 }

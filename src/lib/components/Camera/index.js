@@ -8,8 +8,13 @@ import LibCameraPhoto, { FACING_MODES, IMAGE_TYPES } from 'jslib-html5-camera-ph
 
 import CircleButton from '../CircleButton';
 import WhiteFlash from '../WhiteFlash';
+// import DisplayError from '../DisplayError';
 
-import {getShowHideStyle, getVideoStyles, isDynamicPropsUpdate, playClickAudio, printCameraInfo} from './helpers';
+import {getShowHideStyle,
+  getVideoStyles,
+  isDynamicPropsUpdate,
+  playClickAudio,
+  printCameraInfo} from './helpers';
 import './styles/camera.css';
 
 /*
@@ -23,7 +28,8 @@ class Camera extends React.Component {
     this.state = {
       dataUri: '',
       isShowVideo: true,
-      isCameraStarted: false
+      isCameraStarted: false,
+      startCameraErrorMsg: ''
     };
     this.handleTakePhoto = this.handleTakePhoto.bind(this);
   }
@@ -48,13 +54,17 @@ class Camera extends React.Component {
 
   componentWillUnmount () {
     this.stopCamera()
-      .catch((error) => { printCameraInfo(error.message); });
+      .catch((error) => {
+        printCameraInfo(error.message);
+      });
   }
 
   restartCamera (idealFacingMode, idealResolution, isMaxResolution) {
     this.stopCamera()
       .then()
-      .catch((error) => { printCameraInfo(error.message); })
+      .catch((error) => {
+        printCameraInfo(error.message);
+      })
       .then(() => {
         if (isMaxResolution) {
           this.startCameraMaxResolution(idealFacingMode);
@@ -67,12 +77,16 @@ class Camera extends React.Component {
   startCamera (promiseStartCamera) {
     promiseStartCamera
       .then((stream) => {
-        this.setState({isCameraStarted: true});
+        this.setState({
+          isCameraStarted: true,
+          startCameraErrorMsg: ''
+        });
         if (typeof this.props.onCameraStart === 'function') {
           this.props.onCameraStart(stream);
         }
       })
       .catch((error) => {
+        this.setState({startCameraErrorMsg: error.message});
         if (typeof this.props.onCameraError === 'function') {
           this.props.onCameraError(error);
         }
@@ -95,7 +109,7 @@ class Camera extends React.Component {
     return new Promise((resolve, reject) => {
       this.libCameraPhoto.stopCamera()
         .then(() => {
-          this.setState({isCameraStarted: false});
+          this.setState({ isCameraStarted: false });
           if (typeof this.props.onCameraStop === 'function') {
             this.props.onCameraStop();
           }
@@ -138,6 +152,7 @@ class Camera extends React.Component {
 
     return (
       <div className="react-html5-camera-photo">
+
         <WhiteFlash
           isShowWhiteFlash={!this.state.isShowVideo}
         />
@@ -175,6 +190,7 @@ Camera.propTypes = {
   idealResolution: PropTypes.object,
   imageType: PropTypes.string,
   isImageMirror: PropTypes.bool,
+  isDisplayStartCameraError: PropTypes.bool,
   imageCompression: PropTypes.number,
   isMaxResolution: PropTypes.bool,
   sizeFactor: PropTypes.number,
@@ -182,4 +198,7 @@ Camera.propTypes = {
   onCameraStop: PropTypes.func
 };
 
-Camera.defaultProps = { isImageMirror: true };
+Camera.defaultProps = {
+  isImageMirror: true,
+  isDisplayStartCameraError: true
+};
