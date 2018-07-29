@@ -146,14 +146,15 @@ class Camera extends React.Component {
   }
 
   render () {
-    const {isImageMirror} = this.props;
+    const {isImageMirror, isDisplayStartCameraError} = this.props;
+
     let videoStyles = getVideoStyles(this.state.isShowVideo, isImageMirror);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
 
     return (
       <div className="react-html5-camera-photo">
         <DisplayError
-          isDisplayError={this.props.isDisplayStartCameraError}
+          isDisplayError={isDisplayStartCameraError}
           errorMsg={this.state.startCameraErrorMsg}
         />
         <WhiteFlash
