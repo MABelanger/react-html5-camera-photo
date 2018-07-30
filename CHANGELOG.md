@@ -1,5 +1,9 @@
 # Change Log
 
+### Bug Fixes
+#### 1.2.3-beta.0
+- Fix css for error message inside <DisplayError> component
+
 ### Features
 #### 1.2.2-beta.0
 - Add error message if camera fail to start between h1 tag. see bool prop **isDisplayStartCameraError**
