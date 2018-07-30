@@ -19,7 +19,7 @@
   .react-html5-camera-photo > video, .react-html5-camera-photo > img {
     width: 100%;
   }
-  .react-html5-camera-photo > .error {
+  .react-html5-camera-photo > .display-error {
     width: 100%;
   }
 }
