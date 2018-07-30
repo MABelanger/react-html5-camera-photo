@@ -6,13 +6,14 @@ import './styles/displayError.css';
 function isShowComponent (isDisplayError, errorMsg) {
   return (isDisplayError && errorMsg && errorMsg.length > 0);
 }
-export const DisplayError = ({ isDisplayError, errorMsg }) => {
+export const DisplayError = ({ isDisplayError, errorMsg, cssClass }) => {
   if (!isShowComponent(isDisplayError, errorMsg)) {
     return null;
   }
 
+  console.log('cssClass', cssClass);
   return (
-    <div id="display-error" className="display-error">
+    <div className={cssClass} id="display-error">
       <h1>Camera error: {errorMsg}</h1>
     </div>
   );
@@ -20,7 +21,8 @@ export const DisplayError = ({ isDisplayError, errorMsg }) => {
 
 DisplayError.propTypes = {
   isDisplayError: PropTypes.bool,
-  errorMsg: PropTypes.string
+  errorMsg: PropTypes.string,
+  cssClass: PropTypes.string
 };
 
 export default DisplayError;

@@ -154,6 +154,7 @@ class Camera extends React.Component {
     return (
       <div className="react-html5-camera-photo">
         <DisplayError
+          cssClass={'display-error'}
           isDisplayError={isDisplayStartCameraError}
           errorMsg={this.state.startCameraErrorMsg}
         />

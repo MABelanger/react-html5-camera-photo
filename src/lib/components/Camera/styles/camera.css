@@ -13,6 +13,7 @@
 
 .react-html5-camera-photo > .display-error {
   width: 768px;
+  margin: 0 auto;
 }
 
 @media(max-width:768px){
