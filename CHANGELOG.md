@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 #### 1.2.3-beta.0
-- Fix css for error message inside <DisplayError> component
+- Fix css for error message inside DisplayError component
 
 ### Features
 #### 1.2.2-beta.0
