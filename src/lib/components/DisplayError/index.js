@@ -12,7 +12,7 @@ export const DisplayError = ({ isDisplayError, errorMsg }) => {
   }
 
   return (
-    <div id="display-error" className="error">
+    <div id="display-error" className="display-error">
       <h1>Camera error: {errorMsg}</h1>
     </div>
   );
