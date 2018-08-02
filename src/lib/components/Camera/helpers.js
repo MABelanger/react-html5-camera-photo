@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash/isEqual';
+import isEqual from 'lodash/isEqual';
 
 import clickSound from './data/click-sound.base64.json';
 

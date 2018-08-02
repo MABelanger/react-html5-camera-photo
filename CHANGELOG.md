@@ -1,6 +1,10 @@
 # Change Log
 
 ### Bug Fixes
+#### 1.2.4-beta.0
+- Fix TypeError: Object(...) is not a function when componentWillReceiveProps() is called.
+
+### Bug Fixes
 #### 1.2.3-beta.0
 - Fix css for error message inside DisplayError component
 

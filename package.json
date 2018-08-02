@@ -1,6 +1,6 @@
 {
   "name": "react-html5-camera-photo",
-  "version": "1.2.3-beta.0",
+  "version": "1.2.4-beta.0",
   "description": "React.js HTML5 Camera Photo",
   "main": "build/index.js",
   "scripts": {
@@ -87,8 +87,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "peerDependencies": {
-    "react": ">=0.14",
-    "react-dom": ">=0.14"
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

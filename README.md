@@ -4,7 +4,8 @@ The first objective of this package comes from the need to get the same look and
 For those who want to build with their own css and need an abstraction of `getUserMedia()` take a look of [jslib-html5-camera-photo](https://github.com/mabelanger/jslib-html5-camera-photo) with react.
 
 ## Requirement
-React
+- react: >=16.0.0
+- react-dom: >=16.0.0
 
 ## LiveDemo
 [Demo of react-html5-camera-photo](https://mabelanger.github.io/react-html5-camera-photo/)
