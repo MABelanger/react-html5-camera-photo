@@ -1,5 +1,9 @@
 # Change Log
 
+### Other
+#### 1.2.5-beta.0
+- No need lodash and save 30k
+
 ### Bug Fixes
 #### 1.2.4-beta.0
 - Fix TypeError: Object(...) is not a function when componentWillReceiveProps() is called. Introduced in 1.1.2-beta.0

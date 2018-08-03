@@ -1,5 +1,3 @@
-import isEqual from 'lodash/isEqual';
-
 import clickSound from './data/click-sound.base64.json';
 
 export function getShowHideStyle (isDisplay) {
@@ -27,9 +25,9 @@ export function getVideoStyles (isDisplay, imageMirror) {
 
 export function isDynamicPropsUpdate (props, nextProps) {
   return (
-    !isEqual(props.idealFacingMode, nextProps.idealFacingMode) ||
-    !isEqual(props.idealResolution, nextProps.idealResolution) ||
-    !isEqual(props.isMaxResolution, nextProps.isMaxResolution)
+    (props.idealFacingMode !== nextProps.idealFacingMode) ||
+    (props.idealResolution !== nextProps.idealResolution) ||
+    (props.isMaxResolution !== nextProps.isMaxResolution)
   );
 }
 
