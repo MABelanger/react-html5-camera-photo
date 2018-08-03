@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 #### 1.2.4-beta.0
-- Fix TypeError: Object(...) is not a function when componentWillReceiveProps() is called.
+- Fix TypeError: Object(...) is not a function when componentWillReceiveProps() is called. Introduced in 1.1.2-beta.0
 
 ### Bug Fixes
 #### 1.2.3-beta.0
