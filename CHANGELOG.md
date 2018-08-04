@@ -1,7 +1,7 @@
 # Change Log
 
 ### Bug Fixes
-#### 1.2.6-beta.0
+#### 1.2.7-beta.0
 - Fix Invalid constraint on safari when default value is used.
 
 ### Other
