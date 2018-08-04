@@ -1,5 +1,9 @@
 # Change Log
 
+### Bug Fixes
+#### 1.2.6-beta.0
+- Fix Invalid constraint on safari when default value is used.
+
 ### Other
 #### 1.2.5-beta.0
 - No need lodash and save 30k

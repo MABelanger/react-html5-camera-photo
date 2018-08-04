@@ -4212,9 +4212,9 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
-jslib-html5-camera-photo@^3.0.0-beta.0:
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/jslib-html5-camera-photo/-/jslib-html5-camera-photo-3.0.0-beta.0.tgz#3d65730da574cddd12a2862e9399e5cd30265458"
+jslib-html5-camera-photo@^3.0.1-beta.0:
+  version "3.0.1-beta.0"
+  resolved "https://registry.yarnpkg.com/jslib-html5-camera-photo/-/jslib-html5-camera-photo-3.0.1-beta.0.tgz#6f744ba7f6fb5ec0e4111fc6dab15ff49c1e3211"
 
 json-loader@^0.5.4:
   version "0.5.7"
