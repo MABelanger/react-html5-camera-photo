@@ -53,7 +53,8 @@ class Camera extends React.Component {
   }
 
   componentWillUnmount () {
-    this.stopCamera()
+    const isComponentWillUnmount = true;
+    this.stopCamera(isComponentWillUnmount)
       .catch((error) => {
         printCameraInfo(error.message);
       });
@@ -105,11 +106,13 @@ class Camera extends React.Component {
     this.startCamera(promiseStartCamera);
   }
 
-  stopCamera () {
+  stopCamera (isComponentWillUnmount = false) {
     return new Promise((resolve, reject) => {
       this.libCameraPhoto.stopCamera()
         .then(() => {
-          this.setState({ isCameraStarted: false });
+          if (!isComponentWillUnmount) {
+            this.setState({ isCameraStarted: false });
+          }
           if (typeof this.props.onCameraStop === 'function') {
             this.props.onCameraStop();
           }
