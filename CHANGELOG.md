@@ -2,11 +2,11 @@
 
 ### Bug Fixes
 #### 1.2.8-beta.0
-- Fix Can't call setState on an unmounted component.
+- Fix Error: `Can't call setState on an unmounted component.`
 
 ### Bug Fixes
 #### 1.2.7-beta.0
-- Fix Invalid constraint on safari when default value is used.
+- Fix Error: `Invalid constraint on safari when default value is used.`
 
 ### Other
 #### 1.2.5-beta.0
