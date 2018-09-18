@@ -172,7 +172,7 @@ class Camera extends React.Component {
         <video
           style={videoStyles}
           ref={this.videoRef}
-          autoPlay="true"
+          autoPlay={true}
           playsInline
         />
         <CircleButton
