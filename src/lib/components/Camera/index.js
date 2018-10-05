@@ -53,6 +53,7 @@ class Camera extends React.Component {
   }
 
   componentWillUnmount () {
+    this.showVideoTimeout && clearInterval(this.showVideoTimeout);
     const isComponentWillUnmount = true;
     this.stopCamera(isComponentWillUnmount)
       .catch((error) => {
@@ -141,7 +142,8 @@ class Camera extends React.Component {
       isShowVideo: false
     });
 
-    setTimeout(() => {
+    this.showVideoTimeout && clearInterval(this.showVideoTimeout);
+    this.showVideoTimeout = setTimeout(() => {
       this.setState({
         isShowVideo: true
       });
