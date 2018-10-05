@@ -7,7 +7,7 @@ For those who want to build with their own css and need an abstraction of `getUs
 - react: >=16.0.0
 - react-dom: >=16.0.0
 
-## iOS11 WebRTC issue with webkit (chrome & firefox)
+## iOS >=11 WebRTC issue with webkit (chrome & firefox)
 Apple restricts WebRTC to **Safari only** so it mean that you can't use the `getUserMedia()` with Firefox and Chrome. So `getUserMedia()` is not supported yet, for "security reasons". See [Stackoverflow](https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc)
 
 
