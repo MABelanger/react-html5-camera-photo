@@ -7,6 +7,12 @@ For those who want to build with their own css and need an abstraction of `getUs
 - react: >=16.0.0
 - react-dom: >=16.0.0
 
+## iOS11 WebRTC issue with webkit (chrome, firefox)
+Apple restricts WebRTC to Safari only so it mean that you can't use the `getUserMedia()` used by the camera with other broser than Safarie like Chrome and Firefox
+
+So `getUserMedia()` is not supported yet, for "security reasons". It most probably won't be available before the next major OS release. [ref stackoverflow question](https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc)
+
+
 ## LiveDemo
 [Demo of react-html5-camera-photo](https://mabelanger.github.io/react-html5-camera-photo/)
 
