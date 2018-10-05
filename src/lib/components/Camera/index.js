@@ -24,6 +24,7 @@ class Camera extends React.Component {
   constructor (props, context) {
     super(props, context);
     this.libCameraPhoto = null;
+    this.showVideoTimeoutId = null;
     this.videoRef = React.createRef();
     this.state = {
       dataUri: '',
@@ -32,6 +33,7 @@ class Camera extends React.Component {
       startCameraErrorMsg: ''
     };
     this.handleTakePhoto = this.handleTakePhoto.bind(this);
+    this.clearShowVideoTimeout = this.clearShowVideoTimeout.bind(this);
   }
 
   componentDidMount () {
@@ -53,11 +55,18 @@ class Camera extends React.Component {
   }
 
   componentWillUnmount () {
+    this.clearShowVideoTimeout();
     const isComponentWillUnmount = true;
     this.stopCamera(isComponentWillUnmount)
       .catch((error) => {
         printCameraInfo(error.message);
       });
+  }
+
+  clearShowVideoTimeout () {
+    if (this.showVideoTimeoutId) {
+      clearTimeout(this.showVideoTimeoutId);
+    }
   }
 
   restartCamera (idealFacingMode, idealResolution, isMaxResolution) {
@@ -141,7 +150,8 @@ class Camera extends React.Component {
       isShowVideo: false
     });
 
-    setTimeout(() => {
+    this.clearShowVideoTimeout();
+    this.showVideoTimeoutId = setTimeout(() => {
       this.setState({
         isShowVideo: true
       });
