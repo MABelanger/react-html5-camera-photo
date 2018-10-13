@@ -1,21 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles/closeButton.css';
+import getDisplayErrorStyles from './styles';
+// import './styles/closeButton.css';
 
 export const CloseButton = ({ onClickStop, onClickStart, isOpen }) => {
   if (isOpen) {
     return (
-      <div id="container-close-button"
-        onClick = {onClickStop}
-      >Stop&nbsp;&#9724;
+      <div>
+        <style>
+          { getDisplayErrorStyles() }
+        </style>
+        <div id="container-close-button"
+          onClick = {onClickStop}
+        >Stop&nbsp;&#9724;
+        </div>
       </div>
     );
   } else {
     return (
-      <div id="container-close-button"
-        onClick = {onClickStart}
-      >Start&nbsp;&#9658;
+      <div>
+        <style>
+          { getDisplayErrorStyles() }
+        </style>
+        <div id="container-close-button"
+          onClick = {onClickStart}
+        >Start&nbsp;&#9658;
+        </div>
       </div>
     );
   }

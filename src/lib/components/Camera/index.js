@@ -15,7 +15,8 @@ import {getShowHideStyle,
   isDynamicPropsUpdate,
   playClickAudio,
   printCameraInfo} from './helpers';
-import './styles/camera.css';
+// import './styles/camera.css';
+import getCameraStyles from './styles';
 
 /*
 Inspiration : https://www.html5rocks.com/en/tutorials/getusermedia/intro/
@@ -165,30 +166,35 @@ class Camera extends React.Component {
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
 
     return (
-      <div className="react-html5-camera-photo">
-        <DisplayError
-          cssClass={'display-error'}
-          isDisplayError={isDisplayStartCameraError}
-          errorMsg={this.state.startCameraErrorMsg}
-        />
-        <WhiteFlash
-          isShowWhiteFlash={!this.state.isShowVideo}
-        />
-        <img
-          style={showHideImgStyle}
-          alt="camera"
-          src={this.state.dataUri}
-        />
-        <video
-          style={videoStyles}
-          ref={this.videoRef}
-          autoPlay={true}
-          playsInline
-        />
-        <CircleButton
-          isClicked={!this.state.isShowVideo}
-          onClick={this.handleTakePhoto}
-        />
+      <div>
+        <style>
+          { getCameraStyles() }
+        </style>
+        <div className="react-html5-camera-photo">
+          <DisplayError
+            cssClass={'display-error'}
+            isDisplayError={isDisplayStartCameraError}
+            errorMsg={this.state.startCameraErrorMsg}
+          />
+          <WhiteFlash
+            isShowWhiteFlash={!this.state.isShowVideo}
+          />
+          <img
+            style={showHideImgStyle}
+            alt="camera"
+            src={this.state.dataUri}
+          />
+          <video
+            style={videoStyles}
+            ref={this.videoRef}
+            autoPlay={true}
+            playsInline
+          />
+          <CircleButton
+            isClicked={!this.state.isShowVideo}
+            onClick={this.handleTakePhoto}
+          />
+        </div>
       </div>
     );
   }

@@ -1,0 +1,34 @@
+const getCameraStyles = () => {
+  return(
+    `
+      .react-html5-camera-photo {
+        position: relative;
+        text-align: center;
+      }
+
+      .react-html5-camera-photo > video {
+        width: 768px;
+      }
+
+      .react-html5-camera-photo > img {
+        width: 768px;
+      }
+
+      .react-html5-camera-photo > .display-error {
+        width: 768px;
+        margin: 0 auto;
+      }
+
+      @media(max-width:768px){
+        .react-html5-camera-photo > video, .react-html5-camera-photo > img {
+          width: 100%;
+        }
+        .react-html5-camera-photo > .display-error {
+          width: 100%;
+        }
+      }
+    `
+  );
+}
+
+export default getCameraStyles;

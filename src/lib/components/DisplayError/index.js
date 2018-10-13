@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles/displayError.css';
+import getDisplayErrorStyles from './styles';
+// import './styles/displayError.css';
 
 function isShowComponent (isDisplayError, errorMsg) {
   return (isDisplayError && errorMsg && errorMsg.length > 0);
@@ -11,10 +12,14 @@ export const DisplayError = ({ isDisplayError, errorMsg, cssClass }) => {
     return null;
   }
 
-  console.log('cssClass', cssClass);
   return (
-    <div className={cssClass} id="display-error">
-      <h1>Camera error: {errorMsg}</h1>
+    <div>
+      <style>
+        { getDisplayErrorStyles() }
+      </style>
+      <div className={cssClass} id="display-error">
+        <h1>Camera error: {errorMsg}</h1>
+      </div>
     </div>
   );
 };
