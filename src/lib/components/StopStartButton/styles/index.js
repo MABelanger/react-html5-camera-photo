@@ -1,12 +1,20 @@
-const getDisplayErrorStyles = () => {
+const getCloseButtonStyles = () => {
   return(
     `
-      #display-error {
-        color: black;
-        background-color: white;
+      #container-close-button {
+        position: absolute;
+        left: 80%;
+        top: 10px;
+        height: 0;
+        width: 10px;
+        z-index: 1;
+        font-size: 20px;
+        color: white;
+        background-color: red;
+        cursor: pointer;
       }
     `
   );
 }
 
-export default getDisplayErrorStyles;
+export default getCloseButtonStyles;

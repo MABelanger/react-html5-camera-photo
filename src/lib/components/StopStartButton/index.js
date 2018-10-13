@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import getDisplayErrorStyles from './styles';
+import getCloseButtonStyles from './styles';
 // import './styles/closeButton.css';
 
 export const CloseButton = ({ onClickStop, onClickStart, isOpen }) => {
@@ -9,7 +9,7 @@ export const CloseButton = ({ onClickStop, onClickStart, isOpen }) => {
     return (
       <div>
         <style>
-          { getDisplayErrorStyles() }
+          { getCloseButtonStyles() }
         </style>
         <div id="container-close-button"
           onClick = {onClickStop}
@@ -21,7 +21,7 @@ export const CloseButton = ({ onClickStop, onClickStart, isOpen }) => {
     return (
       <div>
         <style>
-          { getDisplayErrorStyles() }
+          { getCloseButtonStyles() }
         </style>
         <div id="container-close-button"
           onClick = {onClickStart}
