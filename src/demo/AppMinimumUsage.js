@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Camera from '../lib';
 import './reset.css';
+import CameraOverlay from './camera-overlay.png';
 
 class App extends Component {
   onTakePhoto (dataUri) {
@@ -9,11 +10,19 @@ class App extends Component {
   }
 
   render () {
+    const cameraOverlayStyles = {
+      position: 'absolute',
+      zIndex: '1',
+      opacity: '.5',
+      top: '0'
+    };
     return (
       <div className="App">
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-        />
+        >
+          <img style={cameraOverlayStyles} src={ CameraOverlay } />
+        </Camera>
       </div>
     );
   }

@@ -9,6 +9,8 @@
 
 .react-html5-camera-photo > img {
   width: 768px;
+  position: absolute;
+  top: 0;
 }
 
 .react-html5-camera-photo > .display-error {

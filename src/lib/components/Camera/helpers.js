@@ -2,8 +2,8 @@ import clickSound from './data/click-sound.base64.json';
 
 export function getShowHideStyle (isDisplay) {
   const displayStyle = isDisplay
-    ? {display: 'inline-block'}
-    : {display: 'none'};
+    ? {opacity: '1'}
+    : {opacity: '0'};
 
   return displayStyle;
 }

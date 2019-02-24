@@ -180,6 +180,7 @@ class Camera extends React.Component {
           alt="camera"
           src={this.state.dataUri}
         />
+        {this.props.children}
         <video
           style={videoStyles}
           ref={this.videoRef}
@@ -215,7 +216,8 @@ Camera.propTypes = {
   isFullscreen: PropTypes.bool,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
-  onCameraStop: PropTypes.func
+  onCameraStop: PropTypes.func,
+  children: PropTypes.func
 };
 
 Camera.defaultProps = {
