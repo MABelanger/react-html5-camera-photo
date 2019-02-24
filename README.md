@@ -118,6 +118,7 @@ class App extends Component {
           isMaxResolution = {false}
           isImageMirror = {false}
           isDisplayStartCameraError = {true}
+          isFullscreen = {true}
           sizeFactor = {1}
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
           onCameraStop = { () => { this.onCameraStop(); } }
