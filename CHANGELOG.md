@@ -1,5 +1,9 @@
 # Change Log
 
+### Features
+#### 1.3.0
+- Add isFullscreen props that force fullscreen camera, useful for mobile device.
+
 ### Bug Fixes
 #### 1.2.8-beta.0
 - Fix Error: `Can't call setState on an unmounted component.`

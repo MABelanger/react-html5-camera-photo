@@ -13,6 +13,7 @@ class App extends Component {
       <div className="App">
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+          isFullscreen={true}
         />
       </div>
     );

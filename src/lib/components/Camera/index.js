@@ -159,13 +159,14 @@ class Camera extends React.Component {
   }
 
   render () {
-    const {isImageMirror, isDisplayStartCameraError} = this.props;
+    const {isImageMirror, isDisplayStartCameraError, isFullscreen} = this.props;
 
     let videoStyles = getVideoStyles(this.state.isShowVideo, isImageMirror);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
 
+    let classNameFullscreen = isFullscreen ? 'react-html5-camera-photo-fullscreen' : '';
     return (
-      <div className="react-html5-camera-photo">
+      <div className={'react-html5-camera-photo ' + classNameFullscreen}>
         <DisplayError
           cssClass={'display-error'}
           isDisplayError={isDisplayStartCameraError}
@@ -211,6 +212,7 @@ Camera.propTypes = {
   isDisplayStartCameraError: PropTypes.bool,
   imageCompression: PropTypes.number,
   isMaxResolution: PropTypes.bool,
+  isFullscreen: PropTypes.bool,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
   onCameraStop: PropTypes.func
