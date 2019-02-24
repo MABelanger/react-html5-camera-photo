@@ -72,6 +72,7 @@ Properties | Type | Description
 **idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
 **isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
 **isImageMirror:** (Optional) | Boolean | If is true, the camera image will be mirror, the default is true.
+**isFullscreen:** (Optional) | Boolean | If is true, the camera image will be set fullscreen to force the maximum width and height of the viewport.
 **isDisplayStartCameraError:** (Optional) | Boolean | If is true, if the camera start with error, it will show the error between **h1** tag on the top of the component. Useful to notify the user about permission error, the default is true.
 **sizeFactor:** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
 **imageType:**: (Optional) | String | String used to get the desired image type between `jpg` or `png`. to specify the imageType use the constant IMAGE_TYPES, for example to specify jpg format use IMAGE_TYPES.JPG. The default imageType is `png`. Use `IMAGE_TYPES` constant to get the right image type Example:. IMAGE_TYPES.JPG or IMAGE_TYPES.PNG
