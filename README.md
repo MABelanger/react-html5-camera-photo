@@ -72,6 +72,7 @@ Properties | Type | Description
 **idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
 **isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
 **isImageMirror:** (Optional) | Boolean | If is true, the camera image will be mirror, the default is true.
+**isSilentMode:**(Optional) | Boolean | If is true, the camera do not play click sound when the photo was taken, the default is false.
 **isFullscreen:** (Optional) | Boolean | If is true, the camera image will be set fullscreen to force the maximum width and height of the viewport, the default is false.
 **isDisplayStartCameraError:** (Optional) | Boolean | If is true, if the camera start with error, it will show the error between **h1** tag on the top of the component. Useful to notify the user about permission error, the default is true.
 **sizeFactor:** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
@@ -117,6 +118,7 @@ class App extends Component {
           imageCompression = {0.97}
           isMaxResolution = {false}
           isImageMirror = {false}
+          isSilentMode = {true}
           isDisplayStartCameraError = {true}
           isFullscreen = {true}
           sizeFactor = {1}

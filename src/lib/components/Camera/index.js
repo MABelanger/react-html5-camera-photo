@@ -137,10 +137,12 @@ class Camera extends React.Component {
   }
 
   handleTakePhoto () {
-    const {sizeFactor, imageType, imageCompression, isImageMirror} = this.props;
+    const {sizeFactor, imageType, imageCompression, isImageMirror, isSilentMode} = this.props;
     const configDataUri = { sizeFactor, imageType, imageCompression, isImageMirror };
 
-    playClickAudio();
+    if (!isSilentMode) {
+      playClickAudio();
+    }
 
     let dataUri = this.libCameraPhoto.getDataUri(configDataUri);
     this.props.onTakePhoto(dataUri);
@@ -209,6 +211,7 @@ Camera.propTypes = {
   idealResolution: PropTypes.object,
   imageType: PropTypes.string,
   isImageMirror: PropTypes.bool,
+  isSilentMode: PropTypes.bool,
   isDisplayStartCameraError: PropTypes.bool,
   imageCompression: PropTypes.number,
   isMaxResolution: PropTypes.bool,

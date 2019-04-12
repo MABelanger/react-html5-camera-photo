@@ -32,6 +32,7 @@ class App extends Component {
           imageCompression = {0.97}
           isMaxResolution = {false}
           isImageMirror = {false}
+          isSilentMode = {false}
           isDisplayStartCameraError = {true}
           sizeFactor = {1}
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
