@@ -1,6 +1,10 @@
 # Change Log
 
 ### Features
+#### 1.4.0
+- add isSilentMode: props to disable the click sound when the photo was taken.
+
+### Features
 #### 1.3.0
 - Add isFullscreen props that force fullscreen camera, useful for mobile device.
 
