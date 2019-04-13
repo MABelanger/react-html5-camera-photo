@@ -161,7 +161,8 @@ class Camera extends React.Component {
   }
 
   render () {
-    const {isImageMirror, isDisplayStartCameraError, isFullscreen} = this.props;
+    const {isImageMirror, isDisplayStartCameraError, isFullscreen, button} = this.props;
+    const Button = typeof button !== "undefined" ? button : CircleButton;
 
     let videoStyles = getVideoStyles(this.state.isShowVideo, isImageMirror);
     let showHideImgStyle = getShowHideStyle(!this.state.isShowVideo);
@@ -188,7 +189,7 @@ class Camera extends React.Component {
           autoPlay={true}
           playsInline
         />
-        <CircleButton
+        <Button
           isClicked={!this.state.isShowVideo}
           onClick={this.handleTakePhoto}
         />

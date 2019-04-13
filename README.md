@@ -73,6 +73,7 @@ Properties | Type | Description
 **isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
 **isImageMirror:** (Optional) | Boolean | If is true, the camera image will be mirror, the default is true.
 **isSilentMode:**(Optional) | Boolean | If is true, the camera do not play click sound when the photo was taken, the default is false.
+**button:**(Optional) | Element | If set, refers to an Element that should be used as button instead of CircleButton.
 **isFullscreen:** (Optional) | Boolean | If is true, the camera image will be set fullscreen to force the maximum width and height of the viewport, the default is false.
 **isDisplayStartCameraError:** (Optional) | Boolean | If is true, if the camera start with error, it will show the error between **h1** tag on the top of the component. Useful to notify the user about permission error, the default is true.
 **sizeFactor:** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
@@ -82,7 +83,7 @@ Properties | Type | Description
 
 **Dynamic** : If the prop is dynamic, it mean that you can change that prop dynamically without umount the component (removing it). You can do it by a setState() inside the parent component. Checkout the demo example: [./src/demo/AppWithDynamicProperties.js](./src/demo/AppWithDynamicProperties.js)
 
-## Example with all props used
+## Example with all props (except button) used
 ```js
 import React, { Component } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
@@ -137,3 +138,9 @@ export default App;
 ## FAQ
 1. <b>What if i want to improve the code or add functionalities?</b>
   * Please take a look into the [CONTRIBUTING.md](CONTRIBUTING.md)
+
+2. <b>How do I use a different button or manually control taking a photo?</b>
+  * You can pass the `<Camera button={MyButton} ... />` prop, or you can
+    use `ref` and handle the button externally, like so:
+    `<Camera ref={this.camera} button={null} .../>` and then call `this.camera.handleTakePhoto()` from
+    your own button.
