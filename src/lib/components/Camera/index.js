@@ -186,6 +186,7 @@ class Camera extends React.Component {
           style={videoStyles}
           ref={this.videoRef}
           autoPlay={true}
+          muted="muted"
           playsInline
         />
         <CircleButton
