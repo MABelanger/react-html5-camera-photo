@@ -1,5 +1,9 @@
 # Change Log
 
+### Bug Fixes
+#### 1.4.1
+- Bug fix black screen in webview on android-9 #30
+
 ### Features
 #### 1.4.0
 - add isSilentMode: props to disable the click sound when the photo was taken.
