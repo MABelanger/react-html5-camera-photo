@@ -7,12 +7,17 @@ For those who want to build with their own css and need an abstraction of `getUs
 - react: >=16.0.0
 - react-dom: >=16.0.0
 
-## iOS >= 11 WebRTC issue with webkit (Chrome & Firefox)
-Apple restricts WebRTC to **Safari only** so it mean that you can't use the `getUserMedia()` with Firefox and Chrome. So `getUserMedia()` is not supported yet, for "security reasons". See [Stackoverflow](https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc)
-
-
 ## LiveDemo
 [Demo of react-html5-camera-photo](https://mabelanger.github.io/react-html5-camera-photo/)
+
+## Required Working Environment for getUserMedia()
+The `getUserMedia()` method is only available in secure contexts `(https or localhost)`. If a document isn't loaded in a secure context, the navigator.mediaDevices property is undefined, making access to getUserMedia() impossible. Attempting to access `getUserMedia()` in this situation will result in a TypeError.
+
+Source : [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Security)
+
+### iOS >= 11 WebRTC issue with webkit (Chrome & Firefox)
+Apple restricts WebRTC to **Safari only** so it mean that you can't use the `getUserMedia()` with Firefox and Chrome. So `getUserMedia()` is not supported yet, for "security reasons". See [Stackoverflow](https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc)
+
 
 ## Installation
 
@@ -133,6 +138,8 @@ class App extends Component {
 export default App;
 ```
 
+## Bug report (issues)
+Before sending a bug report of camera error, make sure that `getUserMedia()` is supported by your browser. Please test your camera on : [WebRTC samples getUserMedia](https://webrtc.github.io/samples/src/content/getusermedia/gum/) You can get more specific test on [WebRTC samples](https://webrtc.github.io/samples/).
 
 ## FAQ
 1. <b>What if i want to improve the code or add functionalities?</b>
