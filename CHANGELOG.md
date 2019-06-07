@@ -1,5 +1,9 @@
 # Change Log
 
+### Other
+#### 1.4.2
+- Lock packages version
+
 ### Bug Fixes
 #### 1.4.1
 - Bug fix black screen in webview on android-9 #30
