@@ -87,7 +87,7 @@ Properties | Type | Description
 **Dynamic** : If the prop is dynamic, it mean that you can change that prop dynamically without umount the component (removing it). You can do it by a setState() inside the parent component. Checkout the demo example: [./src/demo/AppWithDynamicProperties.js](./src/demo/AppWithDynamicProperties.js)
 
 ## Example of closing the camera and image preview after take a photo
-Probably the tipical usage of using this component is to preview the image and close the camera after take a photo. You can take a look of all the code including the **ImagePreview** component here : [./src/demo/AppWithImagePreview](./src/demo/AppWithImagePreview)
+Probably the typical usage of using this component is to preview the image and close the camera after take a photo. You can take a look of all the code including the **ImagePreview** component here : [./src/demo/AppWithImagePreview](./src/demo/AppWithImagePreview)
 
 ```js
 import React, { Component } from 'react';
