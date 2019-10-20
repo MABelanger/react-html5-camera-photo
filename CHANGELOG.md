@@ -1,5 +1,9 @@
 # Change Log
 
+### Features
+#### 1.4.4
+- Add props callback onTakePhotoAnimationDone(). This function called when a photo is taken and the animation is done. the dataUri is passed as a parameter.
+
 ### Other
 #### 1.4.2
 - Lock packages version
