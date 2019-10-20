@@ -16,12 +16,18 @@ class App extends Component {
   }
 
   render () {
+    const isFullscreen = true;
+
     return (
       <div className="App">
         {
           (this.state.dataUri)
-            ? <ImagePreview dataUri={this.state.dataUri} />
-            : <Camera onTakePhotoAnimationDone = {this.onTakePhotoAnimationDone} />
+            ? <ImagePreview dataUri={this.state.dataUri}
+              isFullscreen={isFullscreen}
+            />
+            : <Camera onTakePhotoAnimationDone = {this.onTakePhotoAnimationDone}
+              isFullscreen={isFullscreen}
+            />
         }
       </div>
     );
