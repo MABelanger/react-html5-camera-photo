@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Camera} from '../../lib';
+import { Camera } from '../../lib';
 import ImagePreview from './ImagePreview';
 import '../reset.css';
 
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   render () {
-    const isFullscreen = true;
+    const isFullscreen = false;
 
     return (
       <div className="App">

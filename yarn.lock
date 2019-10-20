@@ -4877,10 +4877,10 @@ jsesc@~0.5.0:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
-jslib-html5-camera-photo@^3.0.2-beta.0:
-  version "3.0.2-beta.0"
-  resolved "https://registry.yarnpkg.com/jslib-html5-camera-photo/-/jslib-html5-camera-photo-3.0.2-beta.0.tgz#f395a2f3d55521b208967328d3d515a69889e9ef"
-  integrity sha512-AkNBvOb4n3umdD7F+NrIkDzO/1QOJFKP73eYh7ZUebLDqQREUQnvRlqUBT38nTHhIhxPfD9G2qlBbkUfwkHJrA==
+jslib-html5-camera-photo@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/jslib-html5-camera-photo/-/jslib-html5-camera-photo-3.1.1.tgz#5153309f989430f9adfd00b4e6c63ede53bd59c2"
+  integrity sha512-DZXyBCfYlLJAlIUQFvytZf5/M/oV4/GhI3svcaTX9JDT1txGHAYW/r3bWw65ZEPKWDR1JlNHg37XPHu+JXPVgg==
 
 json-loader@^0.5.4:
   version "0.5.7"
