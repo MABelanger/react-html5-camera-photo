@@ -70,7 +70,8 @@ Properties | Type | Description
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
 **onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
 **onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
-**onTakePhoto(dataUri):** (required) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
+**onTakePhoto(dataUri):** (Optional) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
+**onTakePhotoAnimationDone(dataUri):** (Optional) | Event | The function called when a photo is taken and the animation is done. the dataUri is passed as a parameter.
 **idealFacingMode:** (Optional) (Dynamic) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
 **idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
 **isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
@@ -86,12 +87,12 @@ Properties | Type | Description
 **Dynamic** : If the prop is dynamic, it mean that you can change that prop dynamically without umount the component (removing it). You can do it by a setState() inside the parent component. Checkout the demo example: [./src/demo/AppWithDynamicProperties.js](./src/demo/AppWithDynamicProperties.js)
 
 ## Example of closing the camera and image preview after take a photo
-Probably the tipical usage of using this component is to preview the image and close the camera after take a photo. You can take a look of the example here: [./src/demo/AppWithImagePreview](./src/demo/AppWithImagePreview)
+Probably the tipical usage of using this component is to preview the image and close the camera after take a photo. You can take a look of all the code including the **ImagePreview** component here : [./src/demo/AppWithImagePreview](./src/demo/AppWithImagePreview)
 
 ```js
 import React, { Component } from 'react';
-import {Camera} from '../../lib';
-import ImagePreview from './ImagePreview';
+import Camera from 'react-html5-camera-photo';
+import ImagePreview from './ImagePreview'; // source code : ./src/demo/AppWithImagePreview/ImagePreview
 import '../reset.css';
 
 class App extends Component {
