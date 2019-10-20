@@ -92,8 +92,9 @@ Probably the tipical usage of using this component is to preview the image and c
 ```js
 import React, { Component } from 'react';
 import Camera from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+
 import ImagePreview from './ImagePreview'; // source code : ./src/demo/AppWithImagePreview/ImagePreview
-import '../reset.css';
 
 class App extends Component {
   constructor (props, context) {
