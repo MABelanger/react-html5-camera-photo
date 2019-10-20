@@ -145,7 +145,10 @@ class Camera extends React.Component {
     }
 
     let dataUri = this.libCameraPhoto.getDataUri(configDataUri);
-    this.props.onTakePhoto(dataUri);
+
+    if (this.props.onTakePhoto) {
+      this.props.onTakePhoto(dataUri);
+    }
 
     this.setState({
       dataUri,
@@ -157,6 +160,10 @@ class Camera extends React.Component {
       this.setState({
         isShowVideo: true
       });
+
+      if (this.props.onTakePhotoAnimationDone) {
+        this.props.onTakePhotoAnimationDone(dataUri);
+      }
     }, 900);
   }
 
@@ -199,6 +206,7 @@ class Camera extends React.Component {
 }
 
 export {
+  Camera,
   FACING_MODES,
   IMAGE_TYPES
 };
@@ -206,7 +214,8 @@ export {
 export default Camera;
 
 Camera.propTypes = {
-  onTakePhoto: PropTypes.func.isRequired,
+  onTakePhoto: PropTypes.func,
+  onTakePhotoAnimationDone: PropTypes.func,
   onCameraError: PropTypes.func,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
