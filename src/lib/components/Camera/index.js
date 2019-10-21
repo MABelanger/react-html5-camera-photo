@@ -96,7 +96,9 @@ class Camera extends React.Component {
         }
       })
       .catch((error) => {
-        this.setState({startCameraErrorMsg: error.message});
+        this.setState({
+          startCameraErrorMsg: `${error.name} ${error.message}`
+        });
         if (typeof this.props.onCameraError === 'function') {
           this.props.onCameraError(error);
         }

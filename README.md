@@ -136,6 +136,11 @@ class App extends Component {
     console.log('takePhoto');
   }
 
+  onTakePhotoAnimationDone (dataUri) {
+    // Do stuff with the photo...
+    console.log('takePhoto');
+  }
+
   onCameraError (error) {
     console.error('onCameraError', error);
   }
@@ -153,6 +158,7 @@ class App extends Component {
       <div className="App">
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+          onTakePhotoAnimationDone = { (dataUri) => { this.onTakePhotoAnimationDone(dataUri); } }
           onCameraError = { (error) => { this.onCameraError(error); } }
           idealFacingMode = {FACING_MODES.ENVIRONMENT}
           idealResolution = {{width: 640, height: 480}}
