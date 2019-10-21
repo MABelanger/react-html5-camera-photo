@@ -7,12 +7,15 @@ For those who want to build with their own css and need an abstraction of `getUs
 - react: >=16.0.0
 - react-dom: >=16.0.0
 
-## iOS >= 11 WebRTC issue with webkit (Chrome & Firefox)
-Apple restricts WebRTC to **Safari only** so it mean that you can't use the `getUserMedia()` with Firefox and Chrome. So `getUserMedia()` is not supported yet, for "security reasons". See [Stackoverflow](https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc)
-
-
 ## LiveDemo
 [Demo of react-html5-camera-photo](https://mabelanger.github.io/react-html5-camera-photo/)
+
+## Required Working Environment for getUserMedia()
+
+- **https or localhost** : The `getUserMedia()` method is only available in secure contexts `(https or localhost)`. If a document isn't loaded in a secure context, the navigator.mediaDevices property is undefined, making access to getUserMedia() impossible. Attempting to access `getUserMedia()` in this situation will result in a TypeError. See [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Privacy_and_security)
+
+- **iOS >= 11 WebRTC issue with webkit (Chrome & Firefox)** : Apple restricts WebRTC to **Safari only** so it mean that you can't use the `getUserMedia()` with Firefox and Chrome. So `getUserMedia()` is not supported yet, for "security reasons". See [Stackoverflow](https://stackoverflow.com/questions/45055329/does-webkit-in-ios-11-beta-support-webrtc)
+
 
 ## Installation
 
@@ -67,7 +70,8 @@ Properties | Type | Description
 **onCameraStart():** (optional) | Event | Callback called when the camera is started.
 **onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
 **onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
-**onTakePhoto(dataUri):** (required) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
+**onTakePhoto(dataUri):** (Optional) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
+**onTakePhotoAnimationDone(dataUri):** (Optional) | Event | The function called when a photo is taken and the animation is done. the dataUri is passed as a parameter.
 **idealFacingMode:** (Optional) (Dynamic) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
 **idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
 **isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
@@ -83,6 +87,44 @@ Properties | Type | Description
 
 **Dynamic** : If the prop is dynamic, it mean that you can change that prop dynamically without umount the component (removing it). You can do it by a setState() inside the parent component. Checkout the demo example: [./src/demo/AppWithDynamicProperties.js](./src/demo/AppWithDynamicProperties.js)
 
+## Example of closing the camera and image preview after take a photo
+Probably the typical usage of using this component is to preview the image and close the camera after take a photo. You can take a look of all the code including the **ImagePreview** component here : [./src/demo/AppWithImagePreview](./src/demo/AppWithImagePreview)
+
+```js
+import React, { Component } from 'react';
+import Camera from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+
+import ImagePreview from './ImagePreview'; // source code : ./src/demo/AppWithImagePreview/ImagePreview
+
+class App extends Component {
+  constructor (props, context) {
+    super(props, context);
+    this.state = { dataUri: null };
+    this.onTakePhotoAnimationDone = this.onTakePhotoAnimationDone.bind(this);
+  }
+
+  onTakePhotoAnimationDone (dataUri) {
+    console.log('takePhoto');
+    this.setState({ dataUri });
+  }
+
+  render () {
+    return (
+      <div className="App">
+        {
+          (this.state.dataUri)
+            ? <ImagePreview dataUri={this.state.dataUri} />
+            : <Camera onTakePhotoAnimationDone = {this.onTakePhotoAnimationDone} />
+        }
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
 ## Example with all props (except button) used
 ```js
 import React, { Component } from 'react';
@@ -91,6 +133,11 @@ import 'react-html5-camera-photo/build/css/index.css';
 
 class App extends Component {
   onTakePhoto (dataUri) {
+    // Do stuff with the photo...
+    console.log('takePhoto');
+  }
+
+  onTakePhotoAnimationDone (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
@@ -112,6 +159,7 @@ class App extends Component {
       <div className="App">
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+          onTakePhotoAnimationDone = { (dataUri) => { this.onTakePhotoAnimationDone(dataUri); } }
           onCameraError = { (error) => { this.onCameraError(error); } }
           idealFacingMode = {FACING_MODES.ENVIRONMENT}
           idealResolution = {{width: 640, height: 480}}
@@ -134,6 +182,8 @@ class App extends Component {
 export default App;
 ```
 
+## Bug report (issues)
+Before sending a bug report of camera error, make sure that `getUserMedia()` is supported by your browser. Please test your camera on : [DetectRTC | Is WebRTC Supported In Your Browser?](https://www.webrtc-experiment.com/DetectRTC/) If the `System has Webcam is supported`, please send the screenshot of the first 7 first rows of the table.
 
 ## FAQ
 1. <b>What if i want to improve the code or add functionalities?</b>

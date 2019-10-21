@@ -1,5 +1,25 @@
 # Change Log
 
+### Bug Fixes
+#### 1.5.2
+- Fix display error permission
+
+### Other
+#### 1.5.1
+- Use version jslib-html5-camera-photo 3.1.1
+
+### Features
+#### 1.5.0
+- Add props callback onTakePhotoAnimationDone(). This function called when a photo is taken and the animation is done. the dataUri is passed as a parameter.
+
+### Other
+#### 1.4.2
+- Lock packages version
+
+### Bug Fixes
+#### 1.4.1
+- Bug fix black screen in webview on android-9 #30
+
 ### Features
 #### 1.4.0
 - add isSilentMode: props to disable the click sound when the photo was taken.

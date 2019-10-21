@@ -96,7 +96,9 @@ class Camera extends React.Component {
         }
       })
       .catch((error) => {
-        this.setState({startCameraErrorMsg: error.message});
+        this.setState({
+          startCameraErrorMsg: `${error.name} ${error.message}`
+        });
         if (typeof this.props.onCameraError === 'function') {
           this.props.onCameraError(error);
         }
@@ -145,7 +147,10 @@ class Camera extends React.Component {
     }
 
     let dataUri = this.libCameraPhoto.getDataUri(configDataUri);
-    this.props.onTakePhoto(dataUri);
+
+    if (this.props.onTakePhoto) {
+      this.props.onTakePhoto(dataUri);
+    }
 
     this.setState({
       dataUri,
@@ -157,6 +162,10 @@ class Camera extends React.Component {
       this.setState({
         isShowVideo: true
       });
+
+      if (this.props.onTakePhotoAnimationDone) {
+        this.props.onTakePhotoAnimationDone(dataUri);
+      }
     }, 900);
   }
 
@@ -187,6 +196,7 @@ class Camera extends React.Component {
           style={videoStyles}
           ref={this.videoRef}
           autoPlay={true}
+          muted="muted"
           playsInline
         />
         <Button
@@ -199,6 +209,7 @@ class Camera extends React.Component {
 }
 
 export {
+  Camera,
   FACING_MODES,
   IMAGE_TYPES
 };
@@ -206,7 +217,8 @@ export {
 export default Camera;
 
 Camera.propTypes = {
-  onTakePhoto: PropTypes.func.isRequired,
+  onTakePhoto: PropTypes.func,
+  onTakePhotoAnimationDone: PropTypes.func,
   onCameraError: PropTypes.func,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,

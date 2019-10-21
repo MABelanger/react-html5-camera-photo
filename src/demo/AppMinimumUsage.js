@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Camera from '../lib';
+import Camera, { FACING_MODES } from '../lib';
 import './reset.css';
 
 class App extends Component {
@@ -13,6 +13,7 @@ class App extends Component {
       <div className="App">
         <Camera
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+          idealFacingMode = {FACING_MODES.ENVIRONMENT}
         />
       </div>
     );

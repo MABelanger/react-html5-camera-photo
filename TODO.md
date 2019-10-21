@@ -1,1 +1,1 @@
-- Use styled-components instead of css files.
+- Use style module instead of css files.
