@@ -1,5 +1,9 @@
 # Change Log
 
+### Bug Fixes
+#### 1.5.2
+- Fix display error permission
+
 ### Other
 #### 1.5.1
 - Use version jslib-html5-camera-photo 3.1.1
