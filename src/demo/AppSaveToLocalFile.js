@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Camera, { IMAGE_TYPES } from '../lib';
 import './reset.css';
 
@@ -58,26 +58,22 @@ function downloadImageFile (dataUri, imageNumber) {
   downloadImageFileFomBlob(blob, imageNumber);
 }
 
-class App extends Component {
-  constructor () {
-    super();
-    this.imageNumber = 0;
-  }
-  onTakePhoto (dataUri) {
-    downloadImageFile(dataUri, this.imageNumber);
-    this.imageNumber += 1;
+function App (props) {
+  const [imageNumber, setImageNumber] = useState(0);
+
+  function onTakePhoto (dataUri) {
+    downloadImageFile(dataUri, imageNumber);
+    setImageNumber(imageNumber + 1);
   }
 
-  render () {
-    return (
-      <div className="App">
-        <Camera
-          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-          imageType={IMAGE_TYPES.PNG}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Camera
+        onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+        imageType={IMAGE_TYPES.PNG}
+      />
+    </div>
+  );
 }
 
 export default App;

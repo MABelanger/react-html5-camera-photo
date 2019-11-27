@@ -1,5 +1,10 @@
 # Change Log
 
+### Refactor
+#### 1.5.3
+- Refactor states to react hooks.
+- This upgrade has no breaking change.
+
 ### Bug Fixes
 #### 1.5.2
 - Fix display error permission

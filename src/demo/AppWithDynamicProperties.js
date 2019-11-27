@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Camera, { FACING_MODES } from '../lib';
 import './reset.css';
 
@@ -6,40 +6,36 @@ import './reset.css';
  * dynamic properties is : idealFacingMode, idealResolution, isMaxResolution
  * In this example we set the idealFacingMode
  */
-class App extends Component {
-  constructor (props, context) {
-    super(props, context);
-    this.state = {
-      idealFacingMode: FACING_MODES.ENVIRONMENT
-    };
-    this.renderButtons = this.renderButtons.bind(this);
-  }
+function App (props) {
+  const [idealFacingMode, setIdealFacingMode] = useState(null);
+  const [isMaxResolution, setIsMaxResolution] = useState(false);
 
-  renderButtons () {
+  function renderButtons () {
     return (
       <div>
         <button onClick={ (e) => {
-          this.setState({idealFacingMode: FACING_MODES.USER});
+          setIdealFacingMode(FACING_MODES.USER);
+          setIsMaxResolution(false);
         }}> FACING_MODES.USER </button>
 
         <button onClick={ (e) => {
-          this.setState({idealFacingMode: FACING_MODES.ENVIRONMENT});
-        }}> FACING_MODES.ENVIRONMENT </button>
+          setIdealFacingMode(FACING_MODES.ENVIRONMENT);
+          setIsMaxResolution(true);
+        }}> FACING_MODES.ENVIRONMENT & MaxResolution</button>
       </div>
     );
   }
 
-  render () {
-    return (
-      <div className="App">
-        { this.renderButtons() }
-        <Camera
-          idealFacingMode = {this.state.idealFacingMode}
-          onTakePhoto = { () => {} }
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      { renderButtons() }
+      <Camera
+        idealFacingMode = {idealFacingMode}
+        isMaxResolution = {isMaxResolution}
+        onTakePhoto = { () => {} }
+      />
+    </div>
+  );
 }
 
 export default App;

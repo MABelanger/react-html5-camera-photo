@@ -23,14 +23,6 @@ export function getVideoStyles (isDisplay, imageMirror) {
   };
 }
 
-export function isDynamicPropsUpdate (props, nextProps) {
-  return (
-    (props.idealFacingMode !== nextProps.idealFacingMode) ||
-    (props.idealResolution !== nextProps.idealResolution) ||
-    (props.isMaxResolution !== nextProps.isMaxResolution)
-  );
-}
-
 export function playClickAudio () {
   let audio = new Audio('data:audio/mp3;base64,' + clickSound.base64);
   audio.play();

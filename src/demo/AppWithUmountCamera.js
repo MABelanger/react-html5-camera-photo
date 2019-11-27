@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Camera from '../lib';
 import './reset.css';
 
-class App extends Component {
-  constructor (props, context) {
-    super(props, context);
-    this.state = {
-      isRemoveCamera: false
-    };
-    // umount camera after 10 seconds
-    setTimeout(() => {
-      this.setState({isRemoveCamera: true});
-    }, 2000);
-  }
+function App (props) {
+  const [isRemoveCamera, setIsRemoveCamera] = useState(false);
 
-  onTakePhoto (dataUri) {
+  // umount camera after 10 seconds
+  setTimeout(() => {
+    setIsRemoveCamera(true);
+  }, 2000);
+
+  function handleTakePhotoAnimationDone (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
 
-  render () {
-    return this.state.isRemoveCamera ? null : (
-      <div className="App">
-        <Camera
-          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-        />
-      </div>
-    );
-  }
+  return isRemoveCamera ? null : (
+    <div className="App">
+      <Camera
+        onTakePhotoAnimationDone = { (dataUri) => { handleTakePhotoAnimationDone(dataUri); } }
+      />
+    </div>
+  );
 }
 
 export default App;
