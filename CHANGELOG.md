@@ -1,5 +1,9 @@
 # Change Log
 
+### Other
+#### 1.5.4
+- update doc
+
 ### Refactor
 #### 1.5.3
 - Refactor states to react hooks.
