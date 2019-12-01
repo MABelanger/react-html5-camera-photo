@@ -35,28 +35,23 @@ parameter | Description
 --- | ---
 **onTakePhoto(dataUri):** | Event function called when a photo is taken. the dataUri is passed as a parameter.
 
-
 **Minimum ES6 example**
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 
-class App extends Component {
-  onTakePhoto (dataUri) {
-    // Do stuff with the dataUri photo...
+function App (props) {
+  function onTakePhoto (dataUri) {
+    // Do stuff with the photo...
     console.log('takePhoto');
   }
 
-  render () {
-    return (
-      <div className="App">
-        <Camera
-          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-        />
-      </div>
-    );
-  }
+  return (
+    <Camera
+      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+    />
+  );
 }
 
 export default App;
@@ -65,23 +60,23 @@ export default App;
 ## API
 
 ### PropTypes
-Properties | Type | Description
---- | --- | ---
-**onCameraStart():** (optional) | Event | Callback called when the camera is started.
-**onCameraStop():** (optional) | Event | Callback called when the camera is stopped.
-**onCameraError(error):** (Optional) | Event | Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
-**onTakePhoto(dataUri):** (Optional) | Event | The function called when a photo is taken. the dataUri is passed as a parameter.
-**onTakePhotoAnimationDone(dataUri):** (Optional) | Event | The function called when a photo is taken and the animation is done. the dataUri is passed as a parameter.
-**idealFacingMode:** (Optional) (Dynamic) | String | The ideal facing mode of the camera, `environment` or `user`, the default is the default of the browser. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
-**idealResolution:** (Optional) (Dynamic) | Object | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`, the default is the default of the browser.
-**isMaxResolution:** (Optional) (Dynamic) | Boolean | If is true, the camera will start with his own maximum resolution, the default is false.
-**isImageMirror:** (Optional) | Boolean | If is true, the camera image will be mirror, the default is true.
-**isSilentMode:**(Optional) | Boolean | If is true, the camera do not play click sound when the photo was taken, the default is false.
-**isFullscreen:** (Optional) | Boolean | If is true, the camera image will be set fullscreen to force the maximum width and height of the viewport, the default is false.
-**isDisplayStartCameraError:** (Optional) | Boolean | If is true, if the camera start with error, it will show the error between **h1** tag on the top of the component. Useful to notify the user about permission error, the default is true.
-**sizeFactor:** (Optional) | Number | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]` and the default value is `1`.
-**imageType:**: (Optional) | String | String used to get the desired image type between `jpg` or `png`. to specify the imageType use the constant IMAGE_TYPES, for example to specify jpg format use IMAGE_TYPES.JPG. The default imageType is `png`. Use `IMAGE_TYPES` constant to get the right image type Example:. IMAGE_TYPES.JPG or IMAGE_TYPES.PNG
-**imageCompression:**: (Optional) | Number | Number used to get the desired compression when `jpg` is selected. choose a compression between `[0, 1]`, 1 is maximum, 0 is minimum. The default value imageCompression is `0.92`.
+Properties | Type | Default | Description
+--- | --- | --- | ---
+**onCameraStart():** (optional) | Event || Callback called when the camera is started.
+**onCameraStop():** (optional) | Event || Callback called when the camera is stopped.
+**onCameraError(error):** (Optional) | Event || Callback called with the error object as parameter when error occur while opening the camera. Often the permission.
+**onTakePhoto(dataUri):** (Optional) | Event || The function called when a photo is taken. the dataUri is passed as a parameter.
+**onTakePhotoAnimationDone(dataUri):** (Optional) | Event || The function called when a photo is taken and the animation is done. the dataUri is passed as a parameter.
+**idealFacingMode:** (Optional) (Dynamic) | String | Browser default | The ideal facing mode of the camera, `environment` or `user`. Use `FACING_MODES` constant to get the right string. Example :. FACING_MODES.ENVIRONMENT or FACING_MODES.USER
+**idealResolution:** (Optional) (Dynamic) | Object | Browser default | Object of the ideal resolution of the camera, `{width: Integer, height: Integer}`.
+**isMaxResolution:** (Optional) (Dynamic) | Boolean | false | If is true, the camera will start with his own maximum resolution.
+**isImageMirror:** (Optional) | Boolean | true | If is true, the camera image will be mirror.
+**isSilentMode:**(Optional) | Boolean | false | If is true, the camera do not play click sound when the photo was taken.
+**isFullscreen:** (Optional) | Boolean | false | If is true, the camera image will be set fullscreen to force the maximum width and height of the viewport.
+**isDisplayStartCameraError:** (Optional) | Boolean | true | If is true, if the camera start with error, it will show the error between **h1** tag on the top of the component. Useful to notify the user about permission error.
+**sizeFactor:** (Optional) | Number | 1 | Number of the factor resolution. Example, a sizeFactor of `1` get the same resolution of the camera while sizeFactor of `0.5` get the half resolution of the camera. The sizeFactor can be between range of `]0, 1]`.
+**imageType:**: (Optional) | String | png | String used to get the desired image type between `jpg` or `png`. to specify the imageType use the constant IMAGE_TYPES, for example to specify jpg format use IMAGE_TYPES.JPG. Use `IMAGE_TYPES` constant to get the right image type Example:. IMAGE_TYPES.JPG or IMAGE_TYPES.PNG
+**imageCompression:**: (Optional) | Number | 0.92 | Number used to get the desired compression when `jpg` is selected. choose a compression between `[0, 1]`, 1 is maximum, 0 is minimum.
 
 
 **Dynamic** : If the prop is dynamic, it mean that you can change that prop dynamically without umount the component (removing it). You can do it by a setState() inside the parent component. Checkout the demo example: [./src/demo/AppWithDynamicProperties.js](./src/demo/AppWithDynamicProperties.js)
@@ -90,35 +85,34 @@ Properties | Type | Description
 Probably the typical usage of using this component is to preview the image and close the camera after take a photo. You can take a look of all the code including the **ImagePreview** component here : [./src/demo/AppWithImagePreview](./src/demo/AppWithImagePreview)
 
 ```js
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 
 import ImagePreview from './ImagePreview'; // source code : ./src/demo/AppWithImagePreview/ImagePreview
 
-class App extends Component {
-  constructor (props, context) {
-    super(props, context);
-    this.state = { dataUri: null };
-    this.onTakePhotoAnimationDone = this.onTakePhotoAnimationDone.bind(this);
-  }
+function App (props) {
+  const [dataUri, setDataUri] = useState('');
 
-  onTakePhotoAnimationDone (dataUri) {
+  function onTakePhotoAnimationDone (dataUri) {
     console.log('takePhoto');
-    this.setState({ dataUri });
+    setDataUri(dataUri);
   }
 
-  render () {
-    return (
-      <div className="App">
-        {
-          (this.state.dataUri)
-            ? <ImagePreview dataUri={this.state.dataUri} />
-            : <Camera onTakePhotoAnimationDone = {this.onTakePhotoAnimationDone} />
-        }
-      </div>
-    );
-  }
+  const isFullscreen = false;
+  return (
+    <div>
+      {
+        (dataUri)
+          ? <ImagePreview dataUri={dataUri}
+            isFullscreen={isFullscreen}
+          />
+          : <Camera onTakePhotoAnimationDone = {onTakePhotoAnimationDone}
+            isFullscreen={isFullscreen}
+          />
+      }
+    </div>
+  );
 }
 
 export default App;
@@ -126,56 +120,52 @@ export default App;
 
 ## Example with all props used
 ```js
-import React, { Component } from 'react';
+import React from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 
-class App extends Component {
-  onTakePhoto (dataUri) {
+function App (props) {
+  function onTakePhoto (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
 
-  onTakePhotoAnimationDone (dataUri) {
+  function onTakePhotoAnimationDone (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
 
-  onCameraError (error) {
-    console.error('onCameraError', error);
+  function onCameraError (error) {
+    console.log('onCameraError', error);
   }
 
-  onCameraStart (stream) {
+  function onCameraStart (stream) {
     console.log('onCameraStart');
   }
 
-  onCameraStop () {
+  function onCameraStop () {
     console.log('onCameraStop');
   }
 
-  render () {
-    return (
-      <div className="App">
-        <Camera
-          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-          onTakePhotoAnimationDone = { (dataUri) => { this.onTakePhotoAnimationDone(dataUri); } }
-          onCameraError = { (error) => { this.onCameraError(error); } }
-          idealFacingMode = {FACING_MODES.ENVIRONMENT}
-          idealResolution = {{width: 640, height: 480}}
-          imageType = {IMAGE_TYPES.JPG}
-          imageCompression = {0.97}
-          isMaxResolution = {false}
-          isImageMirror = {false}
-          isSilentMode = {true}
-          isDisplayStartCameraError = {true}
-          isFullscreen = {true}
-          sizeFactor = {1}
-          onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-          onCameraStop = { () => { this.onCameraStop(); } }
-        />
-      </div>
-    );
-  }
+  return (
+    <Camera
+      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+      onTakePhotoAnimationDone = { (dataUri) => { onTakePhotoAnimationDone(dataUri); } }
+      onCameraError = { (error) => { onCameraError(error); } }
+      idealFacingMode = {FACING_MODES.ENVIRONMENT}
+      idealResolution = {{width: 640, height: 480}}
+      imageType = {IMAGE_TYPES.JPG}
+      imageCompression = {0.97}
+      isMaxResolution = {true}
+      isImageMirror = {false}
+      isSilentMode = {false}
+      isDisplayStartCameraError = {true}
+      isFullscreen = {false}
+      sizeFactor = {1}
+      onCameraStart = { (stream) => { onCameraStart(stream); } }
+      onCameraStop = { () => { onCameraStop(); } }
+    />
+  );
 }
 
 export default App;

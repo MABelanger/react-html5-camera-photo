@@ -1,5 +1,5 @@
 import React from 'react';
-import Camera, { FACING_MODES } from '../lib';
+import Camera from '../lib';
 import './reset.css';
 
 function App (props) {
@@ -11,7 +11,6 @@ function App (props) {
   return (
     <Camera
       onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
-      idealFacingMode = {FACING_MODES.ENVIRONMENT}
     />
   );
 }
