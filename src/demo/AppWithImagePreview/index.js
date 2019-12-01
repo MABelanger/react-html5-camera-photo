@@ -13,7 +13,7 @@ function App (props) {
 
   const isFullscreen = false;
   return (
-    <div className="App">
+    <div>
       {
         (dataUri)
           ? <ImagePreview dataUri={dataUri}

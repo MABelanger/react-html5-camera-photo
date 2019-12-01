@@ -16,11 +16,9 @@ function App (props) {
   }
 
   return isRemoveCamera ? null : (
-    <div className="App">
-      <Camera
-        onTakePhotoAnimationDone = { (dataUri) => { handleTakePhotoAnimationDone(dataUri); } }
-      />
-    </div>
+    <Camera
+      onTakePhotoAnimationDone = { (dataUri) => { handleTakePhotoAnimationDone(dataUri); } }
+    />
   );
 }
 

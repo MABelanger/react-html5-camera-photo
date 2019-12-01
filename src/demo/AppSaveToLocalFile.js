@@ -67,12 +67,10 @@ function App (props) {
   }
 
   return (
-    <div className="App">
-      <Camera
-        onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
-        imageType={IMAGE_TYPES.PNG}
-      />
-    </div>
+    <Camera
+      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+      imageType={IMAGE_TYPES.PNG}
+    />
   );
 }
 

@@ -26,25 +26,23 @@ function App (props) {
   }
 
   return (
-    <div className="App">
-      <Camera
-        onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
-        onTakePhotoAnimationDone = { (dataUri) => { onTakePhotoAnimationDone(dataUri); } }
-        onCameraError = { (error) => { onCameraError(error); } }
-        idealFacingMode = {FACING_MODES.ENVIRONMENT}
-        idealResolution = {{width: 640, height: 480}}
-        imageType = {IMAGE_TYPES.JPG}
-        imageCompression = {0.97}
-        isMaxResolution = {true}
-        isImageMirror = {false}
-        isSilentMode = {false}
-        isDisplayStartCameraError = {true}
-        isFullscreen = {false}
-        sizeFactor = {1}
-        onCameraStart = { (stream) => { onCameraStart(stream); } }
-        onCameraStop = { () => { onCameraStop(); } }
-      />
-    </div>
+    <Camera
+      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+      onTakePhotoAnimationDone = { (dataUri) => { onTakePhotoAnimationDone(dataUri); } }
+      onCameraError = { (error) => { onCameraError(error); } }
+      idealFacingMode = {FACING_MODES.ENVIRONMENT}
+      idealResolution = {{width: 640, height: 480}}
+      imageType = {IMAGE_TYPES.JPG}
+      imageCompression = {0.97}
+      isMaxResolution = {true}
+      isImageMirror = {false}
+      isSilentMode = {false}
+      isDisplayStartCameraError = {true}
+      isFullscreen = {false}
+      sizeFactor = {1}
+      onCameraStart = { (stream) => { onCameraStart(stream); } }
+      onCameraStop = { () => { onCameraStop(); } }
+    />
   );
 }
 

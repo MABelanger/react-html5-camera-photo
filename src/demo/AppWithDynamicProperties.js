@@ -27,7 +27,7 @@ function App (props) {
   }
 
   return (
-    <div className="App">
+    <div>
       { renderButtons() }
       <Camera
         idealFacingMode = {idealFacingMode}

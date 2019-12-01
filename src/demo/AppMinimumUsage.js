@@ -9,12 +9,10 @@ function App (props) {
   }
 
   return (
-    <div className="App">
-      <Camera
-        onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
-        idealFacingMode = {FACING_MODES.ENVIRONMENT}
-      />
-    </div>
+    <Camera
+      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+      idealFacingMode = {FACING_MODES.ENVIRONMENT}
+    />
   );
 }
 

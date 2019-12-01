@@ -45,7 +45,7 @@ function App (props) {
   }
 
   return (
-    <div className="App">
+    <div>
       { renderButtons() }
       <Camera
         onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
