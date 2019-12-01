@@ -3,14 +3,14 @@ import Camera from '../lib';
 import './reset.css';
 
 function App (props) {
-  function onTakePhoto (dataUri) {
+  function handleTakePhoto (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
 
   return (
     <Camera
-      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+      onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
     />
   );
 }

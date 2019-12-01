@@ -61,14 +61,14 @@ function downloadImageFile (dataUri, imageNumber) {
 function App (props) {
   const [imageNumber, setImageNumber] = useState(0);
 
-  function onTakePhoto (dataUri) {
+  function handleTakePhoto (dataUri) {
     downloadImageFile(dataUri, imageNumber);
     setImageNumber(imageNumber + 1);
   }
 
   return (
     <Camera
-      onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
+      onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
       imageType={IMAGE_TYPES.PNG}
     />
   );

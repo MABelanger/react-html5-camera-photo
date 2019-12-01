@@ -6,7 +6,7 @@ import '../reset.css';
 function App (props) {
   const [dataUri, setDataUri] = useState('');
 
-  function onTakePhotoAnimationDone (dataUri) {
+  function handleTakePhotoAnimationDone (dataUri) {
     console.log('takePhoto');
     setDataUri(dataUri);
   }
@@ -19,7 +19,7 @@ function App (props) {
           ? <ImagePreview dataUri={dataUri}
             isFullscreen={isFullscreen}
           />
-          : <Camera onTakePhotoAnimationDone = {onTakePhotoAnimationDone}
+          : <Camera onTakePhotoAnimationDone = {handleTakePhotoAnimationDone}
             isFullscreen={isFullscreen}
           />
       }

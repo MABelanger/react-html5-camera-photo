@@ -22,35 +22,35 @@ function App (props) {
     );
   }
 
-  function onTakePhoto (dataUri) {
+  function handleTakePhoto (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
 
-  function onTakePhotoAnimationDone (dataUri) {
+  function handleTakePhotoAnimationDone (dataUri) {
     // Do stuff with the photo...
     console.log('takePhoto');
   }
 
-  function onCameraError (error) {
-    console.log('onCameraError', error);
+  function handleCameraError (error) {
+    console.log('handleCameraError', error);
   }
 
-  function onCameraStart (stream) {
-    console.log('onCameraStart');
+  function handleCameraStart (stream) {
+    console.log('handleCameraStart');
   }
 
-  function onCameraStop () {
-    console.log('onCameraStop');
+  function handleCameraStop () {
+    console.log('handleCameraStop');
   }
 
   return (
     <div>
       { renderButtons() }
       <Camera
-        onTakePhoto = { (dataUri) => { onTakePhoto(dataUri); } }
-        onTakePhotoAnimationDone = { (dataUri) => { onTakePhotoAnimationDone(dataUri); } }
-        onCameraError = { (error) => { onCameraError(error); } }
+        onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+        onTakePhotoAnimationDone = { (dataUri) => { handleTakePhotoAnimationDone(dataUri); } }
+        onCameraError = { (error) => { handleCameraError(error); } }
         idealFacingMode = {idealFacingMode}
         idealResolution = {{width: 640, height: 480}}
         imageType = {IMAGE_TYPES.JPG}
@@ -61,8 +61,8 @@ function App (props) {
         isDisplayStartCameraError = {true}
         isFullscreen = {false}
         sizeFactor = {1}
-        onCameraStart = { (stream) => { onCameraStart(stream); } }
-        onCameraStop = { () => { onCameraStop(); } }
+        onCameraStart = { (stream) => { handleCameraStart(stream); } }
+        onCameraStop = { () => { handleCameraStop(); } }
       />
     </div>
   );
