@@ -38,6 +38,7 @@ function App (props) {
       isImageMirror = {false}
       isSilentMode = {false}
       isDisplayStartCameraError = {true}
+      isDisplayDebugOnCameraStart = {true}
       isFullscreen = {false}
       sizeFactor = {1}
       onCameraStart = { (stream) => { handleCameraStart(stream); } }

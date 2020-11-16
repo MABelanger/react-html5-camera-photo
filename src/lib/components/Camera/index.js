@@ -11,6 +11,8 @@ import { useLibCameraPhoto } from './hooks/useLibCameraPhoto';
 import CircleButton from '../CircleButton';
 import WhiteFlash from '../WhiteFlash';
 import DisplayError from '../DisplayError';
+// import DisplayDebug from '../DisplayDebug';
+
 import {
   getShowHideStyle,
   getVideoStyles,
@@ -41,6 +43,9 @@ function Camera (props) {
 
   useEffect(() => {
     if (mediaStream) {
+      if (props.isDisplayDebugOnCameraStart) {
+
+      }
       if (typeof props.onCameraStart === 'function') {
         props.onCameraStart(mediaStream);
       }
@@ -155,6 +160,7 @@ Camera.propTypes = {
   isImageMirror: PropTypes.bool,
   isSilentMode: PropTypes.bool,
   isDisplayStartCameraError: PropTypes.bool,
+  isDisplayDebugOnCameraStart: PropTypes.bool,
   imageCompression: PropTypes.number,
   isMaxResolution: PropTypes.bool,
   isFullscreen: PropTypes.bool,

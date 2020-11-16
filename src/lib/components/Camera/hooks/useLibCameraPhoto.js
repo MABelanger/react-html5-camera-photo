@@ -34,6 +34,7 @@ export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, i
 
     if (!mediaStream) {
       enableStream();
+      console.log('libCameraPhoto.getCameraSettings()', libCameraPhoto.getCameraSettings());
     } else {
       return async function cleanup () {
         try {
@@ -59,5 +60,9 @@ export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, i
     return libCameraPhoto.getDataUri(configDataUri);
   }
 
-  return [mediaStream, cameraStartError, cameraStopError, getDataUri];
+  function getCameraSettings () {
+    return libCameraPhoto.getCameraSettings();
+  }
+
+  return [mediaStream, cameraStartError, cameraStopError, getDataUri, getCameraSettings];
 }
