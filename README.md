@@ -27,8 +27,6 @@ npm install --save react-html5-camera-photo
 yarn add react-html5-camera-photo
 ```
 
-Both Yarn and npm download packages from the npm registry.
-
 ### TypeScript Definitions
 TypeScript definitions are available from [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped)
 
