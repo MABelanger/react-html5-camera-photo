@@ -126,7 +126,7 @@ function Camera (props) {
         style={videoStyles}
         ref={videoRef}
         autoPlay={true}
-        muted="muted"
+        muted={true}
         playsInline
       />
       <CircleButton
