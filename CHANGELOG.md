@@ -1,6 +1,9 @@
 # Change Log
 
 ### Other
+#### 1.5.8
+- Use version jslib-html5-camera-photo 3.3.3
+
 #### 1.5.7
 - Use version jslib-html5-camera-photo 3.3.2
 
