@@ -1,6 +1,6 @@
 {
   "name": "react-html5-camera-photo",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "React.js HTML5 Camera Photo",
   "main": "build/index.js",
   "scripts": {
