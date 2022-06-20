@@ -8,6 +8,8 @@ For those who want to build with their own css and need an abstraction of `getUs
 - react-dom: >=16.8.0
 
 ## LiveDemo
+![alt demo_android](./docs/demo_android.gif)
+
 [Demo of react-html5-camera-photo](https://mabelanger.github.io/react-html5-camera-photo/)
 
 ## Required Working Environment for getUserMedia()

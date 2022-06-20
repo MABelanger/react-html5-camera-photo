@@ -72,12 +72,26 @@ function Camera (props) {
     }
   }
 
+  function getIsImageMirror () {
+    if (props.isImageMirror !== undefined) {
+      return props.isImageMirror;
+    }
+
+    // TODO: When we get a camera id detect if is a facing mode USER or ENVIRONMENT
+    if (props.idealFacingMode === FACING_MODES.USER) {
+      return true;
+    }
+
+    // By default and if is FACING_MODE.ENVIRONMENT is false
+    return false;
+  }
+
   function handleTakePhoto () {
     const configDataUri = {
       sizeFactor: props.sizeFactor,
       imageType: props.imageType,
       imageCompression: props.imageCompression,
-      isImageMirror: props.isImageMirror
+      isImageMirror: getIsImageMirror()
     };
 
     let dataUri = getDataUri(configDataUri);
@@ -103,7 +117,7 @@ function Camera (props) {
     }, 900);
   }
 
-  let videoStyles = getVideoStyles(isShowVideo, props.isImageMirror);
+  let videoStyles = getVideoStyles(isShowVideo, getIsImageMirror());
   let showHideImgStyle = getShowHideStyle(!isShowVideo);
 
   let classNameFullscreen = props.isFullscreen ? 'react-html5-camera-photo-fullscreen' : '';
@@ -164,6 +178,5 @@ Camera.propTypes = {
 };
 
 Camera.defaultProps = {
-  isImageMirror: true,
   isDisplayStartCameraError: true
 };

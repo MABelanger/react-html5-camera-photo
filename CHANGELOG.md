@@ -1,5 +1,9 @@
 # Change Log
 
+### Bug Fixes
+#### 1.5.9
+- By default, use mirror video and image only for FACING_MODE.USER
+
 ### Other
 #### 1.5.8
 - Use version jslib-html5-camera-photo 3.3.3

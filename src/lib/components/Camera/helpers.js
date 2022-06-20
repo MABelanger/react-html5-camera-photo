@@ -2,23 +2,23 @@ import clickSound from './data/click-sound.base64.json';
 
 export function getShowHideStyle (isDisplay) {
   const displayStyle = isDisplay
-    ? {display: 'inline-block'}
-    : {display: 'none'};
+    ? { display: 'inline-block' }
+    : { display: 'none' };
 
   return displayStyle;
 }
 
-export function _getMirrorCameraStyle (imageMirror) {
-  const mirrorDisplayStyle = imageMirror
-    ? {transform: 'rotateY(180deg)'}
-    : {transform: 'none'};
+export function _getMirrorCameraStyle (isImageMirror) {
+  const mirrorDisplayStyle = isImageMirror
+    ? { transform: 'rotateY(180deg)' }
+    : { transform: 'none' };
 
   return mirrorDisplayStyle;
 }
 
-export function getVideoStyles (isDisplay, imageMirror) {
+export function getVideoStyles (isDisplay, isImageMirror) {
   return {
-    ..._getMirrorCameraStyle(imageMirror),
+    ..._getMirrorCameraStyle(isImageMirror),
     ...getShowHideStyle(isDisplay)
   };
 }
