@@ -1,1 +1,8 @@
 - Use style module instead of css files.
+- Add image overlay to image capture #19
+- Apply inline style with style props.
+- Force landscape picture #51
+- Countdown before take the photo #100
+- Get the camera setting The purpose would be to be able to tell whether the picture has been taken in landscape or portrait as well as the size. #78
+- Add zoom capacity #61
+- Feature request: add light and camera switch feature #80
