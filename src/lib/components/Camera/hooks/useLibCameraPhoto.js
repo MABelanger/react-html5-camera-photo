@@ -25,10 +25,16 @@ export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, i
         } else {
           _mediaStream = await libCameraPhoto.startCamera(idealFacingMode, idealResolution);
         }
-        setMediaStream(_mediaStream);
-        setCameraStartError(null);
+        if (videoRef && videoRef.current) {
+          setMediaStream(_mediaStream);
+          setCameraStartError(null);
+        } else {
+          await libCameraPhoto.stopCamera();
+        }
       } catch (cameraStartError) {
-        setCameraStartError(cameraStartError);
+        if (videoRef && videoRef.current) {
+          setCameraStartError(cameraStartError);
+        }
       }
     }
 
