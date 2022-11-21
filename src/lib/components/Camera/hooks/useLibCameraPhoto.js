@@ -4,7 +4,7 @@ import LibCameraPhoto from 'jslib-html5-camera-photo';
 let libCameraPhoto = null;
 let needToClean = false;
 
-export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, isMaxResolution) {
+export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, isMaxResolution, idealDeviceId) {
   const [mediaStream, setMediaStream] = useState(null);
   const [cameraStartError, setCameraStartError] = useState(null);
   const [cameraStopError, setCameraStopError] = useState(null);
@@ -23,7 +23,7 @@ export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, i
         if (isMaxResolution) {
           _mediaStream = await libCameraPhoto.startCameraMaxResolution(idealFacingMode);
         } else {
-          _mediaStream = await libCameraPhoto.startCamera(idealFacingMode, idealResolution);
+          _mediaStream = await libCameraPhoto.startCamera(idealFacingMode, idealResolution, idealDeviceId);
         }
         if (videoRef && videoRef.current) {
           setMediaStream(_mediaStream);
@@ -59,11 +59,11 @@ export function useLibCameraPhoto (videoRef, idealFacingMode, idealResolution, i
         }
       };
     }
-  }, [videoRef, mediaStream, idealFacingMode, idealResolution, isMaxResolution]);
+  }, [videoRef, mediaStream, idealFacingMode, idealResolution, idealDeviceId, isMaxResolution]);
 
   function getDataUri (configDataUri) {
     return libCameraPhoto.getDataUri(configDataUri);
   }
 
-  return [mediaStream, cameraStartError, cameraStopError, getDataUri];
+  return [mediaStream, cameraStartError, cameraStopError, getDataUri, libCameraPhoto];
 }

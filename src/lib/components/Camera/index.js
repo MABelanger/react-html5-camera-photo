@@ -36,13 +36,14 @@ function Camera (props) {
     mediaStream,
     cameraStartError,
     cameraStopError,
-    getDataUri
-  ] = useLibCameraPhoto(videoRef, props.idealFacingMode, props.idealResolution, props.isMaxResolution);
+    getDataUri,
+    cameraPhoto
+  ] = useLibCameraPhoto(videoRef, props.idealFacingMode, props.idealResolution, props.isMaxResolution, props.idealDeviceId);
 
   useEffect(() => {
     if (mediaStream) {
       if (typeof props.onCameraStart === 'function') {
-        props.onCameraStart(mediaStream);
+        props.onCameraStart(mediaStream, cameraPhoto);
       }
     } else {
       if (typeof props.onCameraStop === 'function') {
@@ -163,6 +164,7 @@ Camera.propTypes = {
   onTakePhoto: PropTypes.func,
   onTakePhotoAnimationDone: PropTypes.func,
   onCameraError: PropTypes.func,
+  idealDeviceId: PropTypes.string,
   idealFacingMode: PropTypes.string,
   idealResolution: PropTypes.object,
   imageType: PropTypes.string,
