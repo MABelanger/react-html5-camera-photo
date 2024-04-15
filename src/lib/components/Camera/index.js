@@ -29,6 +29,8 @@ function Camera (props) {
   const [dataUri, setDataUri] = useState('');
   const [isShowVideo, setIsShowVideo] = useState(true);
   const [cameraStartDisplayError, setCameraStartDisplayError] = useState('');
+  const [timerCount, setTimerCount] = useState(null);
+  const [buttonLocked, setButtonLocked] = useState(false);
 
   let videoRef = useRef(null);
 
@@ -66,6 +68,19 @@ function Camera (props) {
     }
   }, [cameraStopError]);
 
+  useEffect(() => {
+    if (timerCount !== null && timerCount > 0) {
+      const intervalId = setInterval(() => {
+        setTimerCount((prevCount) => prevCount - 1); // Decrement the timer count every second
+      }, 1000);
+      // Cleanup function
+      return () => clearInterval(intervalId);
+    } else if (timerCount === 0) {
+      // Clear the timer when it reaches 0
+      setTimerCount(null);
+    }
+  }, [timerCount]);
+
   function clearShowVideoTimeout () {
     if (showVideoTimeoutId) {
       clearTimeout(showVideoTimeoutId);
@@ -87,13 +102,34 @@ function Camera (props) {
   }
 
   function handleTakePhoto () {
-    const configDataUri = {
-      sizeFactor: props.sizeFactor,
-      imageType: props.imageType,
-      imageCompression: props.imageCompression,
-      isImageMirror: getIsImageMirror()
-    };
+    // Check if the button is locked
+    if (!buttonLocked) {
+      // Lock the button
+      setButtonLocked(true);
 
+      const configDataUri = {
+        sizeFactor: props.sizeFactor,
+        imageType: props.imageType,
+        imageCompression: props.imageCompression,
+        isImageMirror: getIsImageMirror()
+      };
+
+      if (props.timer >= 2 && props.timer <= 10) {
+        setTimerCount(props.timer);
+        setTimeout(() => {
+          capturePhoto(configDataUri);
+          // Unlock the button after the timer
+          setButtonLocked(false);
+        }, props.timer * 1000);
+      } else {
+        capturePhoto(configDataUri);
+        // Unlock the button immediately if no timer is set
+        setButtonLocked(false);
+      }
+    }
+  }
+
+  function capturePhoto (configDataUri) {
     let dataUri = getDataUri(configDataUri);
 
     if (!props.isSilentMode) {
@@ -143,10 +179,10 @@ function Camera (props) {
         muted={true}
         playsInline
       />
-      <CircleButton
-        isClicked={!isShowVideo}
-        onClick={handleTakePhoto}
-      />
+      <CircleButton isClicked={!isShowVideo} onClick={handleTakePhoto} locked={buttonLocked} />
+      <div className="countdown-overlay">
+        <span>{timerCount}</span>
+      </div>
     </div>
   );
 }
@@ -174,7 +210,8 @@ Camera.propTypes = {
   isFullscreen: PropTypes.bool,
   sizeFactor: PropTypes.number,
   onCameraStart: PropTypes.func,
-  onCameraStop: PropTypes.func
+  onCameraStop: PropTypes.func,
+  timer: PropTypes.number
 };
 
 Camera.defaultProps = {

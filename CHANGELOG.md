@@ -1,5 +1,9 @@
 # Change Log
 
+### Features
+#### 1.5.11
+- New props timer feature from 0 to 10 seconds
+
 ### Other
 #### 1.5.10
 - Use version jslib-html5-camera-photo 3.3.4
