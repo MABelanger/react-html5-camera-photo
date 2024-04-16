@@ -37,3 +37,15 @@
   width: 100vw;
   height:100vh;
 }
+
+.countdown-overlay{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1500%;
+  color: white;
+  font-family: sans-serif;
+
+}
